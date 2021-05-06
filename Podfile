@@ -6,7 +6,6 @@ target 'MergeMaster' do
 
   pod 'RxSwift',    '~> 5.1'
   pod 'RxCocoa',    '~> 5.1 '
-  pod 'EZJson'
   pod 'SnapKit',    '~> 5.0.0'
 
   target 'MergeMasterTests’ do

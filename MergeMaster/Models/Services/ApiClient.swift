@@ -8,7 +8,6 @@
 
 import Cocoa
 import RxSwift
-import EZJson
 
 enum ApiClientError: Error {
     case cannotCreateURL
