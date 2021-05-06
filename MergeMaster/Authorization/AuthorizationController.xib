@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AuthorizationController" customModule="MergeMaster" customModuleProvider="target">
+            <connections>
+                <outlet property="errorLabel" destination="rCo-We-aNa" id="jRO-1f-exi"/>
+                <outlet property="exitButton" destination="Ryb-mO-nRe" id="kKe-tb-yXJ"/>
+                <outlet property="gitlabURLField" destination="k8T-2P-rck" id="mvY-wt-Mry"/>
+                <outlet property="loginButton" destination="Ttv-QA-ai5" id="plK-fC-mxQ"/>
+                <outlet property="titleLabel" destination="dZ7-OU-9sc" id="Jop-1z-hAP"/>
+                <outlet property="tokenField" destination="N8q-bM-6Gu" id="XpI-Gg-ycP"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="519" height="188"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZ7-OU-9sc">
+                    <rect key="frame" x="233" y="158" width="53" height="24"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="_title" id="Snj-Mx-vdD">
+                        <font key="font" metaFont="systemBold" size="20"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N8q-bM-6Gu" customClass="NSSecureTextField">
+                    <rect key="frame" x="40" y="88" width="439" height="21"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Access token (read_api or higher)" drawsBackground="YES" id="NiW-wv-G0c">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k8T-2P-rck">
+                    <rect key="frame" x="40" y="113" width="439" height="21"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Gitlab URL (for example: gitlab.com)" drawsBackground="YES" id="U3K-1c-AE0">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ttv-QA-ai5">
+                    <rect key="frame" x="40" y="59" width="216" height="19"/>
+                    <buttonCell key="cell" type="bevel" title="Sign In" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="TGE-ks-QkZ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="systemMedium" size="15"/>
+                    </buttonCell>
+                    <color key="contentTintColor" name="AccentColor"/>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Ryb-mO-nRe">
+                    <rect key="frame" x="264" y="59" width="215" height="19"/>
+                    <buttonCell key="cell" type="bevel" title="Exit" bezelStyle="rounded" alignment="center" imageScaling="proportionallyDown" inset="2" id="Jqt-dU-Ceu">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system" size="15"/>
+                    </buttonCell>
+                    <color key="contentTintColor" name="AccentColor"/>
+                </button>
+                <textField horizontalHuggingPriority="300" verticalHuggingPriority="700" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="rCo-We-aNa">
+                    <rect key="frame" x="38" y="20" width="443" height="19"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="_error" id="69J-KX-aOI">
+                        <font key="font" metaFont="system" size="15"/>
+                        <color key="textColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="Ryb-mO-nRe" firstAttribute="centerY" secondItem="Ttv-QA-ai5" secondAttribute="centerY" id="1Dr-Dj-0le"/>
+                <constraint firstItem="k8T-2P-rck" firstAttribute="top" secondItem="dZ7-OU-9sc" secondAttribute="bottom" constant="24" id="90i-ob-bG7"/>
+                <constraint firstItem="rCo-We-aNa" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="40" id="9HS-vp-UXB"/>
+                <constraint firstItem="Ryb-mO-nRe" firstAttribute="leading" secondItem="Ttv-QA-ai5" secondAttribute="trailing" constant="8" id="9YG-FR-spA"/>
+                <constraint firstItem="dZ7-OU-9sc" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="6" id="9gz-pq-qC9"/>
+                <constraint firstItem="Ttv-QA-ai5" firstAttribute="leading" secondItem="N8q-bM-6Gu" secondAttribute="leading" id="BpO-3Z-qe7"/>
+                <constraint firstItem="Ttv-QA-ai5" firstAttribute="top" secondItem="N8q-bM-6Gu" secondAttribute="bottom" constant="10" id="E7t-IG-Oaa"/>
+                <constraint firstItem="Ryb-mO-nRe" firstAttribute="trailing" secondItem="N8q-bM-6Gu" secondAttribute="trailing" id="InM-0E-NRd"/>
+                <constraint firstItem="rCo-We-aNa" firstAttribute="top" secondItem="Ttv-QA-ai5" secondAttribute="bottom" constant="20" id="MW4-da-Gq2"/>
+                <constraint firstAttribute="trailing" secondItem="rCo-We-aNa" secondAttribute="trailing" constant="40" id="N4Q-KZ-TBc"/>
+                <constraint firstItem="N8q-bM-6Gu" firstAttribute="width" secondItem="k8T-2P-rck" secondAttribute="width" id="Q5k-Ic-lX0"/>
+                <constraint firstItem="dZ7-OU-9sc" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="bnO-Vq-ftC"/>
+                <constraint firstItem="N8q-bM-6Gu" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="40" id="dSm-8J-gd2"/>
+                <constraint firstItem="N8q-bM-6Gu" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="ghf-E1-LmN"/>
+                <constraint firstItem="N8q-bM-6Gu" firstAttribute="top" secondItem="k8T-2P-rck" secondAttribute="bottom" constant="4" id="jhy-FV-pDc"/>
+                <constraint firstAttribute="trailing" secondItem="N8q-bM-6Gu" secondAttribute="trailing" constant="40" id="kbg-Me-xD1"/>
+                <constraint firstItem="k8T-2P-rck" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="rOy-fU-DhD"/>
+                <constraint firstItem="Ryb-mO-nRe" firstAttribute="width" secondItem="Ttv-QA-ai5" secondAttribute="width" id="uas-Zd-Wr9"/>
+                <constraint firstAttribute="bottom" secondItem="rCo-We-aNa" secondAttribute="bottom" constant="20" id="xDu-VK-x9S"/>
+            </constraints>
+            <point key="canvasLocation" x="-261.5" y="138"/>
+        </customView>
+    </objects>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
+    </resources>
+</document>

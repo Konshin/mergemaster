@@ -1,0 +1,24 @@
+
+#####
+# Cocoapods
+Podfile.lock
+Pods
+
+#####
+# Bundler
+.bundle
+
+#####
+# OS X temporary files that should never be committed
+.DS_Store
+
+#####
+# Other
+UserInterfaceState.xcuserstate
+Breakpoints_v2.xcbkptlist
+SocialTrading.xcodeproj/xcuserdata
+*.orig
+report.xml
+xcodebuild.log
+**/xcuserdata
+.bundle/

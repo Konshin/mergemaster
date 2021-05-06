@@ -1,0 +1,688 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		932D4932FBCEC7E7499E44C9 /* Pods_MergeMaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */; };
+		BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */; };
+		D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5967F1925DD4CAD000A0F3B /* RequestManager.swift */; };
+		D596A5631E06D51D004162A0 /* RequestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5621E06D51D004162A0 /* RequestsListController.swift */; };
+		D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5641E06D534004162A0 /* RequestsListVM.swift */; };
+		D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5661E06D56F004162A0 /* MergeRequest.swift */; };
+		D596A5691E06DC63004162A0 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5681E06DC63004162A0 /* Project.swift */; };
+		D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A57B1E06EFD4004162A0 /* ProjectsListController.swift */; };
+		D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */; };
+		D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */; };
+		D596A5841E0719B8004162A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5831E0719B8004162A0 /* User.swift */; };
+		D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */; };
+		D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5871E0731A1004162A0 /* EventMonitor.swift */; };
+		D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECCD1E06AEB800802982 /* AppDelegate.swift */; };
+		D5DEECD01E06AEB800802982 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5DEECCF1E06AEB800802982 /* Assets.xcassets */; };
+		D5DEECD31E06AEB800802982 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DEECD11E06AEB800802982 /* MainMenu.xib */; };
+		D5DEECDE1E06AEB900802982 /* MergeMasterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECDD1E06AEB900802982 /* MergeMasterTests.swift */; };
+		D5DEECEA1E06B2F400802982 /* MenuWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECE91E06B2F400802982 /* MenuWizard.swift */; };
+		D5DEECEC1E06B2FC00802982 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECEB1E06B2FC00802982 /* Router.swift */; };
+		D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECEE1E06B53400802982 /* AuthorizationController.swift */; };
+		D5DEECF11E06B53400802982 /* AuthorizationController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DEECEF1E06B53400802982 /* AuthorizationController.xib */; };
+		D5DEECF41E06B79800802982 /* ApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECF31E06B79800802982 /* ApiClient.swift */; };
+		D5DEECF61E06B7F100802982 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECF51E06B7F100802982 /* AppState.swift */; };
+		D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECF71E06C08A00802982 /* AuthorizationVM.swift */; };
+		D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECFD1E06C18200802982 /* Configuration.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D5DEECDA1E06AEB900802982 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D5DEECC21E06AEB800802982 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5DEECC91E06AEB800802982;
+			remoteInfo = MergeMaster;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMaster.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMaster/Pods-MergeMaster.release.xcconfig"; sourceTree = "<group>"; };
+		CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.release.xcconfig"; sourceTree = "<group>"; };
+		D5967F1925DD4CAD000A0F3B /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		D596A5621E06D51D004162A0 /* RequestsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsListController.swift; sourceTree = "<group>"; };
+		D596A5641E06D534004162A0 /* RequestsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsListVM.swift; sourceTree = "<group>"; };
+		D596A5661E06D56F004162A0 /* MergeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeRequest.swift; sourceTree = "<group>"; };
+		D596A5681E06DC63004162A0 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		D596A57B1E06EFD4004162A0 /* ProjectsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsListController.swift; sourceTree = "<group>"; };
+		D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsListVM.swift; sourceTree = "<group>"; };
+		D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCellViewModel.swift; sourceTree = "<group>"; };
+		D596A5831E0719B8004162A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCellViewModel.swift; sourceTree = "<group>"; };
+		D596A5871E0731A1004162A0 /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		D5CE1BE925B827320046D0AF /* MergeMaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MergeMaster.entitlements; sourceTree = "<group>"; };
+		D5DEECCA1E06AEB800802982 /* MergeMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MergeMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5DEECCD1E06AEB800802982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D5DEECCF1E06AEB800802982 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D5DEECD21E06AEB800802982 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		D5DEECD41E06AEB800802982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5DEECD91E06AEB900802982 /* MergeMasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MergeMasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5DEECDD1E06AEB900802982 /* MergeMasterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeMasterTests.swift; sourceTree = "<group>"; };
+		D5DEECDF1E06AEB900802982 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D5DEECE91E06B2F400802982 /* MenuWizard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuWizard.swift; sourceTree = "<group>"; };
+		D5DEECEB1E06B2FC00802982 /* Router.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		D5DEECEE1E06B53400802982 /* AuthorizationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationController.swift; sourceTree = "<group>"; };
+		D5DEECEF1E06B53400802982 /* AuthorizationController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AuthorizationController.xib; sourceTree = "<group>"; };
+		D5DEECF31E06B79800802982 /* ApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiClient.swift; sourceTree = "<group>"; };
+		D5DEECF51E06B7F100802982 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D5DEECF71E06C08A00802982 /* AuthorizationVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationVM.swift; sourceTree = "<group>"; };
+		D5DEECFD1E06C18200802982 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		EEE4891A8610D014906677DB /* Pods-MergeMaster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMaster.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMaster/Pods-MergeMaster.debug.xcconfig"; sourceTree = "<group>"; };
+		F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MergeMasterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MergeMaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D5DEECC71E06AEB800802982 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				932D4932FBCEC7E7499E44C9 /* Pods_MergeMaster.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5DEECD61E06AEB900802982 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1589CBFE262C6428202298DC /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EEE4891A8610D014906677DB /* Pods-MergeMaster.debug.xcconfig */,
+				3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */,
+				CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */,
+				D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		990E23CE4FB749F92E5CF7EE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */,
+				F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5967F1825DD4CA3000A0F3B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D5967F1925DD4CAD000A0F3B /* RequestManager.swift */,
+				D5DEECF31E06B79800802982 /* ApiClient.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D596A5611E06D319004162A0 /* RequestsList */ = {
+			isa = PBXGroup;
+			children = (
+				D596A5621E06D51D004162A0 /* RequestsListController.swift */,
+				D596A5641E06D534004162A0 /* RequestsListVM.swift */,
+				D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */,
+			);
+			name = RequestsList;
+			path = ListOfRequests;
+			sourceTree = "<group>";
+		};
+		D596A57A1E06EFB7004162A0 /* ProjectsList */ = {
+			isa = PBXGroup;
+			children = (
+				D596A57B1E06EFD4004162A0 /* ProjectsListController.swift */,
+				D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */,
+				D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */,
+			);
+			path = ProjectsList;
+			sourceTree = "<group>";
+		};
+		D5DEECC11E06AEB800802982 = {
+			isa = PBXGroup;
+			children = (
+				D5DEECCC1E06AEB800802982 /* MergeMaster */,
+				D5DEECDC1E06AEB900802982 /* MergeMasterTests */,
+				D5DEECCB1E06AEB800802982 /* Products */,
+				1589CBFE262C6428202298DC /* Pods */,
+				990E23CE4FB749F92E5CF7EE /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D5DEECCB1E06AEB800802982 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D5DEECCA1E06AEB800802982 /* MergeMaster.app */,
+				D5DEECD91E06AEB900802982 /* MergeMasterTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D5DEECCC1E06AEB800802982 /* MergeMaster */ = {
+			isa = PBXGroup;
+			children = (
+				D5CE1BE925B827320046D0AF /* MergeMaster.entitlements */,
+				D596A57A1E06EFB7004162A0 /* ProjectsList */,
+				D596A5611E06D319004162A0 /* RequestsList */,
+				D5DEECF91E06C0E600802982 /* Utils */,
+				D5DEECF21E06B78C00802982 /* Models */,
+				D5DEECED1E06B52300802982 /* Authorization */,
+				D5DEECE81E06B2CE00802982 /* MenuWizard */,
+				D5DEECCD1E06AEB800802982 /* AppDelegate.swift */,
+				D5DEECEB1E06B2FC00802982 /* Router.swift */,
+				D5DEECCF1E06AEB800802982 /* Assets.xcassets */,
+				D5DEECD11E06AEB800802982 /* MainMenu.xib */,
+				D5DEECD41E06AEB800802982 /* Info.plist */,
+			);
+			path = MergeMaster;
+			sourceTree = "<group>";
+		};
+		D5DEECDC1E06AEB900802982 /* MergeMasterTests */ = {
+			isa = PBXGroup;
+			children = (
+				D5DEECDD1E06AEB900802982 /* MergeMasterTests.swift */,
+				D5DEECDF1E06AEB900802982 /* Info.plist */,
+			);
+			path = MergeMasterTests;
+			sourceTree = "<group>";
+		};
+		D5DEECE81E06B2CE00802982 /* MenuWizard */ = {
+			isa = PBXGroup;
+			children = (
+				D5DEECE91E06B2F400802982 /* MenuWizard.swift */,
+			);
+			path = MenuWizard;
+			sourceTree = "<group>";
+		};
+		D5DEECED1E06B52300802982 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				D5DEECEE1E06B53400802982 /* AuthorizationController.swift */,
+				D5DEECEF1E06B53400802982 /* AuthorizationController.xib */,
+				D5DEECF71E06C08A00802982 /* AuthorizationVM.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		D5DEECF21E06B78C00802982 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D5967F1825DD4CA3000A0F3B /* Services */,
+				D5DEECF51E06B7F100802982 /* AppState.swift */,
+				D5DEECFD1E06C18200802982 /* Configuration.swift */,
+				D596A5661E06D56F004162A0 /* MergeRequest.swift */,
+				D596A5681E06DC63004162A0 /* Project.swift */,
+				D596A5831E0719B8004162A0 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D5DEECF91E06C0E600802982 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D596A5871E0731A1004162A0 /* EventMonitor.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D5DEECC91E06AEB800802982 /* MergeMaster */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5DEECE21E06AEB900802982 /* Build configuration list for PBXNativeTarget "MergeMaster" */;
+			buildPhases = (
+				0045DA1697A204D57F547508 /* [CP] Check Pods Manifest.lock */,
+				D5DEECC61E06AEB800802982 /* Sources */,
+				D5DEECC71E06AEB800802982 /* Frameworks */,
+				D5DEECC81E06AEB800802982 /* Resources */,
+				9953BB215E67AF76F4F2AE18 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MergeMaster;
+			productName = MergeMaster;
+			productReference = D5DEECCA1E06AEB800802982 /* MergeMaster.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D5DEECD81E06AEB900802982 /* MergeMasterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5DEECE51E06AEB900802982 /* Build configuration list for PBXNativeTarget "MergeMasterTests" */;
+			buildPhases = (
+				50C4C726C0722B699A45C807 /* [CP] Check Pods Manifest.lock */,
+				D5DEECD51E06AEB900802982 /* Sources */,
+				D5DEECD61E06AEB900802982 /* Frameworks */,
+				D5DEECD71E06AEB900802982 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D5DEECDB1E06AEB900802982 /* PBXTargetDependency */,
+			);
+			name = MergeMasterTests;
+			productName = MergeMasterTests;
+			productReference = D5DEECD91E06AEB900802982 /* MergeMasterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D5DEECC21E06AEB800802982 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 1240;
+				ORGANIZATIONNAME = Konshin;
+				TargetAttributes = {
+					D5DEECC91E06AEB800802982 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = DD57QBF5UM;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Automatic;
+					};
+					D5DEECD81E06AEB900802982 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = DD57QBF5UM;
+						ProvisioningStyle = Automatic;
+						TestTargetID = D5DEECC91E06AEB800802982;
+					};
+				};
+			};
+			buildConfigurationList = D5DEECC51E06AEB800802982 /* Build configuration list for PBXProject "MergeMaster" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D5DEECC11E06AEB800802982;
+			productRefGroup = D5DEECCB1E06AEB800802982 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D5DEECC91E06AEB800802982 /* MergeMaster */,
+				D5DEECD81E06AEB900802982 /* MergeMasterTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5DEECC81E06AEB800802982 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5DEECF11E06B53400802982 /* AuthorizationController.xib in Resources */,
+				D5DEECD01E06AEB800802982 /* Assets.xcassets in Resources */,
+				D5DEECD31E06AEB800802982 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5DEECD71E06AEB900802982 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0045DA1697A204D57F547508 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MergeMaster-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50C4C726C0722B699A45C807 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MergeMasterTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9953BB215E67AF76F4F2AE18 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MergeMaster/Pods-MergeMaster-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/EZJson/EZJson.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZJson.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MergeMaster/Pods-MergeMaster-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D5DEECC61E06AEB800802982 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */,
+				D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */,
+				D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */,
+				D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */,
+				D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */,
+				D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */,
+				D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */,
+				D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */,
+				D596A5841E0719B8004162A0 /* User.swift in Sources */,
+				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
+				D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */,
+				D596A5631E06D51D004162A0 /* RequestsListController.swift in Sources */,
+				D5DEECEC1E06B2FC00802982 /* Router.swift in Sources */,
+				D5DEECF61E06B7F100802982 /* AppState.swift in Sources */,
+				D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */,
+				D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */,
+				D5DEECEA1E06B2F400802982 /* MenuWizard.swift in Sources */,
+				D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */,
+				D5DEECF41E06B79800802982 /* ApiClient.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5DEECD51E06AEB900802982 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5DEECDE1E06AEB900802982 /* MergeMasterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D5DEECDB1E06AEB900802982 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5DEECC91E06AEB800802982 /* MergeMaster */;
+			targetProxy = D5DEECDA1E06AEB900802982 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D5DEECD11E06AEB800802982 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D5DEECD21E06AEB800802982 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D5DEECE01E06AEB900802982 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D5DEECE11E06AEB900802982 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		D5DEECE31E06AEB900802982 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EEE4891A8610D014906677DB /* Pods-MergeMaster.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DD57QBF5UM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = MergeMaster/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Konshin.MergeMaster;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		D5DEECE41E06AEB900802982 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = DD57QBF5UM;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = MergeMaster/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MARKETING_VERSION = 1.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Konshin.MergeMaster;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D5DEECE61E06AEB900802982 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DD57QBF5UM;
+				INFOPLIST_FILE = MergeMasterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Konshin.MergeMasterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MergeMaster.app/Contents/MacOS/MergeMaster";
+			};
+			name = Debug;
+		};
+		D5DEECE71E06AEB900802982 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = DD57QBF5UM;
+				INFOPLIST_FILE = MergeMasterTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Konshin.MergeMasterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MergeMaster.app/Contents/MacOS/MergeMaster";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D5DEECC51E06AEB800802982 /* Build configuration list for PBXProject "MergeMaster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5DEECE01E06AEB900802982 /* Debug */,
+				D5DEECE11E06AEB900802982 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5DEECE21E06AEB900802982 /* Build configuration list for PBXNativeTarget "MergeMaster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5DEECE31E06AEB900802982 /* Debug */,
+				D5DEECE41E06AEB900802982 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5DEECE51E06AEB900802982 /* Build configuration list for PBXNativeTarget "MergeMasterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5DEECE61E06AEB900802982 /* Debug */,
+				D5DEECE71E06AEB900802982 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D5DEECC21E06AEB800802982 /* Project object */;
+}
