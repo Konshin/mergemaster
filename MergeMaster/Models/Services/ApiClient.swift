@@ -29,6 +29,10 @@ private enum Authorization {
     case none
 }
 
+protocol ApiClientDelegate: AnyObject {
+    func apiClientDidReceiveResponse(_ response: RequestManager.Response)
+}
+
 final class ApiClient {
     let configuration: Configuration
     let appState: AppState
@@ -36,6 +40,8 @@ final class ApiClient {
     private let disposeBag = DisposeBag()
     private let requestManager = RequestManager(defaultHeaders: [:],
                                                 isGZipEnabled: false)
+    
+    weak var delegate: ApiClientDelegate?
     
     init(configuration: Configuration, appState: AppState) {
         self.configuration = configuration
@@ -47,21 +53,33 @@ final class ApiClient {
             let request = try makeRequest(method: .get,
                                           path: "projects",
                                           params: ["membership": 1,
-                                                   "per_page": 1000],
-                                          authorize: true)
+                                                   "per_page": 1000])
             return performDecodable(request: request, authorization: token.map { .token($0) } ?? .stored)
         } catch {
             return .error(error)
         }
     }
     
-    func getRequests(projectId: ProjectId, token: Token?) -> Single<[MergeRequest]> {
+    func getRequests(projectId: ProjectId) -> Single<[MergeRequest]> {
         do {
             let request = try makeRequest(method: .get,
                                           path: "projects/\(projectId)/merge_requests",
-                                          params: ["state": "opened"],
-                                          authorize: true)
-            return performDecodable(request: request, authorization: token.map { .token($0) } ?? .stored)
+                                          params: ["state": "opened",
+                                                   "with_merge_status_recheck": true])
+            return performDecodable(request: request, authorization: .stored)
+        } catch {
+            return .error(error)
+        }
+    }
+    
+    func getApprovals(projectId: ProjectId, requestIid: Int) -> Single<Approvals> {
+        do {
+            let request = try makeRequest(
+                method: .get,
+                path: "projects/\(projectId)/merge_requests/\(requestIid)/approvals",
+                params: nil
+            )
+            return performDecodable(request: request, authorization: .stored)
         } catch {
             return .error(error)
         }
@@ -73,10 +91,7 @@ final class ApiClient {
         let request = addSecurityParameters(to: request, authorization: authorization)
         return self.requestManager.perform(request: request)
             .flatMap { [weak self] response -> Single<Data> in
-                if response.statusCode == 401 {
-                    // force logout
-                    self?.appState.privateToken.accept(nil)
-                }
+                self?.delegate?.apiClientDidReceiveResponse(response)
                 if response.isSuccess {
                     return Single.just(response.data)
                 } else {
@@ -111,7 +126,7 @@ final class ApiClient {
         return request
     }
     
-    private func makeRequest(method: Request.Method, path: String, params: [String: Any]? = nil, headers: [String: Any]? = nil, authorize: Bool = true) throws -> Request {
+    private func makeRequest(method: Request.Method, path: String, params: [String: Any]? = nil, headers: [String: Any]? = nil) throws -> Request {
         guard let url = configuration.apiURL else {
             throw ApiClientError.cannotCreateURL
         }

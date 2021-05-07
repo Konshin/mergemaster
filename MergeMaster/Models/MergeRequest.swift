@@ -10,6 +10,7 @@ import Foundation
 
 struct MergeRequest: Equatable {
     let id: Int
+    let iid: Int
     let title: String
     let author: User
     let webUrl: String
@@ -19,7 +20,7 @@ struct MergeRequest: Equatable {
 extension MergeRequest: Codable {
     
     private enum CodingKeys: String, CodingKey {
-        case id, title, author
+        case id, title, author, iid
         case webUrl = "web_url"
         case numberOfComments = "user_notes_count"
     }
@@ -28,6 +29,7 @@ extension MergeRequest: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         id = try container.decode(Int.self, forKey: .id)
+        iid = try container.decode(Int.self, forKey: .iid)
         title = try container.decode(String.self, forKey: .title)
         author = try container.decode(User.self, forKey: .author)
         webUrl = try container.decode(String.self, forKey: .webUrl)

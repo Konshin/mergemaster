@@ -13,7 +13,7 @@ import RxCocoa
 final class ProjectsListVM {
     private let router: Router
     private let appState: AppState
-    private let apiClient: ApiClient
+    private let facade: AppFacade
     
     private let disposeBag = DisposeBag()
     private var cellViewModels = [Int: ProjectCellViewModel]()
@@ -21,10 +21,10 @@ final class ProjectsListVM {
     let projects = BehaviorRelay<[Project]>(value: [])
     let status = BehaviorRelay<String?>(value: nil)
     
-    init(router: Router, appState: AppState, apiClient: ApiClient) {
+    init(router: Router, appState: AppState, facade: AppFacade) {
         self.router = router
         self.appState = appState
-        self.apiClient = apiClient
+        self.facade = facade
         
         initialize()
     }
@@ -67,11 +67,8 @@ final class ProjectsListVM {
     
     private func updateProjects() {
         status.accept("Loading projects...")
-        guard let token = appState.privateToken.value else {
-            print("Haven't token")
-            return
-        }
-        self.apiClient.getProjects(token: token)
+        facade.projects(forceRefresh: true)
+            .observeOn(MainScheduler.instance)
             .subscribe { [weak self] event in
                 guard let self = self else { return }
                 switch event {

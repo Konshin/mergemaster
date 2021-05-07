@@ -21,7 +21,6 @@ final class RequestsListController: NSViewController {
     private lazy var tableView: NSTableView = {
         let view = NSTableView()
         view.headerView = nil
-        view.rowHeight = 50
         view.dataSource = self
         view.delegate = self
         return view
@@ -153,9 +152,9 @@ final class RequestsListController: NSViewController {
         })
             .disposed(by: disposeBag)
         
-        viewModel.requests.asDriver()
-            .drive(onNext: { [unowned self] _ in
-                self.tableView.reloadData()
+        viewModel.updateSignal
+            .subscribe(onNext: { [weak self] in
+                self?.tableView.reloadData()
             })
             .disposed(by: disposeBag)
     }
@@ -165,7 +164,7 @@ final class RequestsListController: NSViewController {
 extension RequestsListController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return viewModel.numberOfRequests
+        return viewModel.items.count
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
@@ -177,31 +176,93 @@ extension RequestsListController: NSTableViewDataSource {
 
 extension RequestsListController: NSTableViewDelegate {
     
-    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cellViewModel = viewModel.cellVMAtIndex(index: row)
-        
-        let view: NSView
-        switch tableColumn?.identifier.rawValue {
-        case Constants.nameColumnIdentifier?:
-            let button = NSButton()
-            button.isBordered = false
-            button.alignment = .left
-            button.title = "\(cellViewModel.name)\nAuthor: \(cellViewModel.userName)"
-            button.rx.tap
-                .subscribe(onNext: { [unowned self] in
-                    self.viewModel.tapToIndex(index: row)
-                })
-                .disposed(by: disposeBag)
-            view = button
-        default:
-            return nil
-        }
-        
+    private func createLabel() -> NSTextField {
+        let view = NSTextField()
+        view.isEditable = false
+        view.isSelectable = false
+        view.backgroundColor = .clear
+        view.isBordered = false
         return view
     }
     
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        switch viewModel.items[row] {
+        case .cell(let viewModel):
+            let container = NSView(frame: NSRect(x: 0, y: 0, width: 300, height: 300))
+            let view = createLabel()
+            view.stringValue = viewModel.name
+            
+            let author = createLabel()
+            author.stringValue = "Author: \(viewModel.userName)"
+            
+            let approvers = createLabel()
+            switch viewModel.approvedBy.count {
+            case 1:
+                approvers.stringValue = "Approved: \(viewModel.approvedBy[0])"
+            default:
+                approvers.stringValue = "Approved: \(viewModel.approvedBy.count)"
+            }
+            
+            let line = NSView()
+            line.wantsLayer = true
+            line.layer?.backgroundColor = NSColor.lightGray.cgColor
+            
+            [view, author, approvers, line]
+                .forEach(container.addSubview(_:))
+            
+            view.snp.remakeConstraints {
+                $0.top.equalToSuperview().inset(2)
+                $0.leading.trailing.equalToSuperview()
+            }
+            author.snp.remakeConstraints {
+                $0.leading.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(2)
+            }
+            approvers.snp.remakeConstraints {
+                $0.trailing.equalToSuperview()
+                $0.bottom.equalTo(author)
+            }
+            line.snp.remakeConstraints {
+                $0.bottom.leading.trailing.equalToSuperview()
+                $0.height.equalTo(1)
+            }
+            
+            return container
+        case .header(let header):
+            let container = NSView(frame: NSRect(x: 0, y: 0, width: 300, height: 300))
+            container.wantsLayer = true
+            
+            let view = createLabel()
+            view.font = NSFont.systemFont(ofSize: 12, weight: .bold)
+            view.alignment = .left
+            view.textColor = NSColor.linkColor
+            view.backgroundColor = NSColor.headerColor.withAlphaComponent(0.1)
+            view.stringValue = header.title
+            
+            [view]
+                .forEach(container.addSubview)
+            view.snp.remakeConstraints {
+                $0.leading.equalToSuperview()
+                $0.bottom.equalToSuperview().inset(2)
+                $0.trailing.equalToSuperview()
+            }
+            
+            return container
+        }
+    }
+    
     func tableView(_ tableView: NSTableView, shouldSelectRow row: Int) -> Bool {
+        viewModel.handleTap(index: row)
         return false
+    }
+    
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        switch viewModel.items[row] {
+        case .cell:
+            return 55
+        case .header:
+            return 24
+        }
     }
     
 }

@@ -13,4 +13,5 @@ struct RequestCellViewModel {
     let url: String
     let userAvatarUrl: String
     let userName: String
+    let approvedBy: [String]
 }

@@ -15,11 +15,13 @@ class Router: NSObject {
     private let apiClient: ApiClient
     private let appState: AppState
     private let configuration: Configuration
+    private let facade: AppFacade
     
-    init(apiClient: ApiClient, appState: AppState, configuration: Configuration) {
+    init(apiClient: ApiClient, appState: AppState, configuration: Configuration, facade: AppFacade) {
         self.apiClient = apiClient
         self.appState = appState
         self.configuration = configuration
+        self.facade = facade
         
         super.init()
         
@@ -29,7 +31,7 @@ class Router: NSObject {
     //MARK: - Getters
     
     private var authController: AuthorizationController {
-        let vm = AuthorizationVM(apiClient: apiClient, appState: appState, configuration: configuration, router: self)
+        let vm = AuthorizationVM(facade: facade, appState: appState, configuration: configuration, router: self)
         return AuthorizationController(viewModel: vm)
     }
     
@@ -49,13 +51,13 @@ class Router: NSObject {
     }
     
     func showProjectsController() {
-        let viewModel = ProjectsListVM(router: self, appState: appState, apiClient: apiClient)
+        let viewModel = ProjectsListVM(router: self, appState: appState, facade: facade)
         let vc = ProjectsListController(viewModel: viewModel)
         showController(vc: vc)
     }
     
     func showRequestsController() {
-        let viewModel = RequestsListVM(router: self, appState: appState, apiClient: apiClient)
+        let viewModel = RequestsListVM(router: self, facade: facade, appState: appState)
         let vc = RequestsListController(viewModel: viewModel)
         showController(vc: vc)
     }

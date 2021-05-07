@@ -23,7 +23,7 @@ struct AppState {
     let privateToken: BehaviorRelay<Token?>
     /// Ids for selected projects
     let selectedProjects: BehaviorRelay<[ProjectId]>
-    /// Number of actual reqeusts
+    /// Number of actual requests
     let numberOfRequests = BehaviorRelay(value: 0)
     
     private let disposeBag = DisposeBag()
@@ -37,7 +37,9 @@ struct AppState {
         return privateToken.value != nil
     }
     
-    init() {
+    static let shared = AppState()
+    
+    private init() {
         let defaults = UserDefaults.standard
         let cachedToken = defaults.object(forKey: Constants.tokenCacheKey) as? Token
         let cachedProjectsIds = defaults.object(forKey: Constants.projectsCacheKey) as? [ProjectId]

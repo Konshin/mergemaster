@@ -20,6 +20,9 @@
 		D596A5841E0719B8004162A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5831E0719B8004162A0 /* User.swift */; };
 		D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */; };
 		D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5871E0731A1004162A0 /* EventMonitor.swift */; };
+		D5C38D54264430650033A374 /* AppFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D53264430650033A374 /* AppFacade.swift */; };
+		D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D57264437610033A374 /* MergeRequestInfo.swift */; };
+		D5C38D5C26443A5B0033A374 /* Approvals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D5B26443A5B0033A374 /* Approvals.swift */; };
 		D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECCD1E06AEB800802982 /* AppDelegate.swift */; };
 		D5DEECD01E06AEB800802982 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5DEECCF1E06AEB800802982 /* Assets.xcassets */; };
 		D5DEECD31E06AEB800802982 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5DEECD11E06AEB800802982 /* MainMenu.xib */; };
@@ -59,6 +62,9 @@
 		D596A5831E0719B8004162A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCellViewModel.swift; sourceTree = "<group>"; };
 		D596A5871E0731A1004162A0 /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
+		D5C38D53264430650033A374 /* AppFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFacade.swift; sourceTree = "<group>"; };
+		D5C38D57264437610033A374 /* MergeRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeRequestInfo.swift; sourceTree = "<group>"; };
+		D5C38D5B26443A5B0033A374 /* Approvals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Approvals.swift; sourceTree = "<group>"; };
 		D5CE1BE925B827320046D0AF /* MergeMaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MergeMaster.entitlements; sourceTree = "<group>"; };
 		D5DEECCA1E06AEB800802982 /* MergeMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MergeMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D5DEECCD1E06AEB800802982 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -151,6 +157,14 @@
 			path = ProjectsList;
 			sourceTree = "<group>";
 		};
+		D5C38D52264430580033A374 /* Facades */ = {
+			isa = PBXGroup;
+			children = (
+				D5C38D53264430650033A374 /* AppFacade.swift */,
+			);
+			path = Facades;
+			sourceTree = "<group>";
+		};
 		D5DEECC11E06AEB800802982 = {
 			isa = PBXGroup;
 			children = (
@@ -220,12 +234,15 @@
 		D5DEECF21E06B78C00802982 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D5C38D52264430580033A374 /* Facades */,
 				D5967F1825DD4CA3000A0F3B /* Services */,
 				D5DEECF51E06B7F100802982 /* AppState.swift */,
 				D5DEECFD1E06C18200802982 /* Configuration.swift */,
 				D596A5661E06D56F004162A0 /* MergeRequest.swift */,
 				D596A5681E06DC63004162A0 /* Project.swift */,
 				D596A5831E0719B8004162A0 /* User.swift */,
+				D5C38D57264437610033A374 /* MergeRequestInfo.swift */,
+				D5C38D5B26443A5B0033A374 /* Approvals.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -410,13 +427,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5C38D5C26443A5B0033A374 /* Approvals.swift in Sources */,
 				D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */,
 				D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */,
 				D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */,
 				D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */,
 				D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */,
 				D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */,
+				D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */,
 				D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */,
+				D5C38D54264430650033A374 /* AppFacade.swift in Sources */,
 				D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */,
 				D596A5841E0719B8004162A0 /* User.swift in Sources */,
 				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
@@ -586,7 +606,7 @@
 				INFOPLIST_FILE = MergeMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.konshin.mergemaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -607,7 +627,7 @@
 				INFOPLIST_FILE = MergeMaster/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.konshin.mergemaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

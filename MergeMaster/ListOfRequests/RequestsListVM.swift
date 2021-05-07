@@ -14,38 +14,43 @@ private struct Constants {
     static let updateInterval: Int = 30
 }
 
-class RequestsListVM {
+final class RequestsListVM {
+    
+    enum Item {
+        case cell(RequestCellViewModel)
+        case header(Header)
+    }
+    
+    struct Header {
+        let title: String
+        let tapHandler: () -> Void
+    }
+    
     private let router: Router
+    private let facade: AppFacade
     private let appState: AppState
-    private let apiClient: ApiClient
     
-    private var disposeBag: DisposeBag! = DisposeBag()
+    private var disposeBag: DisposeBag = DisposeBag()
     
-    let requests = BehaviorRelay<[MergeRequest]>(value: [])
+    private var projectRequests: [AppFacade.ProjectRequests] = []
+    private let itemsRelay = BehaviorRelay<[Item]>(value: [])
     
-    init(router: Router, appState: AppState, apiClient: ApiClient) {
+    init(router: Router, facade: AppFacade, appState: AppState) {
         self.router = router
+        self.facade = facade
         self.appState = appState
-        self.apiClient = apiClient
         
         initialize()
     }
     
     //MARK: - Getters
     
-    var numberOfRequests: Int {
-        return requests.value.count
+    var items: [Item] {
+        return itemsRelay.value
     }
     
-    func cellVMAtIndex(index: Int) -> RequestCellViewModel {
-        let request = requests.value[index]
-        let viewModel = RequestCellViewModel(
-            name: request.title,
-            url: request.webUrl,
-            userAvatarUrl: request.author.avatarUrl,
-            userName: request.author.name
-        )
-        return viewModel
+    var updateSignal: Observable<()> {
+        return itemsRelay.map { _ in () }
     }
     
     var selectProjectsTitle: Driver<String> {
@@ -71,101 +76,168 @@ class RequestsListVM {
     }
     
     private func updateRequests(notifyAboutDiff: Bool) {
-        guard let token = appState.privateToken.value else {
-            print("Couldn't update requests: Token is invalid")
-            return
-        }
+        let requestsBefore = projectRequests.reduce([MergeRequestInfo]()) { $0 + $1.requests }
         
-        let requestsBefore = requests.value
-        
-        let observers = appState.selectedProjects.value.map() { projectId in
-            return apiClient.getRequests(projectId: projectId, token: token)
-        }
-        
-        let updateObserver = Single.zip(observers) { values in
-            return values.reduce([]) { acc, requests in
-                return acc + requests
-            }
-        }
-        
-        updateObserver
+        facade.requestsInfo()
             .observeOn(MainScheduler.instance)
-            .subscribe(onSuccess: { requests in
+            .subscribe(onSuccess: { [weak self] requests in
+                self?.setProjectRequests(requests)
                 if notifyAboutDiff {
-                    self.notifyAboutDiffIfNeeded(oldRequests: requestsBefore, requests: requests)
+                    let requests = requests.reduce([MergeRequestInfo]()) { $0 + $1.requests }
+                    self?.notifyAboutDiffIfNeeded(oldRequests: requestsBefore, requests: requests)
                 }
-                
-                self.appState.numberOfRequests.accept(requests.count)
-                self.requests.accept(requests) 
             })
             .disposed(by: disposeBag)
     }
     
-    private func notifyAboutDiffIfNeeded(oldRequests: [MergeRequest], requests: [MergeRequest]) {
+    private func setProjectRequests(_ requests: [AppFacade.ProjectRequests]) {
+        projectRequests = requests
+        let items: [Item] = requests.reduce(into: []) { (result, requests) in
+            let header = Header(title: requests.project.name) { [weak self] in
+                self?.openStringURL(requests.project.webUrl)
+            }
+            result.append(.header(header))
+            requests.requests.forEach { request in
+                let item = RequestCellViewModel(
+                    name: request.title,
+                    url: request.webURL,
+                    userAvatarUrl: request.author.avatarUrl,
+                    userName: request.author.name,
+                    approvedBy: request.approvedBy.map { $0.name }
+                )
+                result.append(.cell(item))
+            }
+        }
+        itemsRelay.accept(items)
+    }
+    
+    private func openStringURL(_ stringURL: String) {
+        guard let url = URL(string: stringURL) else {
+            return
+        }
+        NSWorkspace.shared.open(url)
+    }
+    
+    private func notifyAboutDiffIfNeeded(oldRequests: [MergeRequestInfo], requests: [MergeRequestInfo]) {
+        notifyAboutNewRequestsIfNeeded(oldRequests: oldRequests, requests: requests)
+        notifyAboutNewCommentsIfNeeded(oldRequests: oldRequests, requests: requests)
+        notifyAboutNewApprovalsIfNeeded(oldRequests: oldRequests, requests: requests)
+    }
+    
+    private func notifyAboutNewRequestsIfNeeded(oldRequests: [MergeRequestInfo], requests: [MergeRequestInfo]) {
         if requests.count > oldRequests.count {
             let numberOfNewRequests = requests.count - oldRequests.count
+            
             let n = NSUserNotification()
-            n.title = "Found new Merge Requests: \(numberOfNewRequests)"
+            if numberOfNewRequests == 1 {
+                n.title = "1 new Merge Request"
+            } else {
+                n.title = "\(numberOfNewRequests) new Merge Requests"
+            }
             
             if let newRequest = requests.first(where: { new in !oldRequests.contains(where: { $0.id == new.id }) }) {
                 // Если всего 1 новый реквест - даем на него ссылку
-                n.userInfo = ["URL": newRequest.webUrl]
+                n.userInfo = ["URL": newRequest.webURL]
             }
             
-            n.deliveryDate = Date()
-            
-            NSUserNotificationCenter.default.scheduleNotification(n)
-        } else {
-            let commentsBefore = oldRequests.reduce(into: [Int: Int]()) { (result, request) in
-                result[request.id] = request.numberOfComments
-            }
-            let commentsAfter = requests.reduce(into: [Int: Int]()) { (result, request) in
-                result[request.id] = request.numberOfComments
-            }
-            var newComments = 0
-            let requestsWithNewComments = requests.filter { request in
-                let before = commentsBefore[request.id] ?? 0
-                let after = commentsAfter[request.id] ?? 0
-                let new = after - before
-                let hasNew = new > 0
-                if hasNew {
-                    newComments += new
-                }
-                return hasNew
-            }
-            guard !requestsWithNewComments.isEmpty else { return }
-            
-            let n = NSUserNotification()
-            if requestsWithNewComments.count == 1 {
-                let request = requestsWithNewComments[0]
-                n.title = "New comments for request: \(request.title) (\(newComments))"
-                n.userInfo = ["URL": request.webUrl]
-            } else {
-                let titles = requestsWithNewComments.map { $0.title }.joined(separator: ", ")
-                n.title = "New comments for requests: [\(titles)] (\(newComments))"
-            }
-            
+            n.identifier = "new_request"
             n.deliveryDate = Date()
             
             NSUserNotificationCenter.default.scheduleNotification(n)
         }
+    }
+    
+    private func notifyAboutNewCommentsIfNeeded(oldRequests: [MergeRequestInfo], requests: [MergeRequestInfo]) {
+        let commentsBefore = oldRequests.reduce(into: [Int: Int]()) { (result, request) in
+            result[request.id] = request.numberOfComments
+        }
+        let commentsAfter = requests.reduce(into: [Int: Int]()) { (result, request) in
+            result[request.id] = request.numberOfComments
+        }
+        var newComments = 0
+        let requestsWithNewComments = requests.filter { request in
+            let before = commentsBefore[request.id] ?? 0
+            let after = commentsAfter[request.id] ?? 0
+            let new = after - before
+            let hasNew = new > 0
+            if hasNew {
+                newComments += new
+            }
+            return hasNew
+        }
+        guard !requestsWithNewComments.isEmpty else { return }
+        
+        let n = NSUserNotification()
+        if requestsWithNewComments.count == 1 {
+            let request = requestsWithNewComments[0]
+            n.title = "1 new comment"
+            n.subtitle = request.title
+            n.userInfo = ["URL": request.webURL]
+        } else {
+            let titles = requestsWithNewComments.map { $0.title }.joined(separator: ", ")
+            n.title = "\(newComments) new comments"
+            n.subtitle = titles
+        }
+        
+        n.identifier = "new_comments"
+        n.deliveryDate = Date()
+        
+        NSUserNotificationCenter.default.scheduleNotification(n)
+    }
+    
+    private func notifyAboutNewApprovalsIfNeeded(oldRequests: [MergeRequestInfo], requests: [MergeRequestInfo]) {
+        let approversBefore = oldRequests.reduce(into: [Int: [User]]()) { (result, request) in
+            result[request.id] = request.approvedBy
+        }
+        let approversAfter = requests.reduce(into: [Int: [User]]()) { (result, request) in
+            result[request.id] = request.approvedBy
+        }
+        var newApprovers = 0
+        let requestsWithNewApprovs = requests.filter { request in
+            let before = approversBefore[request.id] ?? []
+            let after = approversAfter[request.id] ?? []
+            let new = after.count - before.count
+            let hasNew = new > 0
+            if hasNew {
+                newApprovers += new
+            }
+            return hasNew
+        }
+        guard !requestsWithNewApprovs.isEmpty else { return }
+        
+        let n = NSUserNotification()
+        if requestsWithNewApprovs.count == 1 {
+            let request = requestsWithNewApprovs[0]
+            n.title = "Got Approve for request"
+            n.subtitle = request.title
+            n.userInfo = ["URL": request.webURL]
+        } else {
+            let titles = requestsWithNewApprovs.map { $0.title }.joined(separator: ", ")
+            n.title = "Got Approve for requests"
+            n.subtitle = titles
+        }
+        
+        n.identifier = "new_approvals"
+        n.deliveryDate = Date()
+        
+        NSUserNotificationCenter.default.scheduleNotification(n)
     }
     
     // MARK: - functions
     
     /// Прекращает слежку за реквестами
     func stopUpdates() {
-        disposeBag = nil
+        disposeBag = DisposeBag()
     }
     
-    func tapToIndex(index: Int) {
+    func handleTap(index: Int) {
         router.dissmissPopover()
-        let viewModel = cellVMAtIndex(index: index)
-        
-        guard let url = URL(string: viewModel.url) else {
-            return
+        switch items[index] {
+        case .cell(let item):
+            openStringURL(item.url)
+        case .header(let header):
+            header.tapHandler()
         }
-        NSWorkspace.shared.open(url)
     }
     
     func reselectProjects() {
