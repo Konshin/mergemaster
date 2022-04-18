@@ -48,12 +48,13 @@ final class ApiClient {
         self.appState = appState
     }
     
-    func getProjects(token: Token?) -> Single<[Project]> {
+    func getProjects(token: Token?, search: String = "") -> Single<[Project]> {
         do {
             let request = try makeRequest(method: .get,
                                           path: "projects",
-                                          params: ["membership": 1,
-                                                   "per_page": 1000])
+                                          params: ["membership": true,
+                                                   "per_page": 1000,
+                                                   "search": search])
             return performDecodable(request: request, authorization: token.map { .token($0) } ?? .stored)
         } catch {
             return .error(error)

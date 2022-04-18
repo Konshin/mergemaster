@@ -102,7 +102,7 @@ final class RequestsListVM {
                     name: request.title,
                     url: request.webURL,
                     userAvatarUrl: request.author.avatarUrl,
-                    userName: request.author.name,
+                    userName: request.author.username ?? request.author.name,
                     approvedBy: request.approvedBy.map { $0.name }
                 )
                 result.append(.cell(item))

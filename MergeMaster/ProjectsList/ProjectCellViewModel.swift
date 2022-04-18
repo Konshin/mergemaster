@@ -11,6 +11,7 @@ import RxSwift
 
 struct ProjectCellViewModel {
     let name: String
+    let nameSpace: String?
     let url: String
     let selected: Observable<Bool>
 }

@@ -12,7 +12,7 @@ import RxCocoa
 
 private struct Constants {
     static let tokenCacheKey = "PRIVATE_TOKEN"
-    static let projectsCacheKey = "PROJECT_IDS"
+    static let projectsCacheKey = "SELECTED_PROJECTS"
     static let loginCacheKey = "USER_LOGIN"
 }
 
@@ -22,7 +22,7 @@ struct AppState {
     /// Current API token
     let privateToken: BehaviorRelay<Token?>
     /// Ids for selected projects
-    let selectedProjects: BehaviorRelay<[ProjectId]>
+    let selectedProjects: BehaviorRelay<[Project]>
     /// Number of actual requests
     let numberOfRequests = BehaviorRelay(value: 0)
     
@@ -42,9 +42,12 @@ struct AppState {
     private init() {
         let defaults = UserDefaults.standard
         let cachedToken = defaults.object(forKey: Constants.tokenCacheKey) as? Token
-        let cachedProjectsIds = defaults.object(forKey: Constants.projectsCacheKey) as? [ProjectId]
+        let decoder = JSONDecoder()
+        let cachedProjects = (defaults.object(forKey: Constants.projectsCacheKey) as? Data).flatMap {
+            try? decoder.decode([Project].self, from: $0)
+        }
         privateToken = BehaviorRelay(value: cachedToken)
-        selectedProjects = BehaviorRelay(value: cachedProjectsIds ?? [])
+        selectedProjects = BehaviorRelay(value: cachedProjects ?? [])
         
         initialize()
     }
@@ -58,7 +61,8 @@ struct AppState {
         
         selectedProjects.asObservable()
             .subscribe(onNext: { projects in
-                UserDefaults.standard.set(projects, forKey: Constants.projectsCacheKey)
+                guard let data = try? JSONEncoder().encode(projects) else { return }
+                UserDefaults.standard.set(data, forKey: Constants.projectsCacheKey)
             })
             .disposed(by: disposeBag)
     }

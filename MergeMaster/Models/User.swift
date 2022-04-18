@@ -10,13 +10,14 @@ import Foundation
 
 struct User: Equatable {
     let name: String
+    let username: String?
     let avatarUrl: String
 }
 
 extension User: Codable {
     
     private enum CodingKeys: String, CodingKey {
-        case name
+        case name, username
         case avatarUrl = "avatar_url"
     }
     

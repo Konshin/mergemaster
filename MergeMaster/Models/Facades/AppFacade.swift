@@ -67,13 +67,15 @@ extension AppFacade {
         let requests: [MergeRequestInfo]
     }
     
-    func projects(token: Token? = nil, forceRefresh: Bool = false) -> Single<[Project]> {
-        if !forceRefresh, let cached = cachedProjects {
+    func projects(token: Token? = nil, search: String = "", forceRefresh: Bool = false) -> Single<[Project]> {
+        if search.isEmpty, !forceRefresh, let cached = cachedProjects {
             return .just(cached)
         } else {
-            return apiClient.getProjects(token: token)
+            return apiClient.getProjects(token: token, search: search)
                 .do(onSuccess: { [weak self] projects in
-                    self?.cachedProjects = projects
+                    if search.isEmpty {
+                        self?.cachedProjects = projects
+                    }
                 })
         }
     }
@@ -92,15 +94,7 @@ extension AppFacade {
             let requests: [MergeRequest]
         }
         
-        return projects()
-            .map { [appState] projects -> [Project] in
-                let projectsByID = projects.reduce(into: [ProjectId: Project]()) { (result, project) in
-                    result[project.id] = project
-                }
-                return appState.selectedProjects.value.compactMap { id in
-                    return projectsByID[id]
-                }
-            }
+        return Single.just(appState.selectedProjects.value)
             .flatMap { projects -> Single<[IntermediateData]> in
                 let requests: [Single<IntermediateData>] = projects.map { project in
                     self.mergeRequests(projectId: project.id)

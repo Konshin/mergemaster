@@ -19,6 +19,7 @@ final class ProjectsListVM {
     private var cellViewModels = [Int: ProjectCellViewModel]()
     
     let projects = BehaviorRelay<[Project]>(value: [])
+    let searchText = PublishSubject<String>()
     let status = BehaviorRelay<String?>(value: nil)
     
     init(router: Router, appState: AppState, facade: AppFacade) {
@@ -43,31 +44,47 @@ final class ProjectsListVM {
         let project = projects.value[index]
         let viewModel = ProjectCellViewModel(
             name: project.name,
+            nameSpace: project.namespace?.name,
             url: project.webUrl,
             selected: appState.selectedProjects.asObservable()
-                .map() { ids in return ids.contains(project.id) }
+                .map() { ids in return ids.contains(project) }
         )
         return viewModel
     }
     
     func selected(index: Int) -> Bool {
         let project = projects.value[index]
-        return appState.selectedProjects.value.contains(project.id)
+        return appState.selectedProjects.value.contains(project)
     }
     
     var selectedUpdate: Observable<[ProjectId]> {
-        return appState.selectedProjects.asObservable()
+        return appState.selectedProjects.map { projects in projects.map { $0.id } }
     }
     
     //MARK: - Actions
     
     private func initialize() {
-        updateProjects()
+        searchText
+            .skip(1)
+            .do(onNext: { [weak self] _ in
+                self?.status.accept("Search for projects...")
+                self?.projects.accept([])
+            })
+            .debounce(.seconds(1), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] text in
+                self?.updateProjects(searchText: text, force: false)
+            })
+            .disposed(by: disposeBag)
+        
+        updateProjects(force: true)
     }
     
-    private func updateProjects() {
-        status.accept("Loading projects...")
-        facade.projects(forceRefresh: true)
+    private func updateProjects(searchText: String = "", force: Bool) {
+        if searchText.isEmpty {
+            status.accept("Loading projects...")
+        }
+        facade.projects(search: searchText, forceRefresh: force)
             .observeOn(MainScheduler.instance)
             .subscribe { [weak self] event in
                 guard let self = self else { return }
@@ -83,7 +100,11 @@ final class ProjectsListVM {
                 }
                 
                 if self.projects.value.isEmpty {
-                    self.status.accept("You don't have any projects available")
+                    if searchText.isEmpty {
+                        self.status.accept("You don't have any projects available")
+                    } else {
+                        self.status.accept("No projects found")
+                    }
                 } else {
                     self.status.accept(nil)
                 }
@@ -94,10 +115,10 @@ final class ProjectsListVM {
     func tapToIndex(index: Int) {
         let project = projects.value[index]
         var selectedProjects = appState.selectedProjects.value
-        if let index = selectedProjects.firstIndex(of: project.id) {
+        if let index = selectedProjects.firstIndex(of: project) {
             selectedProjects.remove(at: index)
         } else {
-            selectedProjects.append(project.id)
+            selectedProjects.append(project)
         }
         appState.selectedProjects.accept(selectedProjects)
     }

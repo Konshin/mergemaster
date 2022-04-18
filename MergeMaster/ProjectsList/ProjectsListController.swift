@@ -15,9 +15,19 @@ private struct Constants {
     static let selectedColumnIdentifier = "SELECTED"
 }
 
-class ProjectsListController: NSViewController {
+final class ProjectsListController: NSViewController {
     fileprivate let viewModel: ProjectsListVM
     
+    private lazy var searchField: NSTextField = {
+        let field = NSTextField()
+        field.placeholderString = "Search for projects"
+        field.backgroundColor = .clear
+        field.delegate = self
+        field.isBordered = false
+        field.isEditable = true
+        field.isSelectable = true
+        return field
+    }()
     private lazy var scrollView: NSScrollView = {
         let scrollView = NSScrollView()
         scrollView.hasHorizontalScroller = false
@@ -26,7 +36,7 @@ class ProjectsListController: NSViewController {
     }()
     private lazy var tableView: NSTableView = {
         let tableView = NSTableView()
-        tableView.rowHeight = 20
+        tableView.rowHeight = 40
         tableView.dataSource = self
         tableView.delegate = self
         
@@ -98,10 +108,15 @@ class ProjectsListController: NSViewController {
     //MARK: - Actions
     
     private func initializeInterface() {
-        [scrollView, confirmButton, statusLabel]
+        [searchField, scrollView, confirmButton, statusLabel]
             .forEach(view.addSubview(_:))
+        searchField.snp.remakeConstraints { make in
+            make.top.equalToSuperview().inset(10)
+            make.left.right.equalTo(view).inset(16)
+        }
         scrollView.snp.remakeConstraints() { make in
-            make.left.top.right.equalToSuperview()
+            make.top.equalTo(searchField.snp.bottom)
+            make.left.right.equalToSuperview()
         }
         statusLabel.snp.remakeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
@@ -132,6 +147,10 @@ class ProjectsListController: NSViewController {
                 self.statusLabel.stringValue = text ?? ""
             })
             .disposed(by: disposeBag)
+        searchField.rx.text
+            .map { $0 ?? "" }
+            .bind(to: viewModel.searchText)
+            .disposed(by: disposeBag)
     }
 }
 
@@ -149,12 +168,28 @@ extension ProjectsListController: NSTableViewDataSource {
 
 extension ProjectsListController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        let cellViewModel = viewModel.cellVMAtIndex(index: row)
-        
         let view: NSView
         switch tableColumn?.identifier.rawValue {
         case Constants.nameColumnIdentifier?:
-            let textView = NSTextField(string: cellViewModel.name)
+            let cellViewModel = viewModel.cellVMAtIndex(index: row)
+            let text = NSMutableAttributedString()
+            if let namespace = cellViewModel.nameSpace {
+                text.append(
+                    NSAttributedString(
+                        string: namespace + "\n",
+                        attributes: [.font: NSFont.systemFont(ofSize: 10),
+                                     .foregroundColor: NSColor.gray]
+                    )
+                )
+            }
+            text.append(
+                NSAttributedString(
+                    string: cellViewModel.name
+                )
+            )
+            let textView = NSTextField()
+            textView.attributedStringValue = text
+            textView.maximumNumberOfLines = 2
             textView.isBordered = false
             view = textView
         case Constants.selectedColumnIdentifier?:
@@ -177,4 +212,9 @@ extension ProjectsListController: NSTableViewDelegate {
         
         return false
     }
+}
+
+// MARK: - NSSearchFieldDelegate
+extension ProjectsListController: NSSearchFieldDelegate {
+    
 }
