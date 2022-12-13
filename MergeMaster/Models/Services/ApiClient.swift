@@ -112,18 +112,18 @@ final class ApiClient {
     
     private func addSecurityParameters(to request: Request,
                                        authorization: Authorization) -> Request {
-        var params = request.params ?? [:]
+        var headers = request.headers ?? [:]
         
         switch authorization {
         case .token(let token):
-            params["private_token"] = token
+            headers["PRIVATE-TOKEN"] = token
         case .stored:
-            params["private_token"] = appState.privateToken.value
+            headers["PRIVATE-TOKEN"] = appState.privateToken.value
         case .none:
             break
         }
         var request = request
-        request.params = params
+        request.headers = headers
         return request
     }
     
