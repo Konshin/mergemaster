@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		932D4932FBCEC7E7499E44C9 /* Pods_MergeMaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */; };
+		B4DAF1782C6229BE00353CE5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B4DAF1772C6229BE00353CE5 /* ComposableArchitecture */; };
+		B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F081362C62238B005839A4 /* ProjectsListView.swift */; };
 		BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */; };
 		D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5967F1925DD4CAD000A0F3B /* RequestManager.swift */; };
 		D596A5631E06D51D004162A0 /* RequestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5621E06D51D004162A0 /* RequestsListController.swift */; };
@@ -49,6 +51,7 @@
 
 /* Begin PBXFileReference section */
 		3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMaster.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMaster/Pods-MergeMaster.release.xcconfig"; sourceTree = "<group>"; };
+		B4F081362C62238B005839A4 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.release.xcconfig"; sourceTree = "<group>"; };
 		D5967F1925DD4CAD000A0F3B /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
@@ -92,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4DAF1782C6229BE00353CE5 /* ComposableArchitecture in Frameworks */,
 				932D4932FBCEC7E7499E44C9 /* Pods_MergeMaster.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -125,6 +129,22 @@
 				F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B4F081342C622371005839A4 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				B4F081362C62238B005839A4 /* ProjectsListView.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		B4F081352C622377005839A4 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				B4F081342C622371005839A4 /* Projects */,
+			);
+			path = Screens;
 			sourceTree = "<group>";
 		};
 		D5967F1825DD4CA3000A0F3B /* Services */ = {
@@ -188,6 +208,7 @@
 		D5DEECCC1E06AEB800802982 /* MergeMaster */ = {
 			isa = PBXGroup;
 			children = (
+				B4F081352C622377005839A4 /* Screens */,
 				D5CE1BE925B827320046D0AF /* MergeMaster.entitlements */,
 				D596A57A1E06EFB7004162A0 /* ProjectsList */,
 				D596A5611E06D319004162A0 /* RequestsList */,
@@ -273,6 +294,9 @@
 			dependencies = (
 			);
 			name = MergeMaster;
+			packageProductDependencies = (
+				B4DAF1772C6229BE00353CE5 /* ComposableArchitecture */,
+			);
 			productName = MergeMaster;
 			productReference = D5DEECCA1E06AEB800802982 /* MergeMaster.app */;
 			productType = "com.apple.product-type.application";
@@ -329,6 +353,9 @@
 				Base,
 			);
 			mainGroup = D5DEECC11E06AEB800802982;
+			packageReferences = (
+				B4F081382C6225A9005839A4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
+			);
 			productRefGroup = D5DEECCB1E06AEB800802982 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,6 +463,7 @@
 				D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */,
 				D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */,
 				D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */,
+				B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */,
 				D5C38D54264430650033A374 /* AppFacade.swift in Sources */,
 				D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */,
 				D596A5841E0719B8004162A0 /* User.swift in Sources */,
@@ -588,7 +616,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -604,8 +633,11 @@
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MergeMaster/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.konshin.mergemaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -625,8 +657,11 @@
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MergeMaster/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MARKETING_VERSION = 1.3.1;
 				PRODUCT_BUNDLE_IDENTIFIER = net.konshin.mergemaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -644,7 +679,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				INFOPLIST_FILE = MergeMasterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Konshin.MergeMasterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -662,7 +701,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				INFOPLIST_FILE = MergeMasterTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = Konshin.MergeMasterTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -701,6 +744,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B4F081382C6225A9005839A4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.12.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B4DAF1772C6229BE00353CE5 /* ComposableArchitecture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B4F081382C6225A9005839A4 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = ComposableArchitecture;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D5DEECC21E06AEB800802982 /* Project object */;
 }
