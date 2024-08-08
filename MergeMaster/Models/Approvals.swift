@@ -9,29 +9,17 @@
 import Foundation
 
 struct Approvals {
-    let id: Int
-    let iid: Int
-    let projectId: Int
-    let title: String
-    let mergeStatus: String
-    let approvalsRequired: Int
-    let approvalsLeft: Int
-    let approvedBy: [ApprovedBy]
+  let approved: Bool
+  let approvedBy: [ApprovedBy]
 }
 
 struct ApprovedBy: Decodable {
-    let user: User
+  let user: User
 }
 
 extension Approvals: Decodable {
-    
-    private enum CodingKeys: String, CodingKey {
-        case id, iid, title
-        case projectId = "project_id"
-        case mergeStatus = "merge_status"
-        case approvalsRequired = "approvals_required"
-        case approvalsLeft = "approvals_left"
-        case approvedBy = "approved_by"
-    }
-    
+  private enum CodingKeys: String, CodingKey {
+    case approved
+    case approvedBy = "approved_by"
+  }
 }
