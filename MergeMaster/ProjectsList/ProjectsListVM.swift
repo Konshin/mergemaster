@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 final class ProjectsListVM {
-    private let router: Router
+    private let router: Coordinator
     private let appState: AppState
     private let facade: AppFacade
     
@@ -22,7 +22,7 @@ final class ProjectsListVM {
     let searchText = PublishSubject<String>()
     let status = BehaviorRelay<String?>(value: nil)
     
-    init(router: Router, appState: AppState, facade: AppFacade) {
+    init(router: Coordinator, appState: AppState, facade: AppFacade) {
         self.router = router
         self.appState = appState
         self.facade = facade
@@ -84,32 +84,32 @@ final class ProjectsListVM {
         if searchText.isEmpty {
             status.accept("Loading projects...")
         }
-        facade.projects(search: searchText, forceRefresh: force)
-            .observeOn(MainScheduler.instance)
-            .subscribe { [weak self] event in
-                guard let self = self else { return }
-                switch event {
-                case .success(let projects):
-                    let sorted = projects
-                        .sorted() { l, p in
-                            return l.name < p.name
-                    }
-                    self.projects.accept(sorted)
-                case .error(let error):
-                    print("Failed to fetch projects: \(error)")
-                }
-                
-                if self.projects.value.isEmpty {
-                    if searchText.isEmpty {
-                        self.status.accept("You don't have any projects available")
-                    } else {
-                        self.status.accept("No projects found")
-                    }
-                } else {
-                    self.status.accept(nil)
-                }
-            }
-            .disposed(by: disposeBag)
+//        facade.projects(search: searchText, forceRefresh: force)
+//            .observeOn(MainScheduler.instance)
+//            .subscribe { [weak self] event in
+//                guard let self = self else { return }
+//                switch event {
+//                case .success(let projects):
+//                    let sorted = projects
+//                        .sorted() { l, p in
+//                            return l.name < p.name
+//                    }
+//                    self.projects.accept(sorted)
+//                case .error(let error):
+//                    print("Failed to fetch projects: \(error)")
+//                }
+//                
+//                if self.projects.value.isEmpty {
+//                    if searchText.isEmpty {
+//                        self.status.accept("You don't have any projects available")
+//                    } else {
+//                        self.status.accept("No projects found")
+//                    }
+//                } else {
+//                    self.status.accept(nil)
+//                }
+//            }
+//            .disposed(by: disposeBag)
     }
     
     func tapToIndex(index: Int) {

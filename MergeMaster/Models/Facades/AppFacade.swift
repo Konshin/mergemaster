@@ -66,19 +66,18 @@ extension AppFacade {
         let project: Project
         let requests: [MergeRequestInfo]
     }
-    
-    func projects(token: Token? = nil, search: String = "", forceRefresh: Bool = false) -> Single<[Project]> {
-        if search.isEmpty, !forceRefresh, let cached = cachedProjects {
-            return .just(cached)
-        } else {
-            return apiClient.getProjects(token: token, search: search)
-                .do(onSuccess: { [weak self] projects in
-                    if search.isEmpty {
-                        self?.cachedProjects = projects
-                    }
-                })
-        }
+
+  func projects(token: Token? = nil, search: String = "", forceRefresh: Bool = false) async throws -> [Project] {
+    if search.isEmpty, !forceRefresh, let cached = cachedProjects {
+      return cached
+    } else {
+      let projects = try await apiClient.getProjects(token: token, search: search)
+      if search.isEmpty {
+        cachedProjects = projects
+      }
+      return projects
     }
+  }
     
     func mergeRequests(projectId: Int) -> Single<[MergeRequest]> {
         return apiClient.getRequests(projectId: projectId)
@@ -167,9 +166,10 @@ extension AppFacade {
             return Disposables.create()
         }
         return prepareURL
-            .flatMap { [apiClient] token in
-                apiClient.getProjects(token: token)
-                    .map { _ in token }
+            .flatMap { [apiClient] token -> Single<Token> in
+//                apiClient.getProjects(token: token)
+//                    .map { _ in token }
+              return Single.just(token)
             }
             .do(onSuccess: { [configuration, appState] token in
                 configuration.saveToCache()

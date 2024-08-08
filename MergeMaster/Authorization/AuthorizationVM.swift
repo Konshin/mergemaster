@@ -25,7 +25,7 @@ final class AuthorizationVM {
     let facade: AppFacade
     let appState: AppState
     let configuration: Configuration
-    let router: Router
+    let router: Coordinator
     
     let token = BehaviorRelay<String?>(value: nil)
     let url = BehaviorRelay<String?>(value: nil)
@@ -33,7 +33,7 @@ final class AuthorizationVM {
     
     private let disposeBag = DisposeBag()
     
-    init(facade: AppFacade, appState: AppState, configuration: Configuration, router: Router) {
+    init(facade: AppFacade, appState: AppState, configuration: Configuration, router: Coordinator) {
         self.appState = appState
         self.configuration = configuration
         self.router = router

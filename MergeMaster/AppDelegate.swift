@@ -11,61 +11,67 @@ import RxSwift
 import RxCocoa
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
 
-    @IBOutlet weak var window: NSWindow!
-    private let configuration = Configuration.saved
-    private let appState = AppState.shared
-    private lazy var facade = AppFacade(apiClient: apiClient,
-                                        configuration: configuration,
-                                        appState: appState)
-    private lazy var apiClient: ApiClient = ApiClient(configuration: configuration, appState: appState)
-    private var router: Router?
-    private var menuWizard: MenuWizard!
-    private var eventMonitor: EventMonitor?
-    
-    private let disposeBag = DisposeBag()
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        NSUserNotificationCenter.default.delegate = self
-        
-        let router = Router(apiClient: apiClient, appState: appState, configuration: configuration, facade: facade)
-        menuWizard = MenuWizard(statusBar: NSStatusBar.system, router: router, appState: appState)
-        
-        self.router = router
-        
-        appState.isAuthorized.asDriver(onErrorJustReturn: false)
-            .drive(onNext: { [unowned self, configuration] authorized in
-                if !authorized || configuration.serverUrl == nil {
-                    router.showAuthController()
-                } else if self.appState.selectedProjects.value.isEmpty == false {
-                    router.showRequestsController()
-                } else {
-                    router.showProjectsController()
-                }
-            })
-        .disposed(by: disposeBag)
-        
-        eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { event in
-            if router.isPopoverShown {
-                router.dissmissPopover()
-            }
-        }
-        eventMonitor?.start()
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-    
-    func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-        if let url = notification.userInfo?["URL"] as? String,
-            let URL = URL(string: url)
-        {
-            NSWorkspace.shared.open(URL)
+  @IBOutlet weak var window: NSWindow!
+  private var coordinator: Coordinator!
+  private var eventMonitor: EventMonitor?
+  private lazy var dependencies: Dependencies = {
+    let menuRouter = Router<MenuWizard.Route>.weak(object: self) { appDelegate, route in
+      switch route {
+      case .togglePopoverVisibility(let sender):
+        guard let coordinator = appDelegate.coordinator else { return }
+        if coordinator.isPopoverShown {
+          coordinator.dissmissPopover()
         } else {
-            router?.showPopover(aroundButton: menuWizard.statusItem.button!)
+          coordinator.showPopover(aroundButton: sender)
         }
+      }
     }
+    let view = Dependencies(menuRouter: menuRouter)
+    return view
+  }()
+
+  private let disposeBag = DisposeBag()
+
+  func applicationDidFinishLaunching(_ aNotification: Notification) {
+    NSUserNotificationCenter.default.delegate = self
+
+    self.coordinator = Coordinator(dependencies: dependencies)
+
+    dependencies.appState.isAuthorized.asDriver(onErrorJustReturn: false)
+      .drive(onNext: { [weak self] authorized in
+        if !authorized || self?.dependencies.configuration.serverUrl == nil {
+          self?.coordinator.showAuthController()
+        } else if self?.dependencies.appState.selectedProjects.value.isEmpty == false {
+          self?.coordinator.showRequestsController()
+        } else {
+          self?.coordinator.showProjectsController()
+        }
+      })
+      .disposed(by: disposeBag)
+
+    eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak coordinator] event in
+      if coordinator?.isPopoverShown == true {
+        coordinator?.dissmissPopover()
+      }
+    }
+    eventMonitor?.start()
+    _ = dependencies.menuWizard
+  }
+
+  func applicationWillTerminate(_ aNotification: Notification) {
+    // Insert code here to tear down your application
+  }
+
+  func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
+    if let url = notification.userInfo?["URL"] as? String,
+       let URL = URL(string: url)
+    {
+      NSWorkspace.shared.open(URL)
+    } else if let button = dependencies.menuWizard.statusItem.button {
+      coordinator?.showPopover(aroundButton: button)
+    }
+  }
 }
 

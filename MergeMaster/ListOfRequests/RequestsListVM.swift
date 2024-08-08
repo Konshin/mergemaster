@@ -26,7 +26,7 @@ final class RequestsListVM {
         let tapHandler: () -> Void
     }
     
-    private let router: Router
+    private let router: Coordinator
     private let facade: AppFacade
     private let appState: AppState
     
@@ -35,7 +35,7 @@ final class RequestsListVM {
     private var projectRequests: [AppFacade.ProjectRequests] = []
     private let itemsRelay = BehaviorRelay<[Item]>(value: [])
     
-    init(router: Router, facade: AppFacade, appState: AppState) {
+    init(router: Coordinator, facade: AppFacade, appState: AppState) {
         self.router = router
         self.facade = facade
         self.appState = appState
