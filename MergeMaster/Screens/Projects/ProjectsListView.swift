@@ -12,18 +12,23 @@ import ComposableArchitecture
 struct ProjectsListView: View {
   @ObservedObject
   var store: ViewStore<State, Action>
+  @SwiftUI.State
+  private var isSearchEnabled = false
 
   var body: some View {
     VStack {
-      TextField.init(
-        "Repository or project name",
-        text: store.binding(
-          get: \.searchTerm,
-          send: Action.update(searchTerm:)
+      header()
+      if store.filter == .all {
+        TextField(
+          "Repository or project name",
+          text: store.binding(
+            get: \.searchTerm,
+            send: Action.update(searchTerm:)
+          )
         )
-      )
-      .textFieldStyle(.squareBorder)
-      .padding(.horizontal)
+        .textFieldStyle(.roundedBorder)
+        .padding(.horizontal, 8)
+      }
       if let error = store.error {
         errorView(error)
       } else {
@@ -34,17 +39,40 @@ struct ProjectsListView: View {
             items(store.items, searchTerm: store.searchTerm)
           }
         }
+        .listStyle(.plain)
       }
-      Button("Confirm") {
-        store.send(.confirm)
-      }
-      .buttonStyle(.bordered)
     }
     .padding(.vertical)
     .frame(width: 400, height: 250)
     .background(Color(.textBackgroundColor))
     .onAppear {
       store.send(.appeared)
+    }
+  }
+
+  @ViewBuilder
+  private func header() -> some View {
+    ToolbarView(title: "Projects") {
+      Picker(
+        "Filter",
+        selection: store.binding(
+          get: \.filter,
+          send: Action.changeFilter),
+        content: {
+          Text("All").tag(ProjectsFilter.all)
+          Text("Selected (\(store.numberOfSelectedProjects))").tag(ProjectsFilter.selected)
+        }
+      )
+      .pickerStyle(.segmented)
+      .labelsHidden()
+      .frame(width: 140)
+    } trailingViews: {
+      Button {
+        store.send(.confirm)
+      } label: {
+        Text("Confirm")
+      }
+      .buttonStyle(.plain)
     }
   }
 
@@ -116,18 +144,15 @@ struct ProjectsListView: View {
 
   @ViewBuilder
   private func errorView(_ error: String) -> some View {
-    VStack {
-      Text(error)
-        .foregroundColor(.red)
-      Button("Reload") {
-        store.send(.reload)
-      }
-    }
-    .frame(maxHeight: .infinity, alignment: .center)
+    ErrorView(error, reload: { store.send(.reload) })
   }
 }
 
 extension ProjectsListView {
+  enum ProjectsFilter {
+    case all, selected
+  }
+
   struct Item: Equatable, Identifiable {
     var id: ProjectId
     var title: String
@@ -137,6 +162,8 @@ extension ProjectsListView {
 
   struct State: Equatable {
     var items: [Item]
+    var numberOfSelectedProjects: Int = 0
+    var filter: ProjectsFilter = .all
     var searchTerm: String = ""
     var isLoading: Bool
     var error: String?
@@ -148,6 +175,7 @@ extension ProjectsListView {
     case confirm
     case appeared
     case reload
+    case changeFilter(ProjectsFilter)
   }
 }
 
@@ -165,9 +193,8 @@ extension ProjectsListView {
     isLoading: false,
     error: "Failed to load projects!"
   )
-  let store = Store<ProjectsListView.State, ProjectsListView.Action>(
-    initialState: state,
-    reducer: {
+  return ProjectsListView(
+    store: .preview(state: state, reducer: {
       Reduce { (state, action) in
         switch action {
         case .setSelected(let id, let selected):
@@ -178,13 +205,13 @@ extension ProjectsListView {
           state.searchTerm = searchTerm
         case .confirm, .appeared:
           break
+        case .changeFilter(let filter):
+          state.filter = filter
         case .reload:
           state.error = nil
         }
         return .none
       }
-    }
+    })
   )
-  let viewStore = ViewStore<ProjectsListView.State, ProjectsListView.Action>(store, observe: { $0 })
-  return ProjectsListView(store: viewStore)
 }

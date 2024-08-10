@@ -65,7 +65,7 @@ final class MenuWizard: NSObject {
     let title = NSAttributedString(
       string: "mr: \(num)",
       attributes: [
-        NSAttributedString.Key.foregroundColor: num == 0 ? NSColor.labelColor : NSColor.systemRed
+        NSAttributedString.Key.foregroundColor: num == 0 ? NSColor.labelColor : NSColor.controlAccentColor
       ]
     )
     statusItem.attributedTitle = title

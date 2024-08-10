@@ -14,9 +14,8 @@ struct ProjectsListAssembly {
   func makeView(router: Router<ProjectsListReducer.Route>) -> ProjectsListView {
     let reducer = ProjectsListReducer(router: router, appFacade: dependencies.appFacade, appState: dependencies.appState)
     let state = ProjectsListReducer.State(selectedProjects: dependencies.appState.selectedProjects.value)
-    let store = StoreOf<ProjectsListReducer>(initialState: state) { reducer }
-    let adapter = ProjectsListAdapter()
-    let viewStore = ViewStore.init(store, observe: adapter.adapt(state:), send: adapter.adapt(action:))
-    return ProjectsListView(store: viewStore)
+    return ProjectsListView(
+      store: .adapted(state: state, reducer: { reducer }, adapter: ProjectsListAdapter())
+    )
   }
 }

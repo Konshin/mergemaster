@@ -14,6 +14,15 @@
 		B4A7A4162C64B819004BAFFC /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4152C64B819004BAFFC /* Dependencies.swift */; };
 		B4A7A4182C64BDDA004BAFFC /* ProjectsListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4172C64BDDA004BAFFC /* ProjectsListAdapter.swift */; };
 		B4A7A41B2C64C678004BAFFC /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A41A2C64C678004BAFFC /* SkeletonView.swift */; };
+		B4A7A4202C64D921004BAFFC /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A41F2C64D921004BAFFC /* RequestsListView.swift */; };
+		B4A7A4232C64E49D004BAFFC /* ViewStore+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4222C64E49D004BAFFC /* ViewStore+Constructor.swift */; };
+		B4A7A4262C64E8AB004BAFFC /* View+BackwardCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4252C64E8AB004BAFFC /* View+BackwardCompatibility.swift */; };
+		B4A7A4282C64F770004BAFFC /* RequestsListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4272C64F770004BAFFC /* RequestsListReducer.swift */; };
+		B4A7A42A2C65074F004BAFFC /* RequestsListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4292C65074F004BAFFC /* RequestsListAdapter.swift */; };
+		B4A7A42C2C6514C3004BAFFC /* RequestsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A42B2C6514C3004BAFFC /* RequestsListAssembly.swift */; };
+		B4A7A42E2C6514EC004BAFFC /* ViewAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A42D2C6514EC004BAFFC /* ViewAdapter.swift */; };
+		B4A7A4302C6654E6004BAFFC /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A42F2C6654E6004BAFFC /* ToolbarView.swift */; };
+		B4A7A4322C676FA7004BAFFC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4312C676FA7004BAFFC /* ErrorView.swift */; };
 		B4DAF1782C6229BE00353CE5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B4DAF1772C6229BE00353CE5 /* ComposableArchitecture */; };
 		B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F081362C62238B005839A4 /* ProjectsListView.swift */; };
 		BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */; };
@@ -63,6 +72,15 @@
 		B4A7A4152C64B819004BAFFC /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		B4A7A4172C64BDDA004BAFFC /* ProjectsListAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListAdapter.swift; sourceTree = "<group>"; };
 		B4A7A41A2C64C678004BAFFC /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
+		B4A7A41F2C64D921004BAFFC /* RequestsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListView.swift; sourceTree = "<group>"; };
+		B4A7A4222C64E49D004BAFFC /* ViewStore+Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewStore+Constructor.swift"; sourceTree = "<group>"; };
+		B4A7A4252C64E8AB004BAFFC /* View+BackwardCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+BackwardCompatibility.swift"; sourceTree = "<group>"; };
+		B4A7A4272C64F770004BAFFC /* RequestsListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListReducer.swift; sourceTree = "<group>"; };
+		B4A7A4292C65074F004BAFFC /* RequestsListAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListAdapter.swift; sourceTree = "<group>"; };
+		B4A7A42B2C6514C3004BAFFC /* RequestsListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListAssembly.swift; sourceTree = "<group>"; };
+		B4A7A42D2C6514EC004BAFFC /* ViewAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAdapter.swift; sourceTree = "<group>"; };
+		B4A7A42F2C6654E6004BAFFC /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
+		B4A7A4312C676FA7004BAFFC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		B4F081362C62238B005839A4 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -147,8 +165,38 @@
 			isa = PBXGroup;
 			children = (
 				B4A7A41A2C64C678004BAFFC /* SkeletonView.swift */,
+				B4A7A42F2C6654E6004BAFFC /* ToolbarView.swift */,
+				B4A7A4312C676FA7004BAFFC /* ErrorView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		B4A7A41C2C64D90B004BAFFC /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				B4A7A41F2C64D921004BAFFC /* RequestsListView.swift */,
+				B4A7A4272C64F770004BAFFC /* RequestsListReducer.swift */,
+				B4A7A4292C65074F004BAFFC /* RequestsListAdapter.swift */,
+				B4A7A42B2C6514C3004BAFFC /* RequestsListAssembly.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		B4A7A4212C64E495004BAFFC /* TCA */ = {
+			isa = PBXGroup;
+			children = (
+				B4A7A4222C64E49D004BAFFC /* ViewStore+Constructor.swift */,
+				B4A7A42D2C6514EC004BAFFC /* ViewAdapter.swift */,
+			);
+			path = TCA;
+			sourceTree = "<group>";
+		};
+		B4A7A4242C64E89C004BAFFC /* SwiftUI+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B4A7A4252C64E8AB004BAFFC /* View+BackwardCompatibility.swift */,
+			);
+			path = "SwiftUI+Extensions";
 			sourceTree = "<group>";
 		};
 		B4F081342C622371005839A4 /* Projects */ = {
@@ -165,6 +213,7 @@
 		B4F081352C622377005839A4 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				B4A7A41C2C64D90B004BAFFC /* Requests */,
 				B4F081342C622371005839A4 /* Projects */,
 			);
 			path = Screens;
@@ -298,6 +347,8 @@
 		D5DEECF91E06C0E600802982 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B4A7A4242C64E89C004BAFFC /* SwiftUI+Extensions */,
+				B4A7A4212C64E495004BAFFC /* TCA */,
 				B4A7A4192C64C671004BAFFC /* Views */,
 				D596A5871E0731A1004162A0 /* EventMonitor.swift */,
 			);
@@ -485,19 +536,25 @@
 				D5C38D5C26443A5B0033A374 /* Approvals.swift in Sources */,
 				D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */,
 				B4577B622C626BFB001FB4B8 /* Router.swift in Sources */,
+				B4A7A4302C6654E6004BAFFC /* ToolbarView.swift in Sources */,
 				D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */,
 				D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */,
 				D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */,
+				B4A7A4202C64D921004BAFFC /* RequestsListView.swift in Sources */,
 				D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */,
 				D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */,
 				D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */,
 				D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */,
+				B4A7A42C2C6514C3004BAFFC /* RequestsListAssembly.swift in Sources */,
 				B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */,
 				D5C38D54264430650033A374 /* AppFacade.swift in Sources */,
 				D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */,
 				B4577B602C6264DB001FB4B8 /* ProjectsListReducer.swift in Sources */,
+				B4A7A42A2C65074F004BAFFC /* RequestsListAdapter.swift in Sources */,
 				D596A5841E0719B8004162A0 /* User.swift in Sources */,
 				B4A7A4182C64BDDA004BAFFC /* ProjectsListAdapter.swift in Sources */,
+				B4A7A4232C64E49D004BAFFC /* ViewStore+Constructor.swift in Sources */,
+				B4A7A4322C676FA7004BAFFC /* ErrorView.swift in Sources */,
 				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
 				D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */,
 				B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */,
@@ -506,11 +563,14 @@
 				D5DEECF61E06B7F100802982 /* AppState.swift in Sources */,
 				B4A7A41B2C64C678004BAFFC /* SkeletonView.swift in Sources */,
 				B4A7A4162C64B819004BAFFC /* Dependencies.swift in Sources */,
+				B4A7A42E2C6514EC004BAFFC /* ViewAdapter.swift in Sources */,
 				D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */,
 				D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */,
+				B4A7A4262C64E8AB004BAFFC /* View+BackwardCompatibility.swift in Sources */,
 				D5DEECEA1E06B2F400802982 /* MenuWizard.swift in Sources */,
 				D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */,
 				D5DEECF41E06B79800802982 /* ApiClient.swift in Sources */,
+				B4A7A4282C64F770004BAFFC /* RequestsListReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +720,7 @@
 			baseConfigurationReference = EEE4891A8610D014906677DB /* Pods-MergeMaster.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
@@ -684,6 +745,7 @@
 			baseConfigurationReference = 3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;

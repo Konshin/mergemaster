@@ -62,29 +62,23 @@ final class ApiClient {
     )
   }
 
-  func getRequests(projectId: ProjectId) -> Single<[MergeRequest]> {
-    do {
-      let request = try makeRequest(method: .get,
-                                    path: "projects/\(projectId)/merge_requests",
-                                    params: ["state": "opened",
-                                             "with_merge_status_recheck": true])
-      return performDecodable(request: request, authorization: .stored)
-    } catch {
-      return .error(error)
-    }
+  func getRequests(projectId: ProjectId) async throws -> [MergeRequest] {
+    let request = try makeRequest(
+      method: .get,
+      path: "projects/\(projectId)/merge_requests",
+      params: ["state": "opened",
+               "with_merge_status_recheck": true]
+    )
+    return try await performDecodable(request: request, authorization: .stored)
   }
 
-  func getApprovals(projectId: ProjectId, requestIid: Int) -> Single<Approvals> {
-    do {
+  func getApprovals(projectId: ProjectId, requestIid: Int) async throws -> Approvals {
       let request = try makeRequest(
         method: .get,
         path: "projects/\(projectId)/merge_requests/\(requestIid)/approvals",
         params: nil
       )
-      return performDecodable(request: request, authorization: .stored)
-    } catch {
-      return .error(error)
-    }
+      return try await performDecodable(request: request, authorization: .stored)
   }
 
   //MARK: - private

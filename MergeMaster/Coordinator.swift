@@ -65,17 +65,39 @@ final class Coordinator: NSObject {
     } else {
       // Fallback on earlier versions
     }
-    _ = vc.view
     showController(vc: vc)
   }
 
   func showRequestsController() {
-    let viewModel = RequestsListVM(
-      router: self,
-      facade: dependencies.appFacade,
-      appState: dependencies.appState
-    )
-    let vc = RequestsListController(viewModel: viewModel)
+//    let viewModel = RequestsListVM(
+//      router: self,
+//      facade: dependencies.appFacade,
+//      appState: dependencies.appState
+//    )
+//    let vc = RequestsListController(viewModel: viewModel)
+//    showController(vc: vc)
+    let assembly = RequestsListAssembly(dependencies: dependencies)
+    let router = Router<RequestsListReducer.Route>.weak(object: self) { c, r in
+      switch r {
+      case .settings(let projectId):
+        break
+      case .changeProjects:
+        c.showProjectsController()
+      case .logout:
+        c.dependencies.appState.privateToken.accept(nil)
+      case .exit:
+        c.exit()
+      case .openProject(let url):
+        NSWorkspace.shared.open(url)
+      }
+    }
+    let view = assembly.makeView(router: router)
+    let vc = NSHostingController(rootView: view)
+    if #available(macOS 13.0, *) {
+      vc.sizingOptions = .preferredContentSize
+    } else {
+      // Fallback on earlier versions
+    }
     showController(vc: vc)
   }
 

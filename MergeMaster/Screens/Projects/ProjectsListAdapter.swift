@@ -8,10 +8,17 @@
 
 import Foundation
 
-struct ProjectsListAdapter {
+struct ProjectsListAdapter: ViewAdapter {
   func adapt(state: ProjectsListReducer.State) -> ProjectsListView.State {
-    ProjectsListView.State(
-      items: state.projects.map { project in
+    let projects: [Project]
+    switch state.selectedFilter {
+    case .all:
+      projects = state.projects
+    case .selected:
+      projects = state.selectedProjects
+    }
+    return ProjectsListView.State(
+      items: projects.map { project in
         ProjectsListView.Item(
           id: project.id,
           title: project.name,
@@ -19,6 +26,8 @@ struct ProjectsListAdapter {
           isSelected: state.selectedProjects.contains(where: { $0.id == project.id })
         )
       },
+      numberOfSelectedProjects: state.selectedProjects.count, 
+      filter: state.selectedFilter,
       searchTerm: state.searchTerm,
       isLoading: state.isLoading,
       error: state.error?.localizedDescription

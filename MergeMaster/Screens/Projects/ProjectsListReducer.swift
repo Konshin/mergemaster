@@ -44,6 +44,8 @@ struct ProjectsListReducer {
       router.syncTrigger(.confirm)
     case .reload:
       return loadProjects(state: &state)
+    case .changeFilter(let filter):
+      state.selectedFilter = filter
     }
     return .none
   }
@@ -63,6 +65,7 @@ struct ProjectsListReducer {
 
   private func loadProjects(state: inout State) -> Effect<Action> {
     state.isLoading = true
+    state.error = nil
     let searchTerm = state.searchTerm
     return .run { send in
       do {
@@ -88,6 +91,7 @@ extension ProjectsListReducer {
     var searchTerm: String = ""
     var isLoading: Bool = false
     var error: Error?
+    var selectedFilter: ProjectsListView.ProjectsFilter = .all
   }
 
   enum Action {

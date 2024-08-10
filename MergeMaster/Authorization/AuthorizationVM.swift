@@ -73,21 +73,22 @@ final class AuthorizationVM {
     }
     
     func authorize() {
-        facade.authorize(gitlabUrlString: url.value ?? "",
-                         token: token.value ?? "")
-            .observeOn(MainScheduler.instance)
-            .do(onSubscribe: { [weak self] in
-                self?.state.accept(.processing)
-            })
-            .subscribe { [weak self] event in
-                switch event {
-                case .success:
-                    self?.state.accept(.idle)
-                case .error(let error):
-                    self?.state.accept(.error(error.localizedDescription))
-                }
-            }
-            .disposed(by: disposeBag)
+      state.accept(.processing)
+      Task {
+        do {
+          try await facade.authorize(
+            gitlabUrlString: url.value ?? "",
+            token: token.value ?? ""
+          )
+          await MainActor.run {
+            state.accept(.idle)
+          }
+        } catch {
+          await MainActor.run {
+            state.accept(.error(error.localizedDescription))
+          }
+        }
+      }
     }
     
     func exit() {

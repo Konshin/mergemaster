@@ -76,18 +76,18 @@ final class RequestsListVM {
     }
     
     private func updateRequests(notifyAboutDiff: Bool) {
-        let requestsBefore = projectRequests.reduce([MergeRequestInfo]()) { $0 + $1.requests }
-        
-        facade.requestsInfo()
-            .observeOn(MainScheduler.instance)
-            .subscribe(onSuccess: { [weak self] requests in
-                self?.setProjectRequests(requests)
-                if notifyAboutDiff {
-                    let requests = requests.reduce([MergeRequestInfo]()) { $0 + $1.requests }
-                    self?.notifyAboutDiffIfNeeded(oldRequests: requestsBefore, requests: requests)
-                }
-            })
-            .disposed(by: disposeBag)
+//        let requestsBefore = projectRequests.reduce([MergeRequestInfo]()) { $0 + $1.requests }
+//        
+//        facade.requestsInfo()
+//            .observeOn(MainScheduler.instance)
+//            .subscribe(onSuccess: { [weak self] requests in
+//                self?.setProjectRequests(requests)
+//                if notifyAboutDiff {
+//                    let requests = requests.reduce([MergeRequestInfo]()) { $0 + $1.requests }
+//                    self?.notifyAboutDiffIfNeeded(oldRequests: requestsBefore, requests: requests)
+//                }
+//            })
+//            .disposed(by: disposeBag)
     }
     
     private func setProjectRequests(_ requests: [AppFacade.ProjectRequests]) {
