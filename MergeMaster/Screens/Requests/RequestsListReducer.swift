@@ -41,7 +41,10 @@ struct RequestsListReducer {
               let url = URL(string: project.webUrl) else { break }
       router.syncTrigger(.openProject(url))
     case .tapProjectSettings(let projectId):
-      router.syncTrigger(.settings(projectId: projectId))
+//      router.syncTrigger(.settings(projectId: projectId))
+      state.settingsOpenedForProjectId = projectId
+    case .settingsWasClosed:
+      state.settingsOpenedForProjectId = nil
     }
     return .none
   }
@@ -91,6 +94,7 @@ extension RequestsListReducer {
     var projectRequests: [AppFacade.ProjectRequests] = []
     var isLoading: Bool = false
     var error: Error?
+    var settingsOpenedForProjectId: ProjectId?
   }
 
   enum Action {

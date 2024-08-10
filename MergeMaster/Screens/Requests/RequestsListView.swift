@@ -19,9 +19,9 @@ struct RequestsListView: View {
       switch store.content {
       case .loading:
         skeletons()
-      case .sections(let sections):
+      case .data(let data):
         List {
-          ForEach(sections) { section in
+          ForEach(data.sections) { section in
             self.section(section: section)
           }
         }
@@ -83,12 +83,12 @@ private extension RequestsListView {
       }
     } trailingViews: {
       Button {
-        store.send(.changeProjects)
+        store.send(.logout)
       } label: {
         Image(systemName: "rectangle.portrait.and.arrow.right")
       }
       Button {
-        store.send(.changeProjects)
+        store.send(.exit)
       } label: {
         Image(systemName: "xmark")
       }
@@ -121,8 +121,25 @@ private extension RequestsListView {
             .foregroundColor(.accentColor)
         }
         .buttonStyle(.plain)
+        .popover(
+          isPresented: store.binding(
+            get: { $0.settingsOpenedForSectionId == section.id },
+            send: { _ in .settingsWasClosed }
+          ),
+          content: {
+            popover(sectionId: section.id)
+          }
+        )
       }
     }
+  }
+
+  @ViewBuilder
+  private func popover(sectionId: ProjectId) -> some View {
+    Text("The popover is here")
+      .onDisappear {
+        store.send(.settingsWasClosed)
+      }
   }
 
   @ViewBuilder
@@ -149,6 +166,11 @@ extension RequestsListView {
     var items: [Item]
   }
 
+  struct Data: Equatable {
+    var sections: [Section]
+    var settingsOpenedForSectionId: ProjectId?
+  }
+
   struct Item: Identifiable, Equatable {
     var id: Int
     var title: String
@@ -158,12 +180,19 @@ extension RequestsListView {
 
   enum Content: Equatable {
     case loading
-    case sections([Section])
+    case data(Data)
     case error(String)
   }
 
   struct State: Equatable {
     var content: Content
+
+    var settingsOpenedForSectionId: ProjectId? {
+      guard case .data(let data) = content else {
+        return nil
+      }
+      return data.settingsOpenedForSectionId
+    }
   }
 
   enum Action {
@@ -174,6 +203,7 @@ extension RequestsListView {
     case exit
     case tapProject(ProjectId)
     case tapProjectSettings(ProjectId)
+    case settingsWasClosed
   }
 }
 
@@ -194,7 +224,7 @@ extension RequestsListView {
     .init(id: 2, name: "Third project", items: makeItems(4)),
   ]
   let state = RequestsListView.State(
-    content: .loading
+    content: .data(.init(sections: sections))
   )
   return RequestsListView(
     store: .preview(state: state, reducer: {
@@ -206,11 +236,20 @@ extension RequestsListView {
             await send(.reload)
           }
         case .reload:
-          state.content = .sections(sections)
+          state.content = .data(.init(sections: sections))
           return .none
+        case .tapProject(let projectId):
+          guard case .data(var data) = state.content else { break }
+          data.settingsOpenedForSectionId = projectId
+          state.content = .data(data)
+        case .settingsWasClosed:
+          guard case .data(var data) = state.content else { break }
+          data.settingsOpenedForSectionId = nil
+          state.content = .data(data)
         default:
-          return .none
+          break
         }
+        return .none
       }
     })
   )

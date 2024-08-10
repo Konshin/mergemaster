@@ -16,14 +16,17 @@ struct RequestsListAdapter: ViewAdapter {
     } else if let error = state.error {
       content = .error(error.localizedDescription)
     } else {
-      content = .sections(
-        state.projectRequests.map { requestInfo in
-            .init(
-              id: requestInfo.project.id,
-              name: requestInfo.project.name,
-              items: requestInfo.requests.map(item(request:))
-            )
-        }
+      content = .data(
+        .init(
+          sections: state.projectRequests.map { requestInfo in
+              .init(
+                id: requestInfo.project.id,
+                name: requestInfo.project.name,
+                items: requestInfo.requests.map(item(request:))
+              )
+          },
+          settingsOpenedForSectionId: state.settingsOpenedForProjectId
+        )
       )
     }
     return RequestsListView.State(
