@@ -53,7 +53,7 @@ final class ApiClient {
       method: .get,
       path: "projects",
       params: ["membership": true,
-               "per_page": 1000,
+               "per_page": 40,
                "search": search]
     )
     return try await performDecodable(
@@ -67,7 +67,8 @@ final class ApiClient {
       method: .get,
       path: "projects/\(projectId)/merge_requests",
       params: ["state": "opened",
-               "with_merge_status_recheck": true]
+               "with_merge_status_recheck": true,
+               "per_page": 40]
     )
     return try await performDecodable(request: request, authorization: .stored)
   }
