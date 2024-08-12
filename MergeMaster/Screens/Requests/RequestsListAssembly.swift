@@ -7,15 +7,55 @@
 //
 
 import Foundation
+import ComposableArchitecture
 
 struct RequestsListAssembly {
   let dependencies: Dependencies
 
   func makeView(router: Router<RequestsListReducer.Route>) -> RequestsListView {
-    let reducer = RequestsListReducer(router: router, appFacade: dependencies.appFacade)
-    let state = RequestsListReducer.State()
+    let reducer = RequestsListReducer(
+      router: router, 
+      appFacade: dependencies.appFacade,
+      appStore: dependencies.appState
+    )
+    let state = RequestsListReducer.State(filters: dependencies.appState.savedFilters)
+    let store = Store(
+      initialState: state,
+      reducer: {
+        reducer
+          .ifLet(
+            \.filterState,
+             action: \.filter,
+             then: {
+               ProjectSettingsReducer(router: .empty)
+             }
+          )
+      }
+    )
+    let adapter = RequestsListAdapter()
     return RequestsListView(
-      store: .adapted(state: state, reducer: { reducer }, adapter: RequestsListAdapter())
+      store: ViewStore(
+        store,
+        observe: adapter.adapt(state:),
+        send: adapter.adapt(action:)
+      ),
+      popover: {
+        if let store = store.optionalScope(
+          state: \.filterState,
+          action: \.filter
+        ) {
+          let adapter = ProjectSettingsAdapter()
+          return ProjectSettingsView(
+            store: .init(
+              store, 
+              observe: adapter.adapt(state:),
+              send: adapter.adapt(action:)
+            )
+          )
+        } else {
+          return nil
+        }
+      }
     )
   }
 }

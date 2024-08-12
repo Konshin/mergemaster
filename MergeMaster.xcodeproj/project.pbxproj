@@ -24,6 +24,11 @@
 		B4A7A4302C6654E6004BAFFC /* ToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A42F2C6654E6004BAFFC /* ToolbarView.swift */; };
 		B4A7A4322C676FA7004BAFFC /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4312C676FA7004BAFFC /* ErrorView.swift */; };
 		B4A7A4372C681847004BAFFC /* ProjectSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4362C681847004BAFFC /* ProjectSettingsView.swift */; };
+		B4A7A4392C689B0C004BAFFC /* ProjectSettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4382C689B0C004BAFFC /* ProjectSettingsReducer.swift */; };
+		B4A7A43B2C689F2D004BAFFC /* ProjectSettingsAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A43A2C689F2D004BAFFC /* ProjectSettingsAssembly.swift */; };
+		B4A7A43D2C689F5E004BAFFC /* ProjectSettingsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A43C2C689F5E004BAFFC /* ProjectSettingsAdapter.swift */; };
+		B4A7A43F2C6935BF004BAFFC /* RequestsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A43E2C6935BF004BAFFC /* RequestsFilter.swift */; };
+		B4A7A4412C6A2932004BAFFC /* Store+OptionalScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4402C6A2932004BAFFC /* Store+OptionalScope.swift */; };
 		B4DAF1782C6229BE00353CE5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B4DAF1772C6229BE00353CE5 /* ComposableArchitecture */; };
 		B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F081362C62238B005839A4 /* ProjectsListView.swift */; };
 		BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */; };
@@ -83,6 +88,11 @@
 		B4A7A42F2C6654E6004BAFFC /* ToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarView.swift; sourceTree = "<group>"; };
 		B4A7A4312C676FA7004BAFFC /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		B4A7A4362C681847004BAFFC /* ProjectSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsView.swift; sourceTree = "<group>"; };
+		B4A7A4382C689B0C004BAFFC /* ProjectSettingsReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsReducer.swift; sourceTree = "<group>"; };
+		B4A7A43A2C689F2D004BAFFC /* ProjectSettingsAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsAssembly.swift; sourceTree = "<group>"; };
+		B4A7A43C2C689F5E004BAFFC /* ProjectSettingsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsAdapter.swift; sourceTree = "<group>"; };
+		B4A7A43E2C6935BF004BAFFC /* RequestsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFilter.swift; sourceTree = "<group>"; };
+		B4A7A4402C6A2932004BAFFC /* Store+OptionalScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+OptionalScope.swift"; sourceTree = "<group>"; };
 		B4F081362C62238B005839A4 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,6 +199,7 @@
 			children = (
 				B4A7A4222C64E49D004BAFFC /* ViewStore+Constructor.swift */,
 				B4A7A42D2C6514EC004BAFFC /* ViewAdapter.swift */,
+				B4A7A4402C6A2932004BAFFC /* Store+OptionalScope.swift */,
 			);
 			path = TCA;
 			sourceTree = "<group>";
@@ -205,6 +216,9 @@
 			isa = PBXGroup;
 			children = (
 				B4A7A4362C681847004BAFFC /* ProjectSettingsView.swift */,
+				B4A7A4382C689B0C004BAFFC /* ProjectSettingsReducer.swift */,
+				B4A7A43C2C689F5E004BAFFC /* ProjectSettingsAdapter.swift */,
+				B4A7A43A2C689F2D004BAFFC /* ProjectSettingsAssembly.swift */,
 			);
 			path = ProjectSettings;
 			sourceTree = "<group>";
@@ -351,6 +365,7 @@
 				D5C38D5B26443A5B0033A374 /* Approvals.swift */,
 				B4577B612C626BFB001FB4B8 /* Router.swift */,
 				B4A7A4152C64B819004BAFFC /* Dependencies.swift */,
+				B4A7A43E2C6935BF004BAFFC /* RequestsFilter.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -553,6 +568,7 @@
 				D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */,
 				B4A7A4202C64D921004BAFFC /* RequestsListView.swift in Sources */,
 				D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */,
+				B4A7A4392C689B0C004BAFFC /* ProjectSettingsReducer.swift in Sources */,
 				D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */,
 				D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */,
 				D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */,
@@ -567,9 +583,11 @@
 				B4A7A4232C64E49D004BAFFC /* ViewStore+Constructor.swift in Sources */,
 				B4A7A4322C676FA7004BAFFC /* ErrorView.swift in Sources */,
 				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
+				B4A7A4412C6A2932004BAFFC /* Store+OptionalScope.swift in Sources */,
 				D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */,
 				B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */,
 				D596A5631E06D51D004162A0 /* RequestsListController.swift in Sources */,
+				B4A7A43F2C6935BF004BAFFC /* RequestsFilter.swift in Sources */,
 				D5DEECEC1E06B2FC00802982 /* Coordinator.swift in Sources */,
 				D5DEECF61E06B7F100802982 /* AppState.swift in Sources */,
 				B4A7A41B2C64C678004BAFFC /* SkeletonView.swift in Sources */,
@@ -581,6 +599,8 @@
 				B4A7A4262C64E8AB004BAFFC /* View+BackwardCompatibility.swift in Sources */,
 				D5DEECEA1E06B2F400802982 /* MenuWizard.swift in Sources */,
 				D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */,
+				B4A7A43D2C689F5E004BAFFC /* ProjectSettingsAdapter.swift in Sources */,
+				B4A7A43B2C689F2D004BAFFC /* ProjectSettingsAssembly.swift in Sources */,
 				D5DEECF41E06B79800802982 /* ApiClient.swift in Sources */,
 				B4A7A4282C64F770004BAFFC /* RequestsListReducer.swift in Sources */,
 			);

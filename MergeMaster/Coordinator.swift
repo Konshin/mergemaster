@@ -79,7 +79,7 @@ final class Coordinator: NSObject {
     let assembly = RequestsListAssembly(dependencies: dependencies)
     let router = Router<RequestsListReducer.Route>.weak(object: self) { c, r in
       switch r {
-      case .settings(let projectId):
+      case .settings:
         break
       case .changeProjects:
         c.showProjectsController()
@@ -88,6 +88,8 @@ final class Coordinator: NSObject {
       case .exit:
         c.exit()
       case .openProject(let url):
+        NSWorkspace.shared.open(url)
+      case .openRequest(let url):
         NSWorkspace.shared.open(url)
       }
     }

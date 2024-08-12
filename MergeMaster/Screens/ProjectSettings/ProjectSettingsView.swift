@@ -14,27 +14,25 @@ struct ProjectSettingsView: View {
   private(set) var store: ViewStore<State, Action>
 
   var body: some View {
-    VStack {
-      ForEach(store.orExpressions) { expression in
-        self.expression(
-          expression,
-          addSeparator: expression.id != store.orExpressions.last?.id
-        )
+//    ScrollView {
+      VStack {
+        ForEach(store.orExpressions) { expression in
+          self.expression(
+            expression,
+            addSeparator: expression.id != store.orExpressions.last?.id
+          )
+        }
       }
-    }
-    .textFieldStyle(.roundedBorder)
+      .textFieldStyle(.roundedBorder)
+//    }
     .padding(8)
-    .animation(
-      .default,
-      value: store.orExpressions
-        .map({ $0.conditions.count })
-        .reduce(0, +))
-    .frame(
-      minWidth: 300,
-      maxWidth: 300,
-      minHeight: 100,
-      alignment: .topLeading
-    )
+    .frame(width: 300)
+//    .frame(
+//      minWidth: 300,
+//      maxWidth: 300,
+//      minHeight: 100,
+//      alignment: .topLeading
+//    )
   }
 }
 
@@ -85,13 +83,27 @@ extension ProjectSettingsView {
           }
         ),
         content: {
-          ForEach(Property.allCases, id: \.name) { property in
+          ForEach([Property.assignee, .author], id: \.name) { property in
             Text(property.name).tag(property)
           }
         }
       )
       .frame(width: 100, alignment: .trailing)
-      TextField("", text: .constant(condition.value))
+      TextField(
+        "",
+        text: .init(
+          get: { condition.value },
+          set: {
+            store.send(
+              .changeValue(
+                expressionId: expressionId,
+                conditionId: condition.id,
+                value: $0
+              )
+            )
+          }
+        )
+      )
       Button {
         store.send(
           .deleteCondition(
@@ -110,18 +122,7 @@ extension ProjectSettingsView {
 
 // MARK: - Types
 extension ProjectSettingsView {
-  enum Property: CaseIterable {
-    case author, assignee
-
-    fileprivate var name: String {
-      switch self {
-      case .author:
-        return "Author"
-      case .assignee:
-        return "Assignee"
-      }
-    }
-  }
+  typealias Property = RequestsFilter.Property
 
   struct State: Equatable {
     var orExpressions: [Expression]
@@ -139,18 +140,12 @@ extension ProjectSettingsView {
   }
 
   enum Action {
+    case appeared
     case addCondition(expressionId: Int)
     case changeProperty(expressionId: Int, conditionId: Int, property: Property)
+    case changeValue(expressionId: Int, conditionId: Int, value: String)
     case deleteCondition(expressionId: Int, conditionId: Int)
   }
-
-//  enum Property {
-//    case assignee, author
-//
-//    var title: String {
-//
-//    }
-//  }
 }
 
 #Preview {
@@ -173,4 +168,15 @@ extension ProjectSettingsView {
     ]
   )
   return ProjectSettingsView(store: .preview(state: state, reducer: {}))
+}
+
+private extension ProjectSettingsView.Property {
+  var name: String {
+    switch self {
+    case .author:
+      return "Author"
+    case .assignee:
+      return "Assignee"
+    }
+  }
 }

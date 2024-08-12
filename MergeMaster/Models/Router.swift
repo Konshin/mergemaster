@@ -27,6 +27,10 @@ struct Router<Route> {
 }
 
 extension Router {
+  static var empty: Router {
+    Router { _ in }
+  }
+
   static func weak<Object: AnyObject>(object: Object, handler: @escaping (Object, Route) -> Void) -> Router<Route> {
     return Router { [weak object] route in
       guard let object else { return }

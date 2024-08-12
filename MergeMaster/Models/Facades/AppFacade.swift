@@ -111,7 +111,8 @@ extension AppFacade {
               id: request.id,
               title: request.title,
               author: request.author,
-              webURL: request.webUrl, 
+              assignees: request.assignees,
+              webURL: request.webUrl,
               numberOfComments: request.numberOfComments,
               approvedBy: []
             )

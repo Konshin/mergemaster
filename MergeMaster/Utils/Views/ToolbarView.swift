@@ -29,7 +29,7 @@ struct ToolbarView<LeadingViews: View, TrailingViews: View>: View {
     .frame(height: 30)
     .frame(maxWidth: .infinity)
     .padding(.horizontal, 8)
-    .foregroundColor(Color.white)
+    .foregroundColor(Color(.textBackgroundColor))
     .background(Color.accentColor)
   }
 }

@@ -11,21 +11,21 @@ import Foundation
 struct RequestsListAdapter: ViewAdapter {
   func adapt(state: RequestsListReducer.State) -> RequestsListView.State {
     let content: RequestsListView.Content
-    if state.isLoading, state.projectRequests.isEmpty {
+    if state.isLoading, state.sections.isEmpty {
       content = .loading
     } else if let error = state.error {
       content = .error(error.localizedDescription)
     } else {
       content = .data(
         .init(
-          sections: state.projectRequests.map { requestInfo in
+          sections: state.sections.map { section in
               .init(
-                id: requestInfo.project.id,
-                name: requestInfo.project.name,
-                items: requestInfo.requests.map(item(request:))
+                id: section.project.id,
+                name: section.project.name,
+                items: section.filteredRequests.map(item(request:))
               )
           },
-          settingsOpenedForSectionId: state.settingsOpenedForProjectId
+          settingsOpenedForSectionId: state.settingsOpenedForProjectIdx.map { state.sections[$0].project.id }
         )
       )
     }

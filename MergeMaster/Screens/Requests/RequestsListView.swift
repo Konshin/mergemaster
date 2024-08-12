@@ -12,6 +12,7 @@ import ComposableArchitecture
 struct RequestsListView: View {
   @ObservedObject
   private(set) var store: ViewStore<State, Action>
+  private(set) var popover: () -> ProjectSettingsView?
 
   var body: some View {
     VStack(spacing: 0) {
@@ -100,7 +101,7 @@ private extension RequestsListView {
   private func section(section: Section) -> some View {
     SwiftUI.Section {
       ForEach(section.items) { item in
-        row(item)
+        row(item, sectionId: section.id)
       }
     } header: {
       HStack {
@@ -124,7 +125,7 @@ private extension RequestsListView {
         .popover(
           isPresented: store.binding(
             get: { $0.settingsOpenedForSectionId == section.id },
-            send: { _ in .settingsWasClosed }
+            send: { .popoverDisplayed($0) }
           ),
           content: {
             popover(sectionId: section.id)
@@ -136,14 +137,15 @@ private extension RequestsListView {
 
   @ViewBuilder
   private func popover(sectionId: ProjectId) -> some View {
-    Text("The popover is here")
-      .onDisappear {
-        store.send(.settingsWasClosed)
-      }
+    if let popover = self.popover() {
+      popover
+    } else {
+      Text("The popover is here")
+    }
   }
 
   @ViewBuilder
-  private func row(_ item: Item) -> some View {
+  private func row(_ item: Item, sectionId: ProjectId) -> some View {
     HStack(alignment: .bottom) {
       VStack(alignment: .leading, spacing: 4) {
         Text(item.title)
@@ -156,6 +158,10 @@ private extension RequestsListView {
       }
     }
     .padding(.vertical, 2)
+    .background(Color(.textBackgroundColor))
+    .onTapGesture {
+      store.send(.tapRequest(id: item.id, projectId: sectionId))
+    }
   }
 }
 
@@ -203,7 +209,8 @@ extension RequestsListView {
     case exit
     case tapProject(ProjectId)
     case tapProjectSettings(ProjectId)
-    case settingsWasClosed
+    case tapRequest(id: Int, projectId: ProjectId)
+    case popoverDisplayed(Bool)
   }
 }
 
@@ -227,30 +234,33 @@ extension RequestsListView {
     content: .data(.init(sections: sections))
   )
   return RequestsListView(
-    store: .preview(state: state, reducer: {
-      Reduce { (state, action) in
-        switch action {
-        case .appeared:
-          return .run { send in
-            try? await Task.sleep(nanoseconds: 5_000_000_000)
-            await send(.reload)
+    store: .preview(
+      state: state,
+      reducer: {
+        Reduce { (state, action) in
+          switch action {
+          case .appeared:
+            return .run { send in
+              try? await Task.sleep(nanoseconds: 5_000_000_000)
+              await send(.reload)
+            }
+          case .reload:
+            state.content = .data(.init(sections: sections))
+            return .none
+          case .tapProject(let projectId):
+            guard case .data(var data) = state.content else { break }
+            data.settingsOpenedForSectionId = projectId
+            state.content = .data(data)
+          case .popoverDisplayed(let displayed):
+            guard !displayed, case .data(var data) = state.content else { break }
+            data.settingsOpenedForSectionId = nil
+            state.content = .data(data)
+          default:
+            break
           }
-        case .reload:
-          state.content = .data(.init(sections: sections))
           return .none
-        case .tapProject(let projectId):
-          guard case .data(var data) = state.content else { break }
-          data.settingsOpenedForSectionId = projectId
-          state.content = .data(data)
-        case .settingsWasClosed:
-          guard case .data(var data) = state.content else { break }
-          data.settingsOpenedForSectionId = nil
-          state.content = .data(data)
-        default:
-          break
         }
-        return .none
-      }
-    })
+      }),
+    popover: { nil }
   )
 }

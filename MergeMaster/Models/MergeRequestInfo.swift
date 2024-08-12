@@ -9,10 +9,11 @@
 import Foundation
 
 struct MergeRequestInfo {
-    let id: Int
-    let title: String
-    let author: User
-    let webURL: String
-    let numberOfComments: Int
-    let approvedBy: [User]
+  let id: Int
+  let title: String
+  let author: User
+  let assignees: [User]
+  let webURL: String
+  let numberOfComments: Int
+  let approvedBy: [User]
 }
