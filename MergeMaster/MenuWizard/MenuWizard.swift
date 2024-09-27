@@ -7,7 +7,11 @@
 //
 
 import Cocoa
-import RxSwift
+
+protocol IMenuWizard {
+  var statusItem: NSStatusItem { get }
+  func setNumberOfRequests(_ num: Int)
+}
 
 final class MenuWizard: NSObject {
   private let router: Router<Route>
@@ -16,8 +20,6 @@ final class MenuWizard: NSObject {
   private let statusBar: NSStatusBar
   /// Инстанс итема приложения в баре osx
   let statusItem: NSStatusItem
-
-  private let disposeBag = DisposeBag()
 
   init(statusBar: NSStatusBar, router: Router<Route>, appState: AppState) {
     self.statusBar = statusBar
@@ -38,14 +40,15 @@ final class MenuWizard: NSObject {
       button.action = #selector(tapToItem(button:))
     }
 
-    setNumberOfRequests(appState.numberOfRequests.value)
-
-    appState.numberOfRequests
-      .asDriver()
-      .drive(onNext: { [unowned self] num in
-        self.setNumberOfRequests(num)
-      })
-      .disposed(by: disposeBag)
+//    setNumberOfRequests(appState.numberOfRequests.value)
+//
+//    appState.numberOfRequests
+//      .asDriver()
+//      .drive(onNext: { [unowned self] num in
+//        self.setNumberOfRequests(num)
+//      })
+//      .disposed(by: disposeBag)
+    setNumberOfRequests(0)
   }
 
   @objc func tapToItem(button: NSStatusBarButton) {
@@ -54,14 +57,12 @@ final class MenuWizard: NSObject {
 
   func togglePopover(button: NSStatusBarButton) {
     router.syncTrigger(.togglePopoverVisibility(sender: button))
-//    if router.isPopoverShown {
-//      router.dissmissPopover()
-//    } else {
-//      router.showPopover(aroundButton: button)
-//    }
   }
+}
+
+extension MenuWizard: IMenuWizard {
   /// Отображает количество реквестов на статус баре
-  private func setNumberOfRequests(_ num: Int) {
+  func setNumberOfRequests(_ num: Int) {
     let title = NSAttributedString(
       string: "mr: \(num)",
       attributes: [

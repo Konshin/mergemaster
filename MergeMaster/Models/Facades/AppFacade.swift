@@ -8,10 +8,6 @@
 
 import Foundation
 
-protocol IAppFacade {
-  func requestsInfo(cacheAllowed: Bool) async throws -> [RequestsInfo]
-}
-
 final class AppFacade {
 
   private let apiClient: ApiClient
@@ -60,85 +56,6 @@ extension AppFacade {
     }
   }
 
-}
-
-// MARK: - Projects
-extension AppFacade {
-
-  struct ProjectRequests {
-    let project: Project
-    let requests: [MergeRequestInfo]
-  }
-
-  func projects(token: Token? = nil, search: String = "", forceRefresh: Bool = false) async throws -> [Project] {
-    if search.isEmpty, !forceRefresh, let cached = cachedProjects {
-      return cached
-    } else {
-      let projects = try await apiClient.getProjects(token: token, search: search)
-      if search.isEmpty {
-        cachedProjects = projects
-      }
-      return projects
-    }
-  }
-
-  func mergeRequests(projectId: Int) async throws -> [MergeRequest] {
-    try await apiClient.getRequests(projectId: projectId)
-  }
-
-  func approvalsInfo(projectId: Int, requestIid: Int) async throws -> Approvals {
-    try await apiClient.getApprovals(
-      projectId: projectId,
-      requestIid: requestIid
-    )
-  }
-
-  func requestsInfo() async throws -> [ProjectRequests] {
-    let selectedProjects = appState.selectedProjects.value
-
-    struct Pair {
-      var projectId: ProjectId
-      var requests: [MergeRequestInfo]
-    }
-    let requestsMap = await withTaskGroup(of: Pair.self) { group in
-      for project in selectedProjects {
-        group.addTask {
-          let requests: [MergeRequest]
-          do {
-            requests = try await self.mergeRequests(projectId: project.id)
-          } catch {
-            requests = []
-          }
-          let info = requests.map { request in
-            MergeRequestInfo(
-              id: request.id,
-              title: request.title,
-              author: request.author,
-              assignees: request.assignees,
-              webURL: request.webUrl,
-              numberOfComments: request.numberOfComments,
-              approvedBy: []
-            )
-          }
-          return Pair(projectId: project.id, requests: info)
-        }
-      }
-      return await group.reduce(into: [ProjectId: [MergeRequestInfo]]()) { partialResult, pair in
-        partialResult[pair.projectId] = pair.requests
-      }
-    }
-    var numberOfRequests = 0
-    let requests: [ProjectRequests] = selectedProjects.map { (project: Project) -> ProjectRequests in
-      let requests = requestsMap[project.id] ?? []
-      numberOfRequests += requests.count
-      return ProjectRequests(
-        project: project,
-        requests: requests
-      )
-    }
-    appState.numberOfRequests.accept(numberOfRequests)
-    return requests
-  }
 }
 
 // MARK: - Authorization

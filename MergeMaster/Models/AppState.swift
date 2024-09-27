@@ -14,7 +14,6 @@ private struct Constants {
   static let tokenCacheKey = "PRIVATE_TOKEN"
   static let projectsCacheKey = "SELECTED_PROJECTS"
   static let loginCacheKey = "USER_LOGIN"
-  static let filters = "REQUESTS_FILTER"
 }
 
 typealias Token = String
@@ -38,7 +37,6 @@ final class AppState {
     return privateToken.value != nil
   }
 
-  private(set) var savedFilters: [ProjectId: RequestsFilter]
 
   static let shared = AppState()
 
@@ -51,9 +49,6 @@ final class AppState {
     }
     privateToken = BehaviorRelay(value: cachedToken)
     selectedProjects = BehaviorRelay(value: cachedProjects ?? [])
-    savedFilters = defaults.data(forKey: Constants.filters).flatMap {
-      try? decoder.decode([ProjectId: RequestsFilter].self, from: $0)
-    } ?? [:]
 
     initialize()
   }
@@ -71,11 +66,5 @@ final class AppState {
         UserDefaults.standard.set(data, forKey: Constants.projectsCacheKey)
       })
       .disposed(by: disposeBag)
-  }
-
-  func set(filters: [ProjectId: RequestsFilter]) throws {
-    self.savedFilters = filters
-    let data = try JSONEncoder().encode(filters)
-    UserDefaults.standard.set(data, forKey: Constants.filters)
   }
 }

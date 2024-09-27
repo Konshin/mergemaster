@@ -9,6 +9,10 @@
 import Foundation
 import ComposableArchitecture
 
+private struct Constants {
+  static let updateInterval: UInt64 = 30_000_000_000
+}
+
 @Reducer
 struct RequestsListReducer {
 
@@ -24,6 +28,17 @@ struct RequestsListReducer {
         return handleLoadResult(result, state: &state)
       case .filter(let action):
         return reduceProjectFilter(state: &state, action: action)
+      case .update:
+        return .merge(
+          loadRequests(state: &state, allowCache: true),
+          .run { send in
+            try? await Task.sleep(nanoseconds: Constants.updateInterval)
+            await send(.update)
+          }
+        )
+        .cancellable(id: "polling", cancelInFlight: true)
+      case .startPolling:
+        return .send(.update)
       }
     }
   }
@@ -145,5 +160,7 @@ extension RequestsListReducer {
     case viewAction(RequestsListView.Action)
     case didLoad(requests: Result<[RequestsInfo], Error>)
     case filter(ProjectSettingsReducer.Action)
+    case update
+    case startPolling
   }
 }

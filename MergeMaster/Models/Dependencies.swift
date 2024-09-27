@@ -11,7 +11,7 @@ import Cocoa
 final class Dependencies {
   private let menuRouter: Router<MenuWizard.Route>
 
-  private(set) lazy var menuWizard = makeMenuWizard()
+  private(set) lazy var menuWizard: IMenuWizard = makeMenuWizard()
   private(set) lazy var apiClient = makeApiClient()
   private(set) lazy var appFacade = makeAppFacade()
   private(set) lazy var filtersRepository: IFiltersRepository = makeFiltersRepository()
@@ -19,6 +19,7 @@ final class Dependencies {
   private(set) lazy var selectedProjectsRepository: ISavedProjectsRepository = makeSavedProjectsRepository()
   private(set) lazy var requestsRepository: IRequestsRepository = makeRequestsRepository()
   private(set) lazy var defaultsStorage = makeDefaultsStorage()
+  private(set) lazy var appStateManager = makeAppStateManager()
   let configuration = Configuration.saved
   let appState = AppState.shared
 
@@ -70,5 +71,13 @@ extension Dependencies {
 
   private func makeRequestsRepository() -> RequestsRepository {
     RequestsRepository(apiClient: apiClient, storage: defaultsStorage)
+  }
+
+  private func makeAppStateManager() -> AppStateManager {
+    AppStateManager(
+      requestsRepository: requestsRepository,
+      filtersRepository: filtersRepository,
+      menuWizard: menuWizard
+    )
   }
 }

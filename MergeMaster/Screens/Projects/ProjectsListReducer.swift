@@ -13,8 +13,8 @@ import ComposableArchitecture
 struct ProjectsListReducer {
 
   let router: Router<Route>
-  let appFacade: AppFacade
-  let appState: AppState
+  let projectsRepository: IProjectsRepository
+  let selectedProjectsRepository: ISavedProjectsRepository
 
   func reduce(into state: inout State, action: Action) -> Effect<Action> {
     switch action {
@@ -39,7 +39,7 @@ struct ProjectsListReducer {
       } else {
         state.selectedProjects.removeAll(where: { $0.id == id })
       }
-      appState.selectedProjects.accept(state.selectedProjects)
+      selectedProjectsRepository.update(savedProjects: state.selectedProjects)
     case .confirm:
       router.syncTrigger(.confirm)
     case .reload:
@@ -69,7 +69,7 @@ struct ProjectsListReducer {
     let searchTerm = state.searchTerm
     return .run { send in
       do {
-        let projects = try await appFacade.projects(search: searchTerm)
+        let projects = try await projectsRepository.projects(query: searchTerm)
         await send(.didLoad(projects: .success(projects)))
       } catch {
         guard !(error is CancellationError) else { return }

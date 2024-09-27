@@ -9,6 +9,7 @@
 import Cocoa
 import RxSwift
 import RxCocoa
+import UserNotifications
 
 @NSApplicationMain
 final class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
@@ -57,7 +58,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCent
       }
     }
     eventMonitor?.start()
-    _ = dependencies.menuWizard
+    // Start app state manager
+    _ = dependencies.appStateManager
+
+    Task {
+      try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .provisional, .sound])
+    }
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {

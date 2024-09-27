@@ -38,11 +38,11 @@
 		B4A7A43D2C689F5E004BAFFC /* ProjectSettingsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A43C2C689F5E004BAFFC /* ProjectSettingsAdapter.swift */; };
 		B4A7A43F2C6935BF004BAFFC /* RequestsFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A43E2C6935BF004BAFFC /* RequestsFilter.swift */; };
 		B4A7A4412C6A2932004BAFFC /* Store+OptionalScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4402C6A2932004BAFFC /* Store+OptionalScope.swift */; };
+		B4A841592CA68F52008EDDA0 /* AppStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A841582CA68F52008EDDA0 /* AppStateManager.swift */; };
 		B4DAF1782C6229BE00353CE5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B4DAF1772C6229BE00353CE5 /* ComposableArchitecture */; };
 		B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F081362C62238B005839A4 /* ProjectsListView.swift */; };
 		BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */; };
 		D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5967F1925DD4CAD000A0F3B /* RequestManager.swift */; };
-		D596A5631E06D51D004162A0 /* RequestsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5621E06D51D004162A0 /* RequestsListController.swift */; };
 		D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5641E06D534004162A0 /* RequestsListVM.swift */; };
 		D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5661E06D56F004162A0 /* MergeRequest.swift */; };
 		D596A5691E06DC63004162A0 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5681E06DC63004162A0 /* Project.swift */; };
@@ -50,7 +50,6 @@
 		D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */; };
 		D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */; };
 		D596A5841E0719B8004162A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5831E0719B8004162A0 /* User.swift */; };
-		D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */; };
 		D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5871E0731A1004162A0 /* EventMonitor.swift */; };
 		D5C38D54264430650033A374 /* AppFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D53264430650033A374 /* AppFacade.swift */; };
 		D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D57264437610033A374 /* MergeRequestInfo.swift */; };
@@ -111,11 +110,11 @@
 		B4A7A43C2C689F5E004BAFFC /* ProjectSettingsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectSettingsAdapter.swift; sourceTree = "<group>"; };
 		B4A7A43E2C6935BF004BAFFC /* RequestsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFilter.swift; sourceTree = "<group>"; };
 		B4A7A4402C6A2932004BAFFC /* Store+OptionalScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+OptionalScope.swift"; sourceTree = "<group>"; };
+		B4A841582CA68F52008EDDA0 /* AppStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateManager.swift; sourceTree = "<group>"; };
 		B4F081362C62238B005839A4 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.release.xcconfig"; sourceTree = "<group>"; };
 		D5967F1925DD4CAD000A0F3B /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
-		D596A5621E06D51D004162A0 /* RequestsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsListController.swift; sourceTree = "<group>"; };
 		D596A5641E06D534004162A0 /* RequestsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsListVM.swift; sourceTree = "<group>"; };
 		D596A5661E06D56F004162A0 /* MergeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeRequest.swift; sourceTree = "<group>"; };
 		D596A5681E06DC63004162A0 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -123,7 +122,6 @@
 		D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsListVM.swift; sourceTree = "<group>"; };
 		D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCellViewModel.swift; sourceTree = "<group>"; };
 		D596A5831E0719B8004162A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCellViewModel.swift; sourceTree = "<group>"; };
 		D596A5871E0731A1004162A0 /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
 		D5C38D53264430650033A374 /* AppFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFacade.swift; sourceTree = "<group>"; };
 		D5C38D57264437610033A374 /* MergeRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeRequestInfo.swift; sourceTree = "<group>"; };
@@ -269,6 +267,14 @@
 			path = ProjectSettings;
 			sourceTree = "<group>";
 		};
+		B4A841572CA68F37008EDDA0 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				B4A841582CA68F52008EDDA0 /* AppStateManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		B4F081342C622371005839A4 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,9 +309,7 @@
 		D596A5611E06D319004162A0 /* RequestsList */ = {
 			isa = PBXGroup;
 			children = (
-				D596A5621E06D51D004162A0 /* RequestsListController.swift */,
 				D596A5641E06D534004162A0 /* RequestsListVM.swift */,
-				D596A5851E071CE4004162A0 /* RequestCellViewModel.swift */,
 			);
 			name = RequestsList;
 			path = ListOfRequests;
@@ -401,6 +405,7 @@
 		D5DEECF21E06B78C00802982 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B4A841572CA68F37008EDDA0 /* Managers */,
 				B40264E22CA5463500939AB0 /* Helpers */,
 				B43FC9B22C83C73400480DDB /* Interfaces */,
 				B43FC9AF2C83ABF900480DDB /* Repositories */,
@@ -616,7 +621,6 @@
 				B4A7A4302C6654E6004BAFFC /* ToolbarView.swift in Sources */,
 				D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */,
 				D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */,
-				D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */,
 				B40264E42CA5469600939AB0 /* DataBySource.swift in Sources */,
 				B4A7A4202C64D921004BAFFC /* RequestsListView.swift in Sources */,
 				D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */,
@@ -635,13 +639,13 @@
 				B4A7A4182C64BDDA004BAFFC /* ProjectsListAdapter.swift in Sources */,
 				B4A7A4232C64E49D004BAFFC /* ViewStore+Constructor.swift in Sources */,
 				B43FC9B12C83AC0E00480DDB /* RequestsRepository.swift in Sources */,
+				B4A841592CA68F52008EDDA0 /* AppStateManager.swift in Sources */,
 				B4A7A4322C676FA7004BAFFC /* ErrorView.swift in Sources */,
 				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
 				B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */,
 				B4A7A4412C6A2932004BAFFC /* Store+OptionalScope.swift in Sources */,
 				D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */,
 				B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */,
-				D596A5631E06D51D004162A0 /* RequestsListController.swift in Sources */,
 				B4A7A43F2C6935BF004BAFFC /* RequestsFilter.swift in Sources */,
 				D5DEECEC1E06B2FC00802982 /* Coordinator.swift in Sources */,
 				D5DEECF61E06B7F100802982 /* AppState.swift in Sources */,

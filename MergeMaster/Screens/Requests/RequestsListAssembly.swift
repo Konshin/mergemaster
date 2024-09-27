@@ -16,12 +16,12 @@ struct RequestsListAssembly {
     let reducer = RequestsListReducer(
       router: router, 
       interactor: RequestsListInteractor(
-        filtersRepository: dependencies.filtersRepository as! IFiltersRepository,
+        filtersRepository: dependencies.filtersRepository,
         savedProjectsRepository: dependencies.selectedProjectsRepository,
         requestsRepository: dependencies.requestsRepository
       )
     )
-    let state = RequestsListReducer.State(filters: dependencies.appState.savedFilters)
+    let state = RequestsListReducer.State(filters: dependencies.filtersRepository.savedFilters)
     let store = Store(
       initialState: state,
       reducer: {
@@ -35,6 +35,10 @@ struct RequestsListAssembly {
           )
       }
     )
+
+    // activate polling
+    store.send(.startPolling)
+
     let adapter = RequestsListAdapter()
     return RequestsListView(
       store: ViewStore(
