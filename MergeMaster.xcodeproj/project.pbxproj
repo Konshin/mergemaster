@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		932D4932FBCEC7E7499E44C9 /* Pods_MergeMaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */; };
+		B4025A262CA4A95200939AB0 /* ProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */; };
+		B4025A282CA534EB00939AB0 /* RequestsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */; };
+		B4025A2A2CA5357C00939AB0 /* RequestsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A292CA5357C00939AB0 /* RequestsInfo.swift */; };
+		B4025A2E2CA536E000939AB0 /* FiltersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A2D2CA536E000939AB0 /* FiltersRepository.swift */; };
+		B40264E12CA5454700939AB0 /* SavedProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40264E02CA5454700939AB0 /* SavedProjectsRepository.swift */; };
+		B40264E42CA5469600939AB0 /* DataBySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40264E32CA5469600939AB0 /* DataBySource.swift */; };
+		B43FC9B12C83AC0E00480DDB /* RequestsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B02C83AC0E00480DDB /* RequestsRepository.swift */; };
+		B43FC9B42C83C73F00480DDB /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B32C83C73F00480DDB /* CodableStorage.swift */; };
+		B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */; };
 		B4577B602C6264DB001FB4B8 /* ProjectsListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4577B5F2C6264DB001FB4B8 /* ProjectsListReducer.swift */; };
 		B4577B622C626BFB001FB4B8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4577B612C626BFB001FB4B8 /* Router.swift */; };
 		B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4132C64B69A004BAFFC /* ProjectsListAssembly.swift */; };
@@ -72,6 +81,15 @@
 
 /* Begin PBXFileReference section */
 		3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMaster.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMaster/Pods-MergeMaster.release.xcconfig"; sourceTree = "<group>"; };
+		B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsRepository.swift; sourceTree = "<group>"; };
+		B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListInteractor.swift; sourceTree = "<group>"; };
+		B4025A292CA5357C00939AB0 /* RequestsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsInfo.swift; sourceTree = "<group>"; };
+		B4025A2D2CA536E000939AB0 /* FiltersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRepository.swift; sourceTree = "<group>"; };
+		B40264E02CA5454700939AB0 /* SavedProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProjectsRepository.swift; sourceTree = "<group>"; };
+		B40264E32CA5469600939AB0 /* DataBySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBySource.swift; sourceTree = "<group>"; };
+		B43FC9B02C83AC0E00480DDB /* RequestsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsRepository.swift; sourceTree = "<group>"; };
+		B43FC9B32C83C73F00480DDB /* CodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStorage.swift; sourceTree = "<group>"; };
+		B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		B4577B5F2C6264DB001FB4B8 /* ProjectsListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListReducer.swift; sourceTree = "<group>"; };
 		B4577B612C626BFB001FB4B8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		B4A7A4132C64B69A004BAFFC /* ProjectsListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListAssembly.swift; sourceTree = "<group>"; };
@@ -173,6 +191,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B40264E22CA5463500939AB0 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				B40264E32CA5469600939AB0 /* DataBySource.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B43FC9AF2C83ABF900480DDB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B43FC9B02C83AC0E00480DDB /* RequestsRepository.swift */,
+				B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */,
+				B4025A2D2CA536E000939AB0 /* FiltersRepository.swift */,
+				B40264E02CA5454700939AB0 /* SavedProjectsRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		B43FC9B22C83C73400480DDB /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				B43FC9B32C83C73F00480DDB /* CodableStorage.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
 		B4A7A4192C64C671004BAFFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +235,7 @@
 				B4A7A4272C64F770004BAFFC /* RequestsListReducer.swift */,
 				B4A7A4292C65074F004BAFFC /* RequestsListAdapter.swift */,
 				B4A7A42B2C6514C3004BAFFC /* RequestsListAssembly.swift */,
+				B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -249,6 +295,7 @@
 			children = (
 				D5967F1925DD4CAD000A0F3B /* RequestManager.swift */,
 				D5DEECF31E06B79800802982 /* ApiClient.swift */,
+				B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -354,6 +401,9 @@
 		D5DEECF21E06B78C00802982 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				B40264E22CA5463500939AB0 /* Helpers */,
+				B43FC9B22C83C73400480DDB /* Interfaces */,
+				B43FC9AF2C83ABF900480DDB /* Repositories */,
 				D5C38D52264430580033A374 /* Facades */,
 				D5967F1825DD4CA3000A0F3B /* Services */,
 				D5DEECF51E06B7F100802982 /* AppState.swift */,
@@ -366,6 +416,7 @@
 				B4577B612C626BFB001FB4B8 /* Router.swift */,
 				B4A7A4152C64B819004BAFFC /* Dependencies.swift */,
 				B4A7A43E2C6935BF004BAFFC /* RequestsFilter.swift */,
+				B4025A292CA5357C00939AB0 /* RequestsInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -566,6 +617,7 @@
 				D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */,
 				D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */,
 				D596A5861E071CE4004162A0 /* RequestCellViewModel.swift in Sources */,
+				B40264E42CA5469600939AB0 /* DataBySource.swift in Sources */,
 				B4A7A4202C64D921004BAFFC /* RequestsListView.swift in Sources */,
 				D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */,
 				B4A7A4392C689B0C004BAFFC /* ProjectSettingsReducer.swift in Sources */,
@@ -576,13 +628,16 @@
 				B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */,
 				D5C38D54264430650033A374 /* AppFacade.swift in Sources */,
 				D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */,
+				B4025A282CA534EB00939AB0 /* RequestsListInteractor.swift in Sources */,
 				B4577B602C6264DB001FB4B8 /* ProjectsListReducer.swift in Sources */,
 				B4A7A42A2C65074F004BAFFC /* RequestsListAdapter.swift in Sources */,
 				D596A5841E0719B8004162A0 /* User.swift in Sources */,
 				B4A7A4182C64BDDA004BAFFC /* ProjectsListAdapter.swift in Sources */,
 				B4A7A4232C64E49D004BAFFC /* ViewStore+Constructor.swift in Sources */,
+				B43FC9B12C83AC0E00480DDB /* RequestsRepository.swift in Sources */,
 				B4A7A4322C676FA7004BAFFC /* ErrorView.swift in Sources */,
 				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
+				B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */,
 				B4A7A4412C6A2932004BAFFC /* Store+OptionalScope.swift in Sources */,
 				D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */,
 				B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */,
@@ -591,7 +646,10 @@
 				D5DEECEC1E06B2FC00802982 /* Coordinator.swift in Sources */,
 				D5DEECF61E06B7F100802982 /* AppState.swift in Sources */,
 				B4A7A41B2C64C678004BAFFC /* SkeletonView.swift in Sources */,
+				B4025A2E2CA536E000939AB0 /* FiltersRepository.swift in Sources */,
+				B40264E12CA5454700939AB0 /* SavedProjectsRepository.swift in Sources */,
 				B4A7A4162C64B819004BAFFC /* Dependencies.swift in Sources */,
+				B43FC9B42C83C73F00480DDB /* CodableStorage.swift in Sources */,
 				B4A7A42E2C6514EC004BAFFC /* ViewAdapter.swift in Sources */,
 				D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */,
 				D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */,
@@ -601,6 +659,8 @@
 				D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */,
 				B4A7A43D2C689F5E004BAFFC /* ProjectSettingsAdapter.swift in Sources */,
 				B4A7A43B2C689F2D004BAFFC /* ProjectSettingsAssembly.swift in Sources */,
+				B4025A262CA4A95200939AB0 /* ProjectsRepository.swift in Sources */,
+				B4025A2A2CA5357C00939AB0 /* RequestsInfo.swift in Sources */,
 				D5DEECF41E06B79800802982 /* ApiClient.swift in Sources */,
 				B4A7A4282C64F770004BAFFC /* RequestsListReducer.swift in Sources */,
 			);

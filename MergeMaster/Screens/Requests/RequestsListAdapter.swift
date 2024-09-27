@@ -22,7 +22,7 @@ struct RequestsListAdapter: ViewAdapter {
               .init(
                 id: section.project.id,
                 name: section.project.name,
-                items: section.filteredRequests.map(item(request:))
+                items: section.requests.map(item(request:))
               )
           },
           settingsOpenedForSectionId: state.settingsOpenedForProjectIdx.map { state.sections[$0].project.id }
@@ -38,7 +38,7 @@ struct RequestsListAdapter: ViewAdapter {
     .viewAction(action)
   }
 
-  private func item(request: MergeRequestInfo) -> RequestsListView.Item {
+  private func item(request: MergeRequest) -> RequestsListView.Item {
     RequestsListView.Item(
       id: request.id,
       title: request.title,

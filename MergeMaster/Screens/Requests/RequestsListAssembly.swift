@@ -15,8 +15,11 @@ struct RequestsListAssembly {
   func makeView(router: Router<RequestsListReducer.Route>) -> RequestsListView {
     let reducer = RequestsListReducer(
       router: router, 
-      appFacade: dependencies.appFacade,
-      appStore: dependencies.appState
+      interactor: RequestsListInteractor(
+        filtersRepository: dependencies.filtersRepository as! IFiltersRepository,
+        savedProjectsRepository: dependencies.selectedProjectsRepository,
+        requestsRepository: dependencies.requestsRepository
+      )
     )
     let state = RequestsListReducer.State(filters: dependencies.appState.savedFilters)
     let store = Store(

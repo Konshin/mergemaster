@@ -7,65 +7,68 @@
 //
 
 import Foundation
-import RxSwift
+
+protocol IAppFacade {
+  func requestsInfo(cacheAllowed: Bool) async throws -> [RequestsInfo]
+}
 
 final class AppFacade {
-    
-    private let apiClient: ApiClient
-    private let appState: AppState
-    private let configuration: Configuration
-    
-    private var cachedProjects: [Project]?
-    
-    init(apiClient: ApiClient,
-         configuration: Configuration,
-         appState: AppState) {
-        self.apiClient = apiClient
-        self.configuration = configuration
-        self.appState = appState
-        
-        apiClient.delegate = self
-    }
-    
-    // MARK: - private functions
-    
+
+  private let apiClient: ApiClient
+  private let appState: AppState
+  private let configuration: Configuration
+
+  private var cachedProjects: [Project]?
+
+  init(apiClient: ApiClient,
+       configuration: Configuration,
+       appState: AppState) {
+    self.apiClient = apiClient
+    self.configuration = configuration
+    self.appState = appState
+
+    apiClient.delegate = self
+  }
+
+  // MARK: - private functions
+
 }
 
 // MARK: - ApiClientDelegate
 extension AppFacade: ApiClientDelegate {
-    
-    func apiClientDidReceiveResponse(_ response: RequestManager.Response) {
-        if response.statusCode == 401 {
-            // force logout
-            logout()
-        }
+
+  func apiClientDidReceiveResponse(_ response: RequestManager.Response) {
+    if response.statusCode == 401 {
+      // force logout
+      logout()
     }
-    
+  }
+
 }
 
 // MARK: - Structures
 extension AppFacade {
-    
-    private enum Error: Swift.Error, LocalizedError {
-        case invalidURL
-        
-        var errorDescription: String? {
-            switch self {
-            case .invalidURL:
-                return "Invalid URL"
-            }
-        }
+
+  private enum Error: Swift.Error, LocalizedError {
+    case invalidURL
+
+    var errorDescription: String? {
+      switch self {
+      case .invalidURL:
+        return "Invalid URL"
+      }
     }
-    
+  }
+
 }
 
 // MARK: - Projects
 extension AppFacade {
-    
-    struct ProjectRequests {
-        let project: Project
-        let requests: [MergeRequestInfo]
-    }
+
+  struct ProjectRequests {
+    let project: Project
+    let requests: [MergeRequestInfo]
+  }
 
   func projects(token: Token? = nil, search: String = "", forceRefresh: Bool = false) async throws -> [Project] {
     if search.isEmpty, !forceRefresh, let cached = cachedProjects {
@@ -78,18 +81,18 @@ extension AppFacade {
       return projects
     }
   }
-    
-    func mergeRequests(projectId: Int) async throws -> [MergeRequest] {
-        try await apiClient.getRequests(projectId: projectId)
-    }
-    
-    func approvalsInfo(projectId: Int, requestIid: Int) async throws -> Approvals {
-        try await apiClient.getApprovals(
-          projectId: projectId,
-          requestIid: requestIid
-        )
-    }
-    
+
+  func mergeRequests(projectId: Int) async throws -> [MergeRequest] {
+    try await apiClient.getRequests(projectId: projectId)
+  }
+
+  func approvalsInfo(projectId: Int, requestIid: Int) async throws -> Approvals {
+    try await apiClient.getApprovals(
+      projectId: projectId,
+      requestIid: requestIid
+    )
+  }
+
   func requestsInfo() async throws -> [ProjectRequests] {
     let selectedProjects = appState.selectedProjects.value
 
@@ -136,7 +139,6 @@ extension AppFacade {
     appState.numberOfRequests.accept(numberOfRequests)
     return requests
   }
-
 }
 
 // MARK: - Authorization

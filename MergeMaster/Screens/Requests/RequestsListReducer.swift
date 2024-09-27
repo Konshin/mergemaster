@@ -13,8 +13,7 @@ import ComposableArchitecture
 struct RequestsListReducer {
 
   let router: Router<Route>
-  let appFacade: AppFacade
-  let appStore: AppState
+  let interactor: IRequestsListInteractor
 
   var body: some ReducerOf<Self> {
     Reduce { (state, action) in
@@ -32,9 +31,9 @@ struct RequestsListReducer {
   private func reduce(into state: inout State, viewAction: RequestsListView.Action) -> Effect<Action> {
     switch viewAction {
     case .appeared:
-      return loadRequests(state: &state)
+      return loadRequests(state: &state, allowCache: true)
     case .reload:
-      return loadRequests(state: &state)
+      return loadRequests(state: &state, allowCache: false)
     case .exit:
       router.syncTrigger(.exit)
     case .changeProjects:
@@ -52,21 +51,20 @@ struct RequestsListReducer {
       state.filterState = .init(filter: filter)
     case .popoverDisplayed(let displayed):
       guard !displayed, let index = state.settingsOpenedForProjectIdx else { break }
+      state.settingsOpenedForProjectIdx = nil
+
       let projectId = state.sections[index].project.id
       if var filter = state.filterState?.filter, filter != state.filters[projectId] {
         filter.orExpressions = filter.orExpressions.filter { !$0.conditions.isEmpty }
         state.filters[projectId] = filter
-        state.sections[index].filteredRequests = filteredRequests(
-          requests: state.sections[index].requests,
-          filter: filter
-        )
-        try? appStore.set(filters: state.filters)
+        interactor.update(filter: filter, for: projectId)
       }
-      state.settingsOpenedForProjectIdx = nil
+      state.sections.removeAll()
+      return loadRequests(state: &state, allowCache: false)
     case .tapRequest(let id, let projectId):
       guard let section = state.sections.first(where: { $0.project.id == projectId }),
-            let request = section.filteredRequests.first(where: { $0.id == id }),
-            let url = URL(string: request.webURL)
+            let request = section.requests.first(where: { $0.id == id }),
+            let url = URL(string: request.webUrl)
       else { break }
       router.syncTrigger(.openRequest(url))
     }
@@ -83,7 +81,7 @@ struct RequestsListReducer {
   // MARK: - Actions
 
   private func handleLoadResult(
-    _ result: Result<[AppFacade.ProjectRequests], Error>, state: inout State
+    _ result: Result<[RequestsInfo], Error>, state: inout State
   ) -> Effect<Action> {
     state.isLoading = false
     switch result {
@@ -91,8 +89,7 @@ struct RequestsListReducer {
       state.sections = requests.map { info in
         Section(
           project: info.project,
-          requests: info.requests,
-          filteredRequests: filteredRequests(requests: info.requests, filter: state.filters[info.project.id])
+          requests: info.requests
         )
       }
     case .failure(let failure):
@@ -102,36 +99,20 @@ struct RequestsListReducer {
     return .none
   }
 
-  private func loadRequests(state: inout State) -> Effect<Action> {
+  private func loadRequests(state: inout State, allowCache: Bool) -> Effect<Action> {
     state.isLoading = true
     state.error = nil
     return .run { send in
       do {
-        let requests = try await appFacade.requestsInfo()
-        await send(.didLoad(requests: .success(requests)))
+        for try await data in interactor.requests(allowCache: allowCache) {
+          await send(.didLoad(requests: .success(data.wrappedValue)))
+        }
       } catch {
         guard !(error is CancellationError) else { return }
         await send(.didLoad(requests: .failure(error)))
       }
     }
     .cancellable(id: "load_requests", cancelInFlight: true)
-  }
-
-  private func filteredRequests(requests: [MergeRequestInfo], filter: RequestsFilter?) -> [MergeRequestInfo] {
-    guard let filter, !filter.isEmpty else { return requests }
-    return requests
-      .filter { request in
-        filter.orExpressions.contains { expression in
-          expression.conditions.allSatisfy { condition in
-            switch condition.property {
-            case .assignee:
-              return request.assignees.contains(where: { $0.username == condition.value })
-            case .author:
-              return request.author.username == condition.value
-            }
-          }
-        }
-      }
   }
 }
 
@@ -147,8 +128,7 @@ extension RequestsListReducer {
 
   struct Section {
     var project: Project
-    var requests: [MergeRequestInfo]
-    var filteredRequests: [MergeRequestInfo]
+    var requests: [MergeRequest]
   }
 
   struct State {
@@ -163,7 +143,7 @@ extension RequestsListReducer {
   @CasePathable
   enum Action {
     case viewAction(RequestsListView.Action)
-    case didLoad(requests: Result<[AppFacade.ProjectRequests], Error>)
+    case didLoad(requests: Result<[RequestsInfo], Error>)
     case filter(ProjectSettingsReducer.Action)
   }
 }
