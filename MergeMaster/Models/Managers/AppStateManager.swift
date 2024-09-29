@@ -81,8 +81,14 @@ final class AppStateManager {
     data: IRequestsRepository.Requests,
     previousData: IRequestsRepository.Requests
   ) {
-    notifyAboutNewRequestsIfNeeded(requests: data, previousRequests: previousData)
-//    notifyAboutNewCommentsIfNeeded(oldRequests: oldRequests, requests: requests)
+    notifyAboutNewRequestsIfNeeded(
+      requests: data,
+      previousRequests: previousData
+    )
+    notifyAboutNewCommentsIfNeeded(
+      requestsByProjects: data,
+      previousRequestsByProjects: previousData
+    )
   }
 
   private func notifyAboutNewRequestsIfNeeded(
@@ -133,6 +139,14 @@ final class AppStateManager {
         let numberOfNewRequests = newRequestsByProject.values.reduce(0, { $0 + $1.count })
         content.title = "\(newRequests.count) new Merge Requests"
         content.subtitle = newRequests[0].title + " +\(numberOfNewRequests - 1) more"
+        if projectIds.count == 1, let project = savedProjectsRepository.savedProject(id: projectIds.first!) {
+          content.body = project.name
+        } else {
+          let projectNames = projectIds.compactMap { savedProjectsRepository.savedProject(id: $0)?.name }
+          if !projectNames.isEmpty {
+            content.body = "projects: " + projectNames.joined(separator: ", ")
+          }
+        }
         id = newRequests.map { String($0.id) }.joined(separator: ";")
       }
 
@@ -144,44 +158,48 @@ final class AppStateManager {
     }
   }
 
-//  private func notifyAboutNewCommentsIfNeeded(
-//    oldRequests: [MergeRequest],
-//    requests: [MergeRequest]
-//  ) {
-//    let commentsBefore = oldRequests.reduce(into: [Int: Int]()) { (result, request) in
-//      result[request.id] = request.numberOfComments
-//    }
-//    let commentsAfter = requests.reduce(into: [Int: Int]()) { (result, request) in
-//      result[request.id] = request.numberOfComments
-//    }
-//    var newComments = 0
-//    let requestsWithNewComments = requests.filter { request in
-//      let before = commentsBefore[request.id] ?? 0
-//      let after = commentsAfter[request.id] ?? 0
-//      let new = after - before
-//      let hasNew = new > 0
-//      if hasNew {
-//        newComments += new
-//      }
-//      return hasNew
-//    }
-//    guard !requestsWithNewComments.isEmpty else { return }
-//
-//    let n = NSUserNotification()
-//    if requestsWithNewComments.count == 1 {
-//      let request = requestsWithNewComments[0]
-//      n.title = "1 new comment"
-//      n.subtitle = request.title
-//      n.userInfo = ["URL": request.webUrl]
-//    } else {
-//      let titles = requestsWithNewComments.map { $0.title }.joined(separator: ", ")
-//      n.title = "\(newComments) new comments"
-//      n.subtitle = titles
-//    }
-//
-//    n.identifier = "new_comments"
-//    n.deliveryDate = Date()
-//
-//    NSUserNotificationCenter.default.scheduleNotification(n)
-//  }
+  private func notifyAboutNewCommentsIfNeeded(
+    requestsByProjects: IRequestsRepository.Requests,
+    previousRequestsByProjects: IRequestsRepository.Requests
+  ) {
+    let requestsBefore = previousRequestsByProjects.values.flatMap { $0 }
+    let commentsBefore = requestsBefore.reduce(into: [Int: Int]()) { (result, request) in
+      result[request.id] = request.numberOfComments
+    }
+
+    let requests = requestsByProjects.values.flatMap { $0 }
+    let commentsAfter = requests.reduce(into: [Int: Int]()) { (result, request) in
+      result[request.id] = request.numberOfComments
+    }
+    var newComments = 0
+    let requestsWithNewComments = requests.filter { request in
+      let before = commentsBefore[request.id] ?? 0
+      let after = commentsAfter[request.id] ?? 0
+      let new = after - before
+      let hasNew = new > 0
+      if hasNew {
+        newComments += new
+      }
+      return hasNew
+    }
+    guard !requestsWithNewComments.isEmpty else { return }
+
+    var content = NotificationContent(category: .newComments)
+    if requestsWithNewComments.count == 1 {
+      let request = requestsWithNewComments[0]
+      content.title = "1 new comment"
+      content.subtitle = request.title
+      content.userInfo = ["URL": request.webUrl]
+    } else {
+      let titles = requestsWithNewComments.map { $0.title }.joined(separator: ", ")
+      content.title = "\(newComments) new comments"
+      content.subtitle = titles
+    }
+
+    notificationsManager.schedule(
+      id: "new_comments",
+      content: content,
+      trigger: .immediately
+    )
+  }
 }

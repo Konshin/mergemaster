@@ -58,9 +58,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
       }
       .store(in: &bindings)
 
-    eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak coordinator] event in
-      if coordinator?.isPopoverShown == true {
-        coordinator?.dissmissPopover()
+    eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak self] event in
+      if self?.coordinator?.isPopoverShown == true {
+        self?.coordinator?.dissmissPopover()
       }
     }
     eventMonitor?.start()
