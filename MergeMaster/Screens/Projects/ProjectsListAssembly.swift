@@ -17,7 +17,7 @@ struct ProjectsListAssembly {
       projectsRepository: dependencies.projectsRepository,
       selectedProjectsRepository: dependencies.selectedProjectsRepository
     )
-    let state = ProjectsListReducer.State(selectedProjects: dependencies.appState.selectedProjects.value)
+    let state = ProjectsListReducer.State(selectedProjects: dependencies.selectedProjectsRepository.savedProjects)
     return ProjectsListView(
       store: .adapted(state: state, reducer: { reducer }, adapter: ProjectsListAdapter())
     )

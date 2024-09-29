@@ -22,7 +22,7 @@ final class AuthorizationVM {
         case error(String)
     }
     
-    let facade: AppFacade
+    let facade: AuthorizationService
     let appState: AppState
     let configuration: Configuration
     let router: Coordinator
@@ -33,7 +33,7 @@ final class AuthorizationVM {
     
     private let disposeBag = DisposeBag()
     
-    init(facade: AppFacade, appState: AppState, configuration: Configuration, router: Coordinator) {
+    init(facade: AuthorizationService, appState: AppState, configuration: Configuration, router: Coordinator) {
         self.appState = appState
         self.configuration = configuration
         self.router = router

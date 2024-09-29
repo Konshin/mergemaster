@@ -7,30 +7,24 @@
 //
 
 import Cocoa
-import RxSwift
-import RxCocoa
+import Combine
 
 private struct Constants {
   static let tokenCacheKey = "PRIVATE_TOKEN"
-  static let projectsCacheKey = "SELECTED_PROJECTS"
-  static let loginCacheKey = "USER_LOGIN"
 }
 
 typealias Token = String
 
 final class AppState {
   /// Current API token
-  let privateToken: BehaviorRelay<Token?>
-  /// Ids for selected projects
-  let selectedProjects: BehaviorRelay<[Project]>
-  /// Number of actual requests
-  let numberOfRequests = BehaviorRelay(value: 0)
+  let privateToken: CurrentValueSubject<Token?, Never>
 
-  private let disposeBag = DisposeBag()
+  private var binding: AnyCancellable?
 
   /// Идентификация, авторизованы ли мы
-  var isAuthorized: Observable<Bool> {
+  var isAuthorized: AnyPublisher<Bool, Never> {
     return privateToken.map { $0 != nil }
+      .eraseToAnyPublisher()
   }
 
   var isAuthorizedValue: Bool {
@@ -41,30 +35,17 @@ final class AppState {
   static let shared = AppState()
 
   private init() {
-    let defaults = UserDefaults.standard
-    let cachedToken = defaults.object(forKey: Constants.tokenCacheKey) as? Token
-    let decoder = JSONDecoder()
-    let cachedProjects = (defaults.object(forKey: Constants.projectsCacheKey) as? Data).flatMap {
-      try? decoder.decode([Project].self, from: $0)
-    }
-    privateToken = BehaviorRelay(value: cachedToken)
-    selectedProjects = BehaviorRelay(value: cachedProjects ?? [])
+    let cachedToken = UserDefaults.standard.object(forKey: Constants.tokenCacheKey) as? Token
+    privateToken = CurrentValueSubject(cachedToken)
 
     initialize()
   }
 
   private func initialize() {
-    privateToken.asObservable()
-      .subscribe(onNext: { token in
+    binding = privateToken
+      .dropFirst()
+      .sink(receiveValue: { token in
         UserDefaults.standard.set(token, forKey: Constants.tokenCacheKey)
       })
-      .disposed(by: disposeBag)
-
-    selectedProjects.asObservable()
-      .subscribe(onNext: { projects in
-        guard let data = try? JSONEncoder().encode(projects) else { return }
-        UserDefaults.standard.set(data, forKey: Constants.projectsCacheKey)
-      })
-      .disposed(by: disposeBag)
   }
 }

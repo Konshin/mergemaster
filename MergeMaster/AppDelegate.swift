@@ -7,12 +7,11 @@
 //
 
 import Cocoa
-import RxSwift
-import RxCocoa
+import Combine
 import UserNotifications
 
 @NSApplicationMain
-final class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCenterDelegate {
+final class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBOutlet weak var window: NSWindow!
   private var coordinator: Coordinator!
@@ -33,24 +32,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCent
     return view
   }()
 
-  private let disposeBag = DisposeBag()
+  private var bindings = Set<AnyCancellable>()
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
-    NSUserNotificationCenter.default.delegate = self
+    initializeServices()
 
     self.coordinator = Coordinator(dependencies: dependencies)
+  }
 
-    dependencies.appState.isAuthorized.asDriver(onErrorJustReturn: false)
-      .drive(onNext: { [weak self] authorized in
+  func applicationWillTerminate(_ aNotification: Notification) {
+    // Insert code here to tear down your application
+  }
+
+  private func initializeServices() {
+    dependencies.appState.isAuthorized
+      .receive(on: DispatchQueue.main)
+      .sink { [weak self] authorized in
         if !authorized || self?.dependencies.configuration.serverUrl == nil {
           self?.coordinator.showAuthController()
-        } else if self?.dependencies.appState.selectedProjects.value.isEmpty == false {
+        } else if self?.dependencies.selectedProjectsRepository.savedProjects.isEmpty == false {
           self?.coordinator.showRequestsController()
         } else {
           self?.coordinator.showProjectsController()
         }
-      })
-      .disposed(by: disposeBag)
+      }
+      .store(in: &bindings)
 
     eventMonitor = EventMonitor(mask: [.leftMouseDown, .rightMouseDown]) { [weak coordinator] event in
       if coordinator?.isPopoverShown == true {
@@ -63,20 +69,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSUserNotificationCent
 
     Task {
       try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .provisional, .sound])
-    }
-  }
-
-  func applicationWillTerminate(_ aNotification: Notification) {
-    // Insert code here to tear down your application
-  }
-
-  func userNotificationCenter(_ center: NSUserNotificationCenter, didActivate notification: NSUserNotification) {
-    if let url = notification.userInfo?["URL"] as? String,
-       let URL = URL(string: url)
-    {
-      NSWorkspace.shared.open(URL)
-    } else if let button = dependencies.menuWizard.statusItem.button {
-      coordinator?.showPopover(aroundButton: button)
     }
   }
 }

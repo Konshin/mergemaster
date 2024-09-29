@@ -56,6 +56,7 @@ final class Coordinator: NSObject {
       switch r {
       case .confirm:
         c.showRequestsController()
+        c.askNotificationPermissionIfNeeded()
       }
     }
     let view = assembly.makeView(router: router)
@@ -69,13 +70,6 @@ final class Coordinator: NSObject {
   }
 
   func showRequestsController() {
-//    let viewModel = RequestsListVM(
-//      router: self,
-//      facade: dependencies.appFacade,
-//      appState: dependencies.appState
-//    )
-//    let vc = RequestsListController(viewModel: viewModel)
-//    showController(vc: vc)
     let assembly = RequestsListAssembly(dependencies: dependencies)
     let router = Router<RequestsListReducer.Route>.weak(object: self) { c, r in
       switch r {
@@ -84,7 +78,7 @@ final class Coordinator: NSObject {
       case .changeProjects:
         c.showProjectsController()
       case .logout:
-        c.dependencies.appState.privateToken.accept(nil)
+        c.dependencies.appFacade.logout()
       case .exit:
         c.exit()
       case .openProject(let url):
@@ -111,13 +105,22 @@ final class Coordinator: NSObject {
     popover.performClose(nil)
   }
 
+  /// Close the app
+  func exit() {
+    NSApplication.shared.terminate(self)
+  }
+
+  // MARK: - Private
+
   private func showController(vc: NSViewController) {
     currentController = vc
     popover.contentViewController = vc
   }
-  /// Close the app
-  func exit() {
-    NSApplication.shared.terminate(self)
+
+  private func askNotificationPermissionIfNeeded() {
+    Task {
+      await dependencies.notificationsManager.authorizeIfNeeded()
+    }
   }
 }
 

@@ -19,6 +19,7 @@ protocol IRequestsRepository {
   var lastData: MergeRequestsFetchingData { get }
   var lastDataPublisher: AnyPublisher<MergeRequestsFetchingData, Never> { get }
   func update(projectIds: [ProjectId], filters: [ProjectId: RequestsFilter]) async throws -> Requests
+  func clean()
 }
 
 final class RequestsRepository: IRequestsRepository {
@@ -112,5 +113,9 @@ final class RequestsRepository: IRequestsRepository {
         }
     }
     return requestsByProject
+  }
+
+  func clean() {
+    self.lastDataSubject.send(.init(filters: [:], response: [:]))
   }
 }

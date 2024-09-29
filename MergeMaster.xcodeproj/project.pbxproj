@@ -19,6 +19,9 @@
 		B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */; };
 		B4577B602C6264DB001FB4B8 /* ProjectsListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4577B5F2C6264DB001FB4B8 /* ProjectsListReducer.swift */; };
 		B4577B622C626BFB001FB4B8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4577B612C626BFB001FB4B8 /* Router.swift */; };
+		B488315F2CA92EDC007BB630 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B488315E2CA92ED0007BB630 /* NotificationsManager.swift */; };
+		B48831622CA92F1E007BB630 /* NotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48831612CA92F19007BB630 /* NotificationContent.swift */; };
+		B48831642CA934CC007BB630 /* NotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48831632CA934C7007BB630 /* NotificationTrigger.swift */; };
 		B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4132C64B69A004BAFFC /* ProjectsListAssembly.swift */; };
 		B4A7A4162C64B819004BAFFC /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4152C64B819004BAFFC /* Dependencies.swift */; };
 		B4A7A4182C64BDDA004BAFFC /* ProjectsListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4172C64BDDA004BAFFC /* ProjectsListAdapter.swift */; };
@@ -46,12 +49,9 @@
 		D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5641E06D534004162A0 /* RequestsListVM.swift */; };
 		D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5661E06D56F004162A0 /* MergeRequest.swift */; };
 		D596A5691E06DC63004162A0 /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5681E06DC63004162A0 /* Project.swift */; };
-		D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A57B1E06EFD4004162A0 /* ProjectsListController.swift */; };
-		D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */; };
-		D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */; };
 		D596A5841E0719B8004162A0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5831E0719B8004162A0 /* User.swift */; };
 		D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5871E0731A1004162A0 /* EventMonitor.swift */; };
-		D5C38D54264430650033A374 /* AppFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D53264430650033A374 /* AppFacade.swift */; };
+		D5C38D54264430650033A374 /* AuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D53264430650033A374 /* AuthorizationService.swift */; };
 		D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D57264437610033A374 /* MergeRequestInfo.swift */; };
 		D5C38D5C26443A5B0033A374 /* Approvals.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5C38D5B26443A5B0033A374 /* Approvals.swift */; };
 		D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5DEECCD1E06AEB800802982 /* AppDelegate.swift */; };
@@ -91,6 +91,9 @@
 		B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		B4577B5F2C6264DB001FB4B8 /* ProjectsListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListReducer.swift; sourceTree = "<group>"; };
 		B4577B612C626BFB001FB4B8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B488315E2CA92ED0007BB630 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
+		B48831612CA92F19007BB630 /* NotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContent.swift; sourceTree = "<group>"; };
+		B48831632CA934C7007BB630 /* NotificationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTrigger.swift; sourceTree = "<group>"; };
 		B4A7A4132C64B69A004BAFFC /* ProjectsListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListAssembly.swift; sourceTree = "<group>"; };
 		B4A7A4152C64B819004BAFFC /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
 		B4A7A4172C64BDDA004BAFFC /* ProjectsListAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListAdapter.swift; sourceTree = "<group>"; };
@@ -118,12 +121,9 @@
 		D596A5641E06D534004162A0 /* RequestsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsListVM.swift; sourceTree = "<group>"; };
 		D596A5661E06D56F004162A0 /* MergeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeRequest.swift; sourceTree = "<group>"; };
 		D596A5681E06DC63004162A0 /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
-		D596A57B1E06EFD4004162A0 /* ProjectsListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsListController.swift; sourceTree = "<group>"; };
-		D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsListVM.swift; sourceTree = "<group>"; };
-		D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectCellViewModel.swift; sourceTree = "<group>"; };
 		D596A5831E0719B8004162A0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		D596A5871E0731A1004162A0 /* EventMonitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMonitor.swift; sourceTree = "<group>"; };
-		D5C38D53264430650033A374 /* AppFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFacade.swift; sourceTree = "<group>"; };
+		D5C38D53264430650033A374 /* AuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationService.swift; sourceTree = "<group>"; };
 		D5C38D57264437610033A374 /* MergeRequestInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MergeRequestInfo.swift; sourceTree = "<group>"; };
 		D5C38D5B26443A5B0033A374 /* Approvals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Approvals.swift; sourceTree = "<group>"; };
 		D5CE1BE925B827320046D0AF /* MergeMaster.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MergeMaster.entitlements; sourceTree = "<group>"; };
@@ -216,6 +216,16 @@
 			path = Interfaces;
 			sourceTree = "<group>";
 		};
+		B48831602CA92F0C007BB630 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				B48831632CA934C7007BB630 /* NotificationTrigger.swift */,
+				B48831612CA92F19007BB630 /* NotificationContent.swift */,
+				B488315E2CA92ED0007BB630 /* NotificationsManager.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		B4A7A4192C64C671004BAFFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,6 +280,7 @@
 		B4A841572CA68F37008EDDA0 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				B48831602CA92F0C007BB630 /* Notifications */,
 				B4A841582CA68F52008EDDA0 /* AppStateManager.swift */,
 			);
 			path = Managers;
@@ -315,20 +326,10 @@
 			path = ListOfRequests;
 			sourceTree = "<group>";
 		};
-		D596A57A1E06EFB7004162A0 /* ProjectsList */ = {
-			isa = PBXGroup;
-			children = (
-				D596A57B1E06EFD4004162A0 /* ProjectsListController.swift */,
-				D596A57F1E06F0CA004162A0 /* ProjectsListVM.swift */,
-				D596A5811E06F4F0004162A0 /* ProjectCellViewModel.swift */,
-			);
-			path = ProjectsList;
-			sourceTree = "<group>";
-		};
 		D5C38D52264430580033A374 /* Facades */ = {
 			isa = PBXGroup;
 			children = (
-				D5C38D53264430650033A374 /* AppFacade.swift */,
+				D5C38D53264430650033A374 /* AuthorizationService.swift */,
 			);
 			path = Facades;
 			sourceTree = "<group>";
@@ -358,7 +359,6 @@
 			children = (
 				B4F081352C622377005839A4 /* Screens */,
 				D5CE1BE925B827320046D0AF /* MergeMaster.entitlements */,
-				D596A57A1E06EFB7004162A0 /* ProjectsList */,
 				D596A5611E06D319004162A0 /* RequestsList */,
 				D5DEECF91E06C0E600802982 /* Utils */,
 				D5DEECF21E06B78C00802982 /* Models */,
@@ -619,19 +619,19 @@
 				D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */,
 				B4577B622C626BFB001FB4B8 /* Router.swift in Sources */,
 				B4A7A4302C6654E6004BAFFC /* ToolbarView.swift in Sources */,
+				B48831622CA92F1E007BB630 /* NotificationContent.swift in Sources */,
 				D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */,
 				D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */,
 				B40264E42CA5469600939AB0 /* DataBySource.swift in Sources */,
+				B48831642CA934CC007BB630 /* NotificationTrigger.swift in Sources */,
 				B4A7A4202C64D921004BAFFC /* RequestsListView.swift in Sources */,
 				D5DEECF81E06C08A00802982 /* AuthorizationVM.swift in Sources */,
 				B4A7A4392C689B0C004BAFFC /* ProjectSettingsReducer.swift in Sources */,
 				D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */,
 				D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */,
-				D596A5801E06F0CA004162A0 /* ProjectsListVM.swift in Sources */,
 				B4A7A42C2C6514C3004BAFFC /* RequestsListAssembly.swift in Sources */,
 				B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */,
-				D5C38D54264430650033A374 /* AppFacade.swift in Sources */,
-				D596A57D1E06EFD4004162A0 /* ProjectsListController.swift in Sources */,
+				D5C38D54264430650033A374 /* AuthorizationService.swift in Sources */,
 				B4025A282CA534EB00939AB0 /* RequestsListInteractor.swift in Sources */,
 				B4577B602C6264DB001FB4B8 /* ProjectsListReducer.swift in Sources */,
 				B4A7A42A2C65074F004BAFFC /* RequestsListAdapter.swift in Sources */,
@@ -644,7 +644,6 @@
 				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
 				B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */,
 				B4A7A4412C6A2932004BAFFC /* Store+OptionalScope.swift in Sources */,
-				D596A5821E06F4F0004162A0 /* ProjectCellViewModel.swift in Sources */,
 				B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */,
 				B4A7A43F2C6935BF004BAFFC /* RequestsFilter.swift in Sources */,
 				D5DEECEC1E06B2FC00802982 /* Coordinator.swift in Sources */,
@@ -658,6 +657,7 @@
 				D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */,
 				D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */,
 				B4A7A4372C681847004BAFFC /* ProjectSettingsView.swift in Sources */,
+				B488315F2CA92EDC007BB630 /* NotificationsManager.swift in Sources */,
 				B4A7A4262C64E8AB004BAFFC /* View+BackwardCompatibility.swift in Sources */,
 				D5DEECEA1E06B2F400802982 /* MenuWizard.swift in Sources */,
 				D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */,

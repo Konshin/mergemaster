@@ -6,7 +6,7 @@
 //  Copyright © 2020 Wheel-Size. All rights reserved.
 //
 
-import RxSwift
+import Foundation
 
 struct Request {
 
@@ -86,39 +86,6 @@ final class RequestManager: NSObject {
   }
 
   // MARK: - Functions
-
-  func perform(request: Request) -> Single<Response> {
-    let defaultHeaders = self.defaultHeaders
-    return Single.create { event in
-      var request = request
-      request.modifyHeaders(defaultHeaders, replaceOnMerge: false)
-
-      let url = request.url()
-      var urlRequest = URLRequest(url: url)
-      request.headers?.forEach { pair in
-        urlRequest.setValue("\(pair.value)", forHTTPHeaderField: pair.key)
-      }
-      let task = self.session.dataTask(with: urlRequest) { (data, response, error) in
-        let httpResponse = response as? HTTPURLResponse
-        self.logResponse(httpResponse, data: data, request: request)
-
-        if let error = error {
-          event(.error(error))
-        } else if let data = data {
-          let response = Response(data: data, statusCode: httpResponse?.statusCode ?? 0)
-          event(.success(response))
-        } else {
-          event(.error(Error.unknown(statusCode: httpResponse?.statusCode ?? 0, data: data)))
-        }
-      }
-
-      task.resume()
-
-      return Disposables.create {
-        task.cancel()
-      }
-    }
-  }
 
   func perform(request: Request) async throws -> Response {
     let defaultHeaders = self.defaultHeaders

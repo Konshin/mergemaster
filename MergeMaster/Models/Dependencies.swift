@@ -20,6 +20,7 @@ final class Dependencies {
   private(set) lazy var requestsRepository: IRequestsRepository = makeRequestsRepository()
   private(set) lazy var defaultsStorage = makeDefaultsStorage()
   private(set) lazy var appStateManager = makeAppStateManager()
+  private(set) lazy var notificationsManager = makeNotificationsManager()
   let configuration = Configuration.saved
   let appState = AppState.shared
 
@@ -38,11 +39,14 @@ extension Dependencies {
     )
   }
 
-  private func makeAppFacade() -> AppFacade {
-    AppFacade(
+  private func makeAppFacade() -> AuthorizationService {
+    AuthorizationService(
       apiClient: apiClient,
       configuration: configuration,
-      appState: appState
+      appState: appState,
+      filtersRepository: filtersRepository,
+      savedProjectsRepository: selectedProjectsRepository,
+      requestsRepository: requestsRepository
     )
   }
 
@@ -77,7 +81,13 @@ extension Dependencies {
     AppStateManager(
       requestsRepository: requestsRepository,
       filtersRepository: filtersRepository,
-      menuWizard: menuWizard
+      menuWizard: menuWizard,
+      notificationsManager: notificationsManager,
+      savedProjectsRepository: selectedProjectsRepository
     )
+  }
+
+  private func makeNotificationsManager() -> NotificationsManager {
+    NotificationsManager()
   }
 }

@@ -8,20 +8,29 @@
 
 import Foundation
 
-final class AppFacade {
+final class AuthorizationService {
 
   private let apiClient: ApiClient
   private let appState: AppState
   private let configuration: Configuration
+  private let filtersRepository: IFiltersRepository
+  private let savedProjectsRepository: ISavedProjectsRepository
+  private let requestsRepository: IRequestsRepository
 
-  private var cachedProjects: [Project]?
-
-  init(apiClient: ApiClient,
-       configuration: Configuration,
-       appState: AppState) {
+  init(
+    apiClient: ApiClient,
+    configuration: Configuration,
+    appState: AppState,
+    filtersRepository: IFiltersRepository,
+    savedProjectsRepository: ISavedProjectsRepository,
+    requestsRepository: IRequestsRepository
+  ) {
     self.apiClient = apiClient
     self.configuration = configuration
     self.appState = appState
+    self.filtersRepository = filtersRepository
+    self.savedProjectsRepository = savedProjectsRepository
+    self.requestsRepository = requestsRepository
 
     apiClient.delegate = self
   }
@@ -31,7 +40,7 @@ final class AppFacade {
 }
 
 // MARK: - ApiClientDelegate
-extension AppFacade: ApiClientDelegate {
+extension AuthorizationService: ApiClientDelegate {
 
   func apiClientDidReceiveResponse(_ response: RequestManager.Response) {
     if response.statusCode == 401 {
@@ -43,7 +52,7 @@ extension AppFacade: ApiClientDelegate {
 }
 
 // MARK: - Structures
-extension AppFacade {
+extension AuthorizationService {
 
   private enum Error: Swift.Error, LocalizedError {
     case invalidURL
@@ -59,7 +68,7 @@ extension AppFacade {
 }
 
 // MARK: - Authorization
-extension AppFacade {
+extension AuthorizationService {
 
   func authorize(
     gitlabUrlString: String,
@@ -84,14 +93,12 @@ extension AppFacade {
     // try to get projects
     _ = try await apiClient.getProjects(token: token)
     configuration.saveToCache()
-    appState.privateToken.accept(token)
+    appState.privateToken.send(token)
   }
 
   func logout() {
-    cachedProjects?.removeAll()
-    appState.privateToken.accept(nil)
-    appState.selectedProjects.accept([])
-    appState.numberOfRequests.accept(0)
+    appState.privateToken.send(nil)
+    savedProjectsRepository.update(savedProjects: [])
+    filtersRepository.update(filters: [:])
   }
-
 }

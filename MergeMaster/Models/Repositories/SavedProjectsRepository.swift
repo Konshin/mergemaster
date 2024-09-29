@@ -10,6 +10,7 @@ import Foundation
 
 protocol ISavedProjectsRepository {
   var savedProjects: [Project] { get }
+  func savedProject(id: ProjectId) -> Project?
   func update(savedProjects: [Project])
 }
 
@@ -34,5 +35,9 @@ extension SavedProjectsRepository: ISavedProjectsRepository {
 
   func update(savedProjects: [Project]) {
     self.projects = savedProjects
+  }
+
+  func savedProject(id: ProjectId) -> Project? {
+    projects.first(where: { $0.id == id })
   }
 }
