@@ -146,19 +146,7 @@ private extension RequestsListView {
 
   @ViewBuilder
   private func row(_ item: Item, sectionId: ProjectId) -> some View {
-    HStack(alignment: .bottom) {
-      VStack(alignment: .leading, spacing: 4) {
-        Text(item.title)
-          .lineLimit(3)
-        Text("Author: ").foregroundColor(.secondary) + Text(item.author)
-      }
-      Spacer()
-      if item.isApprovedByUser {
-        Text("Approved by you").foregroundColor(.secondary)
-      }
-    }
-    .padding(.vertical, 2)
-    .background(Color(.textBackgroundColor))
+    RequestListRow(item: item)
     .onTapGesture {
       store.send(.tapRequest(id: item.id, projectId: sectionId))
     }
@@ -177,12 +165,7 @@ extension RequestsListView {
     var settingsOpenedForSectionId: ProjectId?
   }
 
-  struct Item: Identifiable, Equatable {
-    var id: Int
-    var title: String
-    var author: String
-    var isApprovedByUser: Bool
-  }
+  typealias Item = RequestListRow.Item
 
   enum Content: Equatable {
     case loading
@@ -216,12 +199,20 @@ extension RequestsListView {
 
 #Preview {
   let makeItems: (Int) -> [RequestsListView.Item] = { count in
+    let highlights: [RequestListRow.StatusHighlighting] = [.none, .red, .yellow]
+    func statusHighlight(at index: Int) -> RequestListRow.StatusHighlighting {
+      let idx = index % highlights.count
+      return highlights[idx]
+    }
+
     return (0..<count).map { id in
       RequestsListView.Item(
         id: id,
         title: Array<String>(repeating: "Merge request #\(id)", count: id + 1).joined(separator: "\n"),
         author: "Author of MR",
-        isApprovedByUser: id % 3 == 0
+        status: "Some status",
+        statusDescription: "Some description",
+        statusHighlighting: statusHighlight(at: id)
       )
     }
   }
@@ -233,7 +224,7 @@ extension RequestsListView {
   let state = RequestsListView.State(
     content: .data(.init(sections: sections))
   )
-  return RequestsListView(
+  RequestsListView(
     store: .preview(
       state: state,
       reducer: {

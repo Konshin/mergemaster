@@ -39,11 +39,22 @@ struct RequestsListAdapter: ViewAdapter {
   }
 
   private func item(request: MergeRequest) -> RequestsListView.Item {
-    RequestsListView.Item(
+    return RequestsListView.Item(
       id: request.id,
       title: request.title,
       author: request.author.name,
-      isApprovedByUser: false
+      status: request.detailedMergeStatus.title,
+      statusDescription: request.detailedMergeStatus.description,
+      statusHighlighting: {
+        switch request.detailedMergeStatus.category {
+        case .waitingForResultOfSth:
+          return .none
+        case .userActionRequired:
+          return .red
+        case .readyToMerge:
+          return .green
+        }
+      }()
     )
   }
 }

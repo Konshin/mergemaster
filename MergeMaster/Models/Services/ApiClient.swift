@@ -64,9 +64,11 @@ final class ApiClient {
     let request = try makeRequest(
       method: .get,
       path: "projects/\(projectId)/merge_requests",
-      params: ["state": "opened",
-               "with_merge_status_recheck": true,
-               "per_page": 40]
+      params: [
+        "state": "opened",
+        "with_merge_status_recheck": true,
+        "per_page": 40
+      ]
     )
     return try await performDecodable(request: request, authorization: .stored)
   }

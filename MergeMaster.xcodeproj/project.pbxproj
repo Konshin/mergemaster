@@ -14,11 +14,13 @@
 		B4025A2E2CA536E000939AB0 /* FiltersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A2D2CA536E000939AB0 /* FiltersRepository.swift */; };
 		B40264E12CA5454700939AB0 /* SavedProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40264E02CA5454700939AB0 /* SavedProjectsRepository.swift */; };
 		B40264E42CA5469600939AB0 /* DataBySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40264E32CA5469600939AB0 /* DataBySource.swift */; };
+		B42659012CB55AD000CA834A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42659002CB55ACA00CA834A /* Color+Extensions.swift */; };
 		B43FC9B12C83AC0E00480DDB /* RequestsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B02C83AC0E00480DDB /* RequestsRepository.swift */; };
 		B43FC9B42C83C73F00480DDB /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B32C83C73F00480DDB /* CodableStorage.swift */; };
 		B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */; };
 		B4577B602C6264DB001FB4B8 /* ProjectsListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4577B5F2C6264DB001FB4B8 /* ProjectsListReducer.swift */; };
 		B4577B622C626BFB001FB4B8 /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4577B612C626BFB001FB4B8 /* Router.swift */; };
+		B484E3192CB51EA9002C3781 /* RequestListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = B484E3182CB51EA9002C3781 /* RequestListRow.swift */; };
 		B488315F2CA92EDC007BB630 /* NotificationsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B488315E2CA92ED0007BB630 /* NotificationsManager.swift */; };
 		B48831622CA92F1E007BB630 /* NotificationContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48831612CA92F19007BB630 /* NotificationContent.swift */; };
 		B48831642CA934CC007BB630 /* NotificationTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48831632CA934C7007BB630 /* NotificationTrigger.swift */; };
@@ -86,11 +88,13 @@
 		B4025A2D2CA536E000939AB0 /* FiltersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FiltersRepository.swift; sourceTree = "<group>"; };
 		B40264E02CA5454700939AB0 /* SavedProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProjectsRepository.swift; sourceTree = "<group>"; };
 		B40264E32CA5469600939AB0 /* DataBySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBySource.swift; sourceTree = "<group>"; };
+		B42659002CB55ACA00CA834A /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
 		B43FC9B02C83AC0E00480DDB /* RequestsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsRepository.swift; sourceTree = "<group>"; };
 		B43FC9B32C83C73F00480DDB /* CodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStorage.swift; sourceTree = "<group>"; };
 		B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
 		B4577B5F2C6264DB001FB4B8 /* ProjectsListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListReducer.swift; sourceTree = "<group>"; };
 		B4577B612C626BFB001FB4B8 /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		B484E3182CB51EA9002C3781 /* RequestListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestListRow.swift; sourceTree = "<group>"; };
 		B488315E2CA92ED0007BB630 /* NotificationsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsManager.swift; sourceTree = "<group>"; };
 		B48831612CA92F19007BB630 /* NotificationContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationContent.swift; sourceTree = "<group>"; };
 		B48831632CA934C7007BB630 /* NotificationTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTrigger.swift; sourceTree = "<group>"; };
@@ -216,6 +220,14 @@
 			path = Interfaces;
 			sourceTree = "<group>";
 		};
+		B484E3152CB51E5E002C3781 /* subviews */ = {
+			isa = PBXGroup;
+			children = (
+				B484E3182CB51EA9002C3781 /* RequestListRow.swift */,
+			);
+			path = subviews;
+			sourceTree = "<group>";
+		};
 		B48831602CA92F0C007BB630 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +251,7 @@
 		B4A7A41C2C64D90B004BAFFC /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				B484E3152CB51E5E002C3781 /* subviews */,
 				B4A7A41F2C64D921004BAFFC /* RequestsListView.swift */,
 				B4A7A4272C64F770004BAFFC /* RequestsListReducer.swift */,
 				B4A7A4292C65074F004BAFFC /* RequestsListAdapter.swift */,
@@ -261,6 +274,7 @@
 		B4A7A4242C64E89C004BAFFC /* SwiftUI+Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B42659002CB55ACA00CA834A /* Color+Extensions.swift */,
 				B4A7A4252C64E8AB004BAFFC /* View+BackwardCompatibility.swift */,
 			);
 			path = "SwiftUI+Extensions";
@@ -639,10 +653,12 @@
 				B4A7A4182C64BDDA004BAFFC /* ProjectsListAdapter.swift in Sources */,
 				B4A7A4232C64E49D004BAFFC /* ViewStore+Constructor.swift in Sources */,
 				B43FC9B12C83AC0E00480DDB /* RequestsRepository.swift in Sources */,
+				B484E3192CB51EA9002C3781 /* RequestListRow.swift in Sources */,
 				B4A841592CA68F52008EDDA0 /* AppStateManager.swift in Sources */,
 				B4A7A4322C676FA7004BAFFC /* ErrorView.swift in Sources */,
 				D596A5691E06DC63004162A0 /* Project.swift in Sources */,
 				B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */,
+				B42659012CB55AD000CA834A /* Color+Extensions.swift in Sources */,
 				B4A7A4412C6A2932004BAFFC /* Store+OptionalScope.swift in Sources */,
 				B4A7A4142C64B69A004BAFFC /* ProjectsListAssembly.swift in Sources */,
 				B4A7A43F2C6935BF004BAFFC /* RequestsFilter.swift in Sources */,
