@@ -18,11 +18,13 @@ struct RequestListRow: View {
         .lineLimit(3)
       HStack(alignment: .bottom) {
         Text(item.author).foregroundColor(.secondary)
+          .lineLimit(1)
           .layoutPriority(100)
         Spacer()
         HStack(spacing: 2) {
           Text(item.status)
             .foregroundColor(color(highlighting: item.statusHighlighting))
+            .lineLimit(1)
           if let description = item.statusDescription {
             Button {
               overText = true

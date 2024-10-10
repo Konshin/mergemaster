@@ -87,6 +87,10 @@ final class RequestsRepository: IRequestsRepository {
     return filteredRequests
   }
 
+  func clean() {
+    self.lastDataSubject.send(.init(filters: [:], response: [:]))
+  }
+
   // MARK: - Private
 
   private func mergeRequests(projectId: Int) async throws -> [MergeRequest] {
@@ -100,22 +104,60 @@ final class RequestsRepository: IRequestsRepository {
       guard let filter = filters[projectId], !filter.isEmpty else { continue }
       requestsByProject[projectId] = requests
         .filter { request in
-          filter.orExpressions.contains { expression in
-            expression.conditions.allSatisfy { condition in
-              switch condition.property {
-              case .assignee:
-                return request.assignees.contains(where: { $0.username == condition.value })
-              case .author:
-                return request.author.username == condition.value
-              }
-            }
-          }
+          self.check(request: request, orExpressions: filter.orExpressions)
         }
     }
     return requestsByProject
   }
 
-  func clean() {
-    self.lastDataSubject.send(.init(filters: [:], response: [:]))
+  private func check(request: MergeRequest, orExpressions: [RequestsFilter.Expression]) -> Bool {
+    orExpressions.contains { expression in
+      expression.conditions.allSatisfy { condition in
+        switch condition.property {
+        case .assignee:
+          return check(
+            property: request.assignees.compactMap { $0.username },
+            operator: condition.operator,
+            value: condition.value
+          )
+        case .author:
+          guard let username = request.author.username else { return false }
+          return check(
+            property: username,
+            operator: condition.operator,
+            value: condition.value
+          )
+        case .labels:
+          return check(
+            property: request.labels,
+            operator: condition.operator,
+            value: condition.value
+          )
+        }
+      }
+    }
+  }
+
+  private func check(property: String, operator: RequestsFilter.Condition.Operator, value: String) -> Bool {
+    switch `operator` {
+    case .equal:
+      return property == value
+    case .notEqual:
+      return property != value
+    case .contains:
+      assertionFailure("Unexpected behaviour")
+      return false
+    }
+  }
+
+  private func check(property: [String], operator: RequestsFilter.Condition.Operator, value: String) -> Bool {
+    switch `operator` {
+    case .equal:
+      return property == [value]
+    case .notEqual:
+      return property != [value]
+    case .contains:
+      return property.contains(value)
+    }
   }
 }

@@ -46,6 +46,9 @@ struct ProjectSettingsReducer {
     case .changeProperty(let expressionId, let conditionId, let property):
       guard let indexPath = indexPath(expressionId: expressionId, conditionId: conditionId, state: state) else { break }
       state.filter.orExpressions[indexPath.section].conditions[indexPath.item].property = property
+    case .changeOperator(let expressionId, let conditionId, let `operator`):
+      guard let indexPath = indexPath(expressionId: expressionId, conditionId: conditionId, state: state) else { break }
+      state.filter.orExpressions[indexPath.section].conditions[indexPath.item].operator = `operator`
     case .deleteCondition(let expressionId, let conditionId):
       guard let indexPath = indexPath(expressionId: expressionId, conditionId: conditionId, state: state) else { break }
       let isLastExpression = indexPath.section == state.filter.orExpressions.count - 1

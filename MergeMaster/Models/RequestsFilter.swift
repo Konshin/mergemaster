@@ -27,10 +27,17 @@ extension RequestsFilter {
 
   struct Condition: Equatable, Codable {
     var property: Property
+    var `operator`: Operator = .equal
     var value: String
   }
 
   enum Property: String, Codable {
-    case assignee, author
+    case assignee, author, labels
+  }
+}
+
+extension RequestsFilter.Condition {
+  enum Operator: String, Codable {
+    case equal, notEqual, contains
   }
 }

@@ -18,6 +18,7 @@ struct ProjectSettingsAdapter: ViewAdapter {
               ProjectSettingsView.Condition(
                 id: idx,
                 property: cond.property,
+                operator: cond.operator,
                 value: cond.value)
             }
         )

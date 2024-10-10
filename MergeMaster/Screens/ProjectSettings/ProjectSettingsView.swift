@@ -14,7 +14,6 @@ struct ProjectSettingsView: View {
   private(set) var store: ViewStore<State, Action>
 
   var body: some View {
-//    ScrollView {
       VStack {
         ForEach(store.orExpressions) { expression in
           self.expression(
@@ -24,15 +23,8 @@ struct ProjectSettingsView: View {
         }
       }
       .textFieldStyle(.roundedBorder)
-//    }
     .padding(8)
     .frame(width: 300)
-//    .frame(
-//      minWidth: 300,
-//      maxWidth: 300,
-//      minHeight: 100,
-//      alignment: .topLeading
-//    )
   }
 }
 
@@ -83,12 +75,33 @@ extension ProjectSettingsView {
           }
         ),
         content: {
-          ForEach([Property.assignee, .author], id: \.name) { property in
+          ForEach([Property.assignee, .author, .labels], id: \.name) { property in
             Text(property.name).tag(property)
           }
         }
       )
-      .frame(width: 100, alignment: .trailing)
+      .fixedSize()
+      Picker(
+        "",
+        selection: Binding(
+          get: { condition.operator },
+          set: {
+            store.send(
+              .changeOperator(
+                expressionId: expressionId,
+                conditionId: condition.id,
+                operator: $0
+              )
+            )
+          }
+        ),
+        content: {
+          ForEach([Operator.equal, .notEqual, .contains], id: \.symbol) { `operator` in
+            Text(`operator`.symbol).tag(`operator`)
+          }
+        }
+      )
+      .fixedSize()
       TextField(
         "",
         text: .init(
@@ -123,6 +136,7 @@ extension ProjectSettingsView {
 // MARK: - Types
 extension ProjectSettingsView {
   typealias Property = RequestsFilter.Property
+  typealias Operator = RequestsFilter.Condition.Operator
 
   struct State: Equatable {
     var orExpressions: [Expression]
@@ -136,6 +150,7 @@ extension ProjectSettingsView {
   struct Condition: Equatable, Identifiable {
     var id: Int
     var property: Property
+    var `operator`: Operator
     var value: String
   }
 
@@ -143,6 +158,7 @@ extension ProjectSettingsView {
     case appeared
     case addCondition(expressionId: Int)
     case changeProperty(expressionId: Int, conditionId: Int, property: Property)
+    case changeOperator(expressionId: Int, conditionId: Int, operator: Operator)
     case changeValue(expressionId: Int, conditionId: Int, value: String)
     case deleteCondition(expressionId: Int, conditionId: Int)
   }
@@ -154,14 +170,14 @@ extension ProjectSettingsView {
       .init(
         id: 0,
         conditions: [
-          .init(id: 0, property: .assignee, value: "a.konshin"),
-          .init(id: 1, property: .author, value: "ANY")
+          .init(id: 0, property: .assignee, operator: .equal, value: "a.konshin"),
+          .init(id: 1, property: .author, operator: .notEqual, value: "ANY")
         ]
       ),
       .init(
         id: 1,
         conditions: [
-          .init(id: 0, property: .assignee, value: "example.user"),
+          .init(id: 0, property: .assignee, operator: .contains, value: "example.user"),
         ]
       ),
       .init(id: 2, conditions: [])
@@ -177,6 +193,21 @@ private extension ProjectSettingsView.Property {
       return "Author"
     case .assignee:
       return "Assignee"
+    case .labels:
+      return "Labels"
+    }
+  }
+}
+
+private extension ProjectSettingsView.Operator {
+  var symbol: String {
+    switch self {
+    case .equal:
+      return "="
+    case .notEqual:
+      return "≠"
+    case .contains:
+      return "⊂"
     }
   }
 }

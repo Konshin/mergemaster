@@ -15,6 +15,7 @@ struct MergeRequest: Equatable {
   let author: User
   let reviewers: [User]
   let assignees: [User]
+  let labels: [String]
   let webUrl: String
   let numberOfComments: Int
   let detailedMergeStatus: DetailedStatus
@@ -23,7 +24,7 @@ struct MergeRequest: Equatable {
 extension MergeRequest: Codable {
 
   private enum CodingKeys: String, CodingKey {
-    case id, title, author, iid, reviewers, assignees
+    case id, title, author, iid, reviewers, assignees, labels
     case webUrl = "web_url"
     case numberOfComments = "user_notes_count"
     case detailedMergeStatus = "detailed_merge_status"
@@ -41,6 +42,7 @@ extension MergeRequest: Codable {
     assignees = try container.decode([User].self, forKey: .assignees)
     reviewers = try container.decode([User].self, forKey: .reviewers)
     detailedMergeStatus = try container.decodeIfPresent(DetailedStatus.self, forKey: .detailedMergeStatus) ?? .unknown
+    labels = (try? container.decodeIfPresent([String].self, forKey: .labels)) ?? []
   }
 }
 
