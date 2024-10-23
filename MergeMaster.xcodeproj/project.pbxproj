@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		932D4932FBCEC7E7499E44C9 /* Pods_MergeMaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */; };
 		B4025A262CA4A95200939AB0 /* ProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */; };
 		B4025A282CA534EB00939AB0 /* RequestsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */; };
 		B4025A2A2CA5357C00939AB0 /* RequestsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A292CA5357C00939AB0 /* RequestsInfo.swift */; };
@@ -46,7 +45,6 @@
 		B4A841592CA68F52008EDDA0 /* AppStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A841582CA68F52008EDDA0 /* AppStateManager.swift */; };
 		B4DAF1782C6229BE00353CE5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = B4DAF1772C6229BE00353CE5 /* ComposableArchitecture */; };
 		B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F081362C62238B005839A4 /* ProjectsListView.swift */; };
-		BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */; };
 		D5967F1A25DD4CAD000A0F3B /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5967F1925DD4CAD000A0F3B /* RequestManager.swift */; };
 		D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5641E06D534004162A0 /* RequestsListVM.swift */; };
 		D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D596A5661E06D56F004162A0 /* MergeRequest.swift */; };
@@ -81,7 +79,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMaster.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMaster/Pods-MergeMaster.release.xcconfig"; sourceTree = "<group>"; };
 		B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsRepository.swift; sourceTree = "<group>"; };
 		B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListInteractor.swift; sourceTree = "<group>"; };
 		B4025A292CA5357C00939AB0 /* RequestsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsInfo.swift; sourceTree = "<group>"; };
@@ -119,8 +116,6 @@
 		B4A7A4402C6A2932004BAFFC /* Store+OptionalScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+OptionalScope.swift"; sourceTree = "<group>"; };
 		B4A841582CA68F52008EDDA0 /* AppStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateManager.swift; sourceTree = "<group>"; };
 		B4F081362C62238B005839A4 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
-		CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.debug.xcconfig"; sourceTree = "<group>"; };
-		D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMasterTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMasterTests/Pods-MergeMasterTests.release.xcconfig"; sourceTree = "<group>"; };
 		D5967F1925DD4CAD000A0F3B /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		D596A5641E06D534004162A0 /* RequestsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsListVM.swift; sourceTree = "<group>"; };
 		D596A5661E06D56F004162A0 /* MergeRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeRequest.swift; sourceTree = "<group>"; };
@@ -147,9 +142,6 @@
 		D5DEECF51E06B7F100802982 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D5DEECF71E06C08A00802982 /* AuthorizationVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationVM.swift; sourceTree = "<group>"; };
 		D5DEECFD1E06C18200802982 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		EEE4891A8610D014906677DB /* Pods-MergeMaster.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MergeMaster.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MergeMaster/Pods-MergeMaster.debug.xcconfig"; sourceTree = "<group>"; };
-		F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MergeMasterTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MergeMaster.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,7 +150,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				B4DAF1782C6229BE00353CE5 /* ComposableArchitecture in Frameworks */,
-				932D4932FBCEC7E7499E44C9 /* Pods_MergeMaster.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,33 +157,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE8AA85B5F351B245FB5BA59 /* Pods_MergeMasterTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1589CBFE262C6428202298DC /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				EEE4891A8610D014906677DB /* Pods-MergeMaster.debug.xcconfig */,
-				3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */,
-				CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */,
-				D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		990E23CE4FB749F92E5CF7EE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				F7199498F6A9D8CEC076A978 /* Pods_MergeMaster.framework */,
-				F5244C9F44A3712F22E4BD6C /* Pods_MergeMasterTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		B40264E22CA5463500939AB0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,8 +324,6 @@
 				D5DEECCC1E06AEB800802982 /* MergeMaster */,
 				D5DEECDC1E06AEB900802982 /* MergeMasterTests */,
 				D5DEECCB1E06AEB800802982 /* Products */,
-				1589CBFE262C6428202298DC /* Pods */,
-				990E23CE4FB749F92E5CF7EE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -458,11 +426,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5DEECE21E06AEB900802982 /* Build configuration list for PBXNativeTarget "MergeMaster" */;
 			buildPhases = (
-				0045DA1697A204D57F547508 /* [CP] Check Pods Manifest.lock */,
 				D5DEECC61E06AEB800802982 /* Sources */,
 				D5DEECC71E06AEB800802982 /* Frameworks */,
 				D5DEECC81E06AEB800802982 /* Resources */,
-				9953BB215E67AF76F4F2AE18 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -480,7 +446,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D5DEECE51E06AEB900802982 /* Build configuration list for PBXNativeTarget "MergeMasterTests" */;
 			buildPhases = (
-				50C4C726C0722B699A45C807 /* [CP] Check Pods Manifest.lock */,
 				D5DEECD51E06AEB900802982 /* Sources */,
 				D5DEECD61E06AEB900802982 /* Frameworks */,
 				D5DEECD71E06AEB900802982 /* Resources */,
@@ -560,69 +525,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		0045DA1697A204D57F547508 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MergeMaster-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		50C4C726C0722B699A45C807 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MergeMasterTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9953BB215E67AF76F4F2AE18 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MergeMaster/Pods-MergeMaster-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
-				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
-				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MergeMaster/Pods-MergeMaster-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D5DEECC61E06AEB800802982 /* Sources */ = {
@@ -772,6 +674,7 @@
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 			};
 			name = Debug;
 		};
@@ -824,19 +727,19 @@
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = minimal;
 			};
 			name = Release;
 		};
 		D5DEECE31E06AEB900802982 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EEE4891A8610D014906677DB /* Pods-MergeMaster.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MergeMaster/Info.plist;
@@ -854,14 +757,13 @@
 		};
 		D5DEECE41E06AEB900802982 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3743790D8719ACA3BBD72FFC /* Pods-MergeMaster.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MergeMaster/Info.plist;
@@ -879,7 +781,6 @@
 		};
 		D5DEECE61E06AEB900802982 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBD82A93AEC6A07649B82669 /* Pods-MergeMasterTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -902,7 +803,6 @@
 		};
 		D5DEECE71E06AEB900802982 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0CCF19A08A57BCB5CB58048 /* Pods-MergeMasterTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";

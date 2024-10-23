@@ -72,6 +72,8 @@ extension MergeRequest {
     case lockedPaths = "locked_paths"
     case lockedLfsFiles = "locked_lfs_files"
     case unknown
+    /// Some old status
+    case brokenStatus = "broken_status"
   }
 }
 
@@ -140,6 +142,8 @@ extension MergeRequest.DetailedStatus {
       return "Locked paths"
     case .lockedLfsFiles:
       return "Locked LFS files"
+    case .brokenStatus:
+      return "Broken status"
     case .unknown:
       return "Unknown"
     }
@@ -194,6 +198,8 @@ extension MergeRequest.DetailedStatus {
       return "Paths locked by other users must be unlocked before merging to default branch."
     case .lockedLfsFiles:
       return "LFS files locked by other users must be unlocked before merge."
+    case .brokenStatus:
+      return "Can't merge into the target branch due to a potential conflict."
     case .unknown:
       return nil
     }
@@ -203,7 +209,7 @@ extension MergeRequest.DetailedStatus {
     switch self {
     case .approvalsSyncing, .checking, .ciMustPass, .ciStillRunning, .draft_status, .mergeRequestBlocked, .mergeTime, .notApproved, .notOpen, .preparing, .unknown, .unchecked, .statusChecksMustPass:
       return .waitingForResultOfSth
-    case .conflict, .discussionsNotResolved, .commitsStatus, .jiraAssociationMissing, .needRebase, .requestedChanges, .securityPolicyEvaluation, .securityPolicyViolations, .lockedPaths, .lockedLfsFiles:
+    case .conflict, .discussionsNotResolved, .commitsStatus, .jiraAssociationMissing, .needRebase, .requestedChanges, .securityPolicyEvaluation, .securityPolicyViolations, .lockedPaths, .lockedLfsFiles, .brokenStatus:
       return .userActionRequired
     case .mergeable:
       return .readyToMerge

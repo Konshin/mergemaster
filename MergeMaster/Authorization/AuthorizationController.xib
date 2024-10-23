@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23094" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23094"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="519" height="188"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZ7-OU-9sc">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dZ7-OU-9sc">
                     <rect key="frame" x="233" y="158" width="53" height="24"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="_title" id="Snj-Mx-vdD">
                         <font key="font" metaFont="systemBold" size="20"/>
@@ -32,7 +32,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N8q-bM-6Gu" customClass="NSSecureTextField">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="N8q-bM-6Gu" customClass="NSSecureTextField">
                     <rect key="frame" x="40" y="88" width="439" height="21"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Access token (read_api or higher)" drawsBackground="YES" id="NiW-wv-G0c">
                         <font key="font" metaFont="system"/>
@@ -40,7 +40,7 @@
                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k8T-2P-rck">
+                <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k8T-2P-rck">
                     <rect key="frame" x="40" y="113" width="439" height="21"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Gitlab URL (for example: gitlab.com)" drawsBackground="YES" id="U3K-1c-AE0">
                         <font key="font" metaFont="system"/>
@@ -64,7 +64,7 @@
                     </buttonCell>
                     <color key="contentTintColor" name="AccentColor"/>
                 </button>
-                <textField horizontalHuggingPriority="300" verticalHuggingPriority="700" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="rCo-We-aNa">
+                <textField focusRingType="none" horizontalHuggingPriority="300" verticalHuggingPriority="700" horizontalCompressionResistancePriority="300" verticalCompressionResistancePriority="700" translatesAutoresizingMaskIntoConstraints="NO" id="rCo-We-aNa">
                     <rect key="frame" x="38" y="20" width="443" height="19"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="_error" id="69J-KX-aOI">
                         <font key="font" metaFont="system" size="15"/>
