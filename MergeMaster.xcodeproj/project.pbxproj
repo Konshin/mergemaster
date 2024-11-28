@@ -115,6 +115,7 @@
 		B4A7A43E2C6935BF004BAFFC /* RequestsFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsFilter.swift; sourceTree = "<group>"; };
 		B4A7A4402C6A2932004BAFFC /* Store+OptionalScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Store+OptionalScope.swift"; sourceTree = "<group>"; };
 		B4A841582CA68F52008EDDA0 /* AppStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateManager.swift; sourceTree = "<group>"; };
+		B4D018632CF85C9F0070E980 /* MergeMaster.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = MergeMaster.app; path = "/Users/a.konshin/Library/Developer/Xcode/DerivedData/MergeMaster-egmgvjwcfwmnxwfwgfpuxikpwxeb/Build/Products/Debug/MergeMaster.app"; sourceTree = "<absolute>"; };
 		B4F081362C62238B005839A4 /* ProjectsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsListView.swift; sourceTree = "<group>"; };
 		D5967F1925DD4CAD000A0F3B /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		D596A5641E06D534004162A0 /* RequestsListVM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestsListVM.swift; sourceTree = "<group>"; };
@@ -270,6 +271,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		B4D018622CF85C8D0070E980 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				B4D018632CF85C9F0070E980 /* MergeMaster.app */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
 		B4F081342C622371005839A4 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,6 +348,7 @@
 		D5DEECCC1E06AEB800802982 /* MergeMaster */ = {
 			isa = PBXGroup;
 			children = (
+				B4D018622CF85C8D0070E980 /* Product */,
 				B4F081352C622377005839A4 /* Screens */,
 				D5CE1BE925B827320046D0AF /* MergeMaster.entitlements */,
 				D596A5611E06D319004162A0 /* RequestsList */,

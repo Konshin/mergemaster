@@ -18,5 +18,6 @@ extension NotificationContent {
   enum Category: String {
     case newRequests = "new_requests"
     case newComments = "new_comments"
+    case newStatusCategories = "new_status_categories"
   }
 }

@@ -9,7 +9,9 @@
 import Foundation
 
 struct MergeRequest: Equatable {
-  let id: Int
+  typealias ID = Int
+
+  let id: ID
   let iid: Int
   let title: String
   let author: User
@@ -75,14 +77,15 @@ extension MergeRequest {
     /// Some old status
     case brokenStatus = "broken_status"
   }
-}
 
-extension MergeRequest.DetailedStatus {
-  enum Category {
+  enum StatusCategory {
     case userActionRequired
     case readyToMerge
     case waitingForResultOfSth
   }
+}
+
+extension MergeRequest.DetailedStatus {
 
   init(from decoder: any Decoder) throws {
     do {
@@ -205,7 +208,7 @@ extension MergeRequest.DetailedStatus {
     }
   }
 
-  var category: Category {
+  var category: MergeRequest.StatusCategory {
     switch self {
     case .approvalsSyncing, .checking, .ciMustPass, .ciStillRunning, .draft_status, .mergeRequestBlocked, .mergeTime, .notApproved, .notOpen, .preparing, .unknown, .unchecked, .statusChecksMustPass:
       return .waitingForResultOfSth
