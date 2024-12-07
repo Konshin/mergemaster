@@ -75,7 +75,7 @@ extension ProjectSettingsView {
           }
         ),
         content: {
-          ForEach([Property.assignee, .author, .labels], id: \.name) { property in
+          ForEach([Property.assignee, .author, .reviewers, .labels], id: \.name) { property in
             Text(property.name).tag(property)
           }
         }
@@ -195,6 +195,8 @@ private extension ProjectSettingsView.Property {
       return "Assignee"
     case .labels:
       return "Labels"
+    case .reviewers:
+      return "Reviewers"
     }
   }
 }

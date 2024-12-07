@@ -133,6 +133,12 @@ final class RequestsRepository: IRequestsRepository {
             operator: condition.operator,
             value: condition.value
           )
+        case .reviewers:
+          return check(
+            property: request.reviewers.compactMap { $0.username },
+            operator: condition.operator,
+            value: condition.value
+          )
         }
       }
     }

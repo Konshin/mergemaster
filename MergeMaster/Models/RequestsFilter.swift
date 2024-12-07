@@ -32,7 +32,7 @@ extension RequestsFilter {
   }
 
   enum Property: String, Codable {
-    case assignee, author, labels
+    case assignee, author, labels, reviewers
   }
 }
 
