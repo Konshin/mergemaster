@@ -26,6 +26,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
           coordinator.showPopover(aroundButton: sender)
         }
+      case .logout:
+        appDelegate.dependencies.appFacade.logout()
+      case .quit:
+        appDelegate.coordinator?.exit()
+      case .selectProjects:
+        appDelegate.coordinator?.showProjectsController(forceDisplay: true)
       }
     }
     let view = Dependencies(menuRouter: menuRouter)
@@ -37,7 +43,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     initializeServices()
 
-    self.coordinator = Coordinator(dependencies: dependencies)
+    self.coordinator = Coordinator(
+      dependencies: dependencies,
+      requestToShowPopover: { [weak self] coordinator in
+        guard let button = self?.dependencies.menuWizard.statusItem.button else { return }
+        coordinator.showPopover(aroundButton: button)
+      }
+    )
   }
 
   func applicationWillTerminate(_ aNotification: Notification) {
@@ -51,9 +63,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if !authorized || self?.dependencies.configuration.serverUrl == nil {
           self?.coordinator.showAuthController()
         } else if self?.dependencies.selectedProjectsRepository.savedProjects.isEmpty == false {
-          self?.coordinator.showRequestsController()
+          self?.coordinator.showRequestsController(forceDisplay: false)
         } else {
-          self?.coordinator.showProjectsController()
+          self?.coordinator.showProjectsController(forceDisplay: false)
         }
       }
       .store(in: &bindings)

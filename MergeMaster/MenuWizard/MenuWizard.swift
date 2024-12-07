@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Foundation
 
 protocol IMenuWizard {
   var statusItem: NSStatusItem { get }
@@ -38,18 +39,42 @@ final class MenuWizard: NSObject {
   private func initialize() {
     if let button = statusItem.button {
       button.target = self
-      button.action = #selector(tapToItem(button:))
+      button.action = #selector(self.clickToItem)
+      button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+      button.menu = self.makeMennu()
     }
 
     setNumberOfRequests(0)
   }
 
-  @objc func tapToItem(button: NSStatusBarButton) {
-    togglePopover(button: button)
+  @objc func clickToItem(button: NSStatusBarButton) {
+    switch NSApp.currentEvent?.type {
+    case .leftMouseUp:
+      togglePopover(button: button)
+    case .rightMouseUp:
+      button.menu?.popUp(positioning: nil, at: .zero, in: button)
+    default:
+      break
+    }
   }
 
-  func togglePopover(button: NSStatusBarButton) {
+  private func togglePopover(button: NSStatusBarButton) {
     router.syncTrigger(.togglePopoverVisibility(sender: button))
+  }
+
+  @objc
+  private func logout() {
+    router.syncTrigger(.logout)
+  }
+
+  @objc
+  private func quit() {
+    router.syncTrigger(.quit)
+  }
+
+  @objc
+  private func selectProjects() {
+    router.syncTrigger(.selectProjects)
   }
 }
 
@@ -91,8 +116,35 @@ extension MenuWizard: IMenuWizard {
   }
 }
 
+// MARK: - Nested types and constructors
 extension MenuWizard {
   enum Route {
     case togglePopoverVisibility(sender: NSStatusBarButton)
+    case selectProjects
+    case logout
+    case quit
+  }
+
+  private func makeMennu() -> NSMenu {
+    let menu = NSMenu()
+
+    menu.addItem(
+      withTitle: "Select projects",
+      action: #selector(selectProjects),
+      keyEquivalent: ""
+    ).target = self
+    menu.addItem(.separator())
+    menu.addItem(
+      withTitle: "Logout",
+      action: #selector(logout),
+      keyEquivalent: ""
+    ).target = self
+
+    menu.addItem(
+      withTitle: "Quit",
+      action: #selector(quit),
+      keyEquivalent: ""
+    ).target = self
+    return menu
   }
 }

@@ -12,11 +12,13 @@ import SwiftUI
 final class Coordinator: NSObject {
   private(set) var currentController: NSViewController!
   fileprivate let popover = NSPopover()
+  private let requestToShowPopover: (Coordinator) -> Void
 
   private let dependencies: Dependencies
 
-  init(dependencies: Dependencies) {
+  init(dependencies: Dependencies, requestToShowPopover: @escaping (Coordinator) -> Void) {
     self.dependencies = dependencies
+    self.requestToShowPopover = requestToShowPopover
 
     super.init()
 
@@ -50,12 +52,12 @@ final class Coordinator: NSObject {
     showController(vc: authController)
   }
 
-  func showProjectsController() {
+  func showProjectsController(forceDisplay: Bool) {
     let assembly = ProjectsListAssembly(dependencies: dependencies)
     let router = Router<ProjectsListReducer.Route>.weak(object: self) { c, r in
       switch r {
       case .confirm:
-        c.showRequestsController()
+        c.showRequestsController(forceDisplay: forceDisplay)
         c.askNotificationPermissionIfNeeded()
       }
     }
@@ -69,14 +71,14 @@ final class Coordinator: NSObject {
     showController(vc: vc)
   }
 
-  func showRequestsController() {
+  func showRequestsController(forceDisplay: Bool) {
     let assembly = RequestsListAssembly(dependencies: dependencies)
     let router = Router<RequestsListReducer.Route>.weak(object: self) { c, r in
       switch r {
       case .settings:
         break
       case .changeProjects:
-        c.showProjectsController()
+        c.showProjectsController(forceDisplay: false)
       case .logout:
         c.dependencies.appFacade.logout()
       case .exit:
@@ -94,7 +96,7 @@ final class Coordinator: NSObject {
     } else {
       // Fallback on earlier versions
     }
-    showController(vc: vc)
+    showController(vc: vc, forceDisplay: forceDisplay)
   }
 
   func showPopover(aroundButton button: NSStatusBarButton) {
@@ -112,9 +114,12 @@ final class Coordinator: NSObject {
 
   // MARK: - Private
 
-  private func showController(vc: NSViewController) {
+  private func showController(vc: NSViewController, forceDisplay: Bool = true) {
     currentController = vc
     popover.contentViewController = vc
+    if forceDisplay, !isPopoverShown {
+      requestToShowPopover(self)
+    }
   }
 
   private func askNotificationPermissionIfNeeded() {
