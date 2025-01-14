@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B400DC672D36609900AF5EB8 /* TimeBasedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B400DC662D36609600AF5EB8 /* TimeBasedData.swift */; };
+		B400DC692D36A6E100AF5EB8 /* View+RotationModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B400DC682D36A6DB00AF5EB8 /* View+RotationModifier.swift */; };
 		B4025A262CA4A95200939AB0 /* ProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */; };
 		B4025A282CA534EB00939AB0 /* RequestsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */; };
 		B4025A2A2CA5357C00939AB0 /* RequestsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A292CA5357C00939AB0 /* RequestsInfo.swift */; };
@@ -30,7 +31,6 @@
 		B4A7A41B2C64C678004BAFFC /* SkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A41A2C64C678004BAFFC /* SkeletonView.swift */; };
 		B4A7A4202C64D921004BAFFC /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A41F2C64D921004BAFFC /* RequestsListView.swift */; };
 		B4A7A4232C64E49D004BAFFC /* ViewStore+Constructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4222C64E49D004BAFFC /* ViewStore+Constructor.swift */; };
-		B4A7A4262C64E8AB004BAFFC /* View+BackwardCompatibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4252C64E8AB004BAFFC /* View+BackwardCompatibility.swift */; };
 		B4A7A4282C64F770004BAFFC /* RequestsListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4272C64F770004BAFFC /* RequestsListReducer.swift */; };
 		B4A7A42A2C65074F004BAFFC /* RequestsListAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A4292C65074F004BAFFC /* RequestsListAdapter.swift */; };
 		B4A7A42C2C6514C3004BAFFC /* RequestsListAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A7A42B2C6514C3004BAFFC /* RequestsListAssembly.swift */; };
@@ -81,6 +81,7 @@
 
 /* Begin PBXFileReference section */
 		B400DC662D36609600AF5EB8 /* TimeBasedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedData.swift; sourceTree = "<group>"; };
+		B400DC682D36A6DB00AF5EB8 /* View+RotationModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+RotationModifier.swift"; sourceTree = "<group>"; };
 		B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsRepository.swift; sourceTree = "<group>"; };
 		B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListInteractor.swift; sourceTree = "<group>"; };
 		B4025A292CA5357C00939AB0 /* RequestsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsInfo.swift; sourceTree = "<group>"; };
@@ -103,7 +104,6 @@
 		B4A7A41A2C64C678004BAFFC /* SkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonView.swift; sourceTree = "<group>"; };
 		B4A7A41F2C64D921004BAFFC /* RequestsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListView.swift; sourceTree = "<group>"; };
 		B4A7A4222C64E49D004BAFFC /* ViewStore+Constructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewStore+Constructor.swift"; sourceTree = "<group>"; };
-		B4A7A4252C64E8AB004BAFFC /* View+BackwardCompatibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+BackwardCompatibility.swift"; sourceTree = "<group>"; };
 		B4A7A4272C64F770004BAFFC /* RequestsListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListReducer.swift; sourceTree = "<group>"; };
 		B4A7A4292C65074F004BAFFC /* RequestsListAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListAdapter.swift; sourceTree = "<group>"; };
 		B4A7A42B2C6514C3004BAFFC /* RequestsListAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListAssembly.swift; sourceTree = "<group>"; };
@@ -248,8 +248,8 @@
 		B4A7A4242C64E89C004BAFFC /* SwiftUI+Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				B400DC682D36A6DB00AF5EB8 /* View+RotationModifier.swift */,
 				B42659002CB55ACA00CA834A /* Color+Extensions.swift */,
-				B4A7A4252C64E8AB004BAFFC /* View+BackwardCompatibility.swift */,
 			);
 			path = "SwiftUI+Extensions";
 			sourceTree = "<group>";
@@ -559,6 +559,7 @@
 				D5DEECFE1E06C18200802982 /* Configuration.swift in Sources */,
 				D5C38D58264437610033A374 /* MergeRequestInfo.swift in Sources */,
 				B4A7A42C2C6514C3004BAFFC /* RequestsListAssembly.swift in Sources */,
+				B400DC692D36A6E100AF5EB8 /* View+RotationModifier.swift in Sources */,
 				B4F081372C62238B005839A4 /* ProjectsListView.swift in Sources */,
 				D5C38D54264430650033A374 /* AuthorizationService.swift in Sources */,
 				B4025A282CA534EB00939AB0 /* RequestsListInteractor.swift in Sources */,
@@ -589,7 +590,6 @@
 				D596A5651E06D534004162A0 /* RequestsListVM.swift in Sources */,
 				B4A7A4372C681847004BAFFC /* ProjectSettingsView.swift in Sources */,
 				B488315F2CA92EDC007BB630 /* NotificationsManager.swift in Sources */,
-				B4A7A4262C64E8AB004BAFFC /* View+BackwardCompatibility.swift in Sources */,
 				D5DEECEA1E06B2F400802982 /* MenuWizard.swift in Sources */,
 				D596A5671E06D56F004162A0 /* MergeRequest.swift in Sources */,
 				B4A7A43D2C689F5E004BAFFC /* ProjectSettingsAdapter.swift in Sources */,

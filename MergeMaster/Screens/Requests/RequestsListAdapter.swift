@@ -45,7 +45,6 @@ struct RequestsListAdapter: ViewAdapter {
     return RequestsListView.State(
       content: content,
       lastUpdateDate: state.lastUpdateDate.map(dateString),
-      
       isRefreshing: state.isLoading
     )
   }

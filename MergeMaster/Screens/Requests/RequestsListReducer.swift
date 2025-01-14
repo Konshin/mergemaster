@@ -39,7 +39,10 @@ struct RequestsListReducer {
         .cancellable(id: "polling", cancelInFlight: true)
       case .startPolling:
         return .send(.update)
+      case .setIsLoading(let isLoading):
+        state.isLoading = isLoading
       }
+      return .none
     }
   }
 
@@ -115,8 +118,8 @@ struct RequestsListReducer {
   }
 
   private func loadRequests(state: inout State, allowCache: Bool) -> Effect<Action> {
-    state.isLoading = true
     state.error = nil
+    state.isLoading = true
     return .run { send in
       do {
         for try await data in interactor.requests(allowCache: allowCache) {
@@ -163,5 +166,6 @@ extension RequestsListReducer {
     case filter(ProjectSettingsReducer.Action)
     case update
     case startPolling
+    case setIsLoading(_ isLoading: Bool)
   }
 }

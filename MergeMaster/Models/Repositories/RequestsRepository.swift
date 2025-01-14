@@ -61,7 +61,6 @@ final class RequestsRepository: IRequestsRepository {
     projectIds: [ProjectId],
     filters: [ProjectId: RequestsFilter]
   ) async throws -> TimeBasedData<Requests> {
-    throw NSError(domain: "123", code: 123)
     struct Pair {
       var projectId: ProjectId
       var requests: [MergeRequest]
@@ -82,6 +81,7 @@ final class RequestsRepository: IRequestsRepository {
         partialResult[pair.projectId] = pair.requests
       }
     }
+
     let fetchedDate = Date()
     let filteredRequests = filter(requests: requests, filters: filters)
     let data = MergeRequestsFetchingData(

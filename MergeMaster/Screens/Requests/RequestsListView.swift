@@ -13,6 +13,7 @@ struct RequestsListView: View {
   @ObservedObject
   private(set) var store: ViewStore<State, Action>
   private(set) var popover: () -> ProjectSettingsView?
+  @SwiftUI.State private var isRefreshRotating = false
 
   var body: some View {
     VStack(spacing: 0) {
@@ -38,7 +39,7 @@ struct RequestsListView: View {
   }
 }
 
-// MARK: - Subveiws
+// MARK: - Subviews
 private extension RequestsListView {
 
   @ViewBuilder
@@ -76,7 +77,7 @@ private extension RequestsListView {
 
   @ViewBuilder
   private func header(updated: String?, isRefreshing: Bool) -> some View {
-    ToolbarView(title: nil) {
+    return ToolbarView(title: nil) {
       Text("Merge requests")
         .font(.title3)
     } trailingViews: {
@@ -88,8 +89,7 @@ private extension RequestsListView {
             .font(.footnote)
         } icon: {
           Image(systemName: "arrow.2.circlepath")
-            .rotationEffect(Angle(radians: store.isRefreshing ? .pi : 0))
-            .animation(.linear.repeatForever(), value: store.isRefreshing)
+            .modifier(RotationModifier(isAnimating: isRefreshing))
         }
       }
     }
