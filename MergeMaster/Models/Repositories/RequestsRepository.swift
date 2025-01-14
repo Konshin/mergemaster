@@ -65,20 +65,30 @@ final class RequestsRepository: IRequestsRepository {
       var projectId: ProjectId
       var requests: [MergeRequest]
     }
-    let requests = await withTaskGroup(of: Pair.self) { group in
+    let requests = try await withThrowingTaskGroup(of: Pair.self) { group in
       for projectId in projectIds {
         group.addTask {
           let requests: [MergeRequest]
-          do {
-            requests = try await self.mergeRequests(projectId: projectId)
-          } catch {
-            requests = []
-          }
+          requests = try await self.mergeRequests(projectId: projectId)
           return Pair(projectId: projectId, requests: requests)
         }
       }
-      return await group.reduce(into: Requests()) { partialResult, pair in
-        partialResult[pair.projectId] = pair.requests
+      var error: Error?
+      var hasSuccessResult = false
+      var result = Requests()
+      while let projectResult = await group.nextResult() {
+        switch projectResult {
+        case .success(let success):
+          hasSuccessResult = true
+          result[success.projectId] = success.requests
+        case .failure(let failure):
+          error = failure
+        }
+      }
+      if let error, hasSuccessResult == false {
+        throw error
+      } else {
+        return result
       }
     }
 
