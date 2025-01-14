@@ -16,7 +16,7 @@ struct RequestsListView: View {
 
   var body: some View {
     VStack(spacing: 0) {
-      header()
+      header(updated: store.lastUpdateDate, isRefreshing: store.isRefreshing)
       switch store.content {
       case .loading:
         skeletons()
@@ -75,23 +75,22 @@ private extension RequestsListView {
   }
 
   @ViewBuilder
-  private func header() -> some View {
-    ToolbarView(title: "Merge requests") {
-      Button {
-        store.send(.changeProjects)
-      } label: {
-        Image(systemName: "list.star")
-      }
+  private func header(updated: String?, isRefreshing: Bool) -> some View {
+    ToolbarView(title: nil) {
+      Text("Merge requests")
+        .font(.title3)
     } trailingViews: {
       Button {
-        store.send(.logout)
+        store.send(.reload)
       } label: {
-        Image(systemName: "rectangle.portrait.and.arrow.right")
-      }
-      Button {
-        store.send(.exit)
-      } label: {
-        Image(systemName: "xmark")
+        Label {
+          Text(updated ?? "")
+            .font(.footnote)
+        } icon: {
+          Image(systemName: "arrow.2.circlepath")
+            .rotationEffect(Angle(radians: store.isRefreshing ? .pi : 0))
+            .animation(.linear.repeatForever(), value: store.isRefreshing)
+        }
       }
     }
     .buttonStyle(.plain)
@@ -175,6 +174,8 @@ extension RequestsListView {
 
   struct State: Equatable {
     var content: Content
+    var lastUpdateDate: String?
+    var isRefreshing: Bool = false
 
     var settingsOpenedForSectionId: ProjectId? {
       guard case .data(let data) = content else {
@@ -222,9 +223,11 @@ extension RequestsListView {
     .init(id: 2, name: "Third project", items: makeItems(4)),
   ]
   let state = RequestsListView.State(
-    content: .data(.init(sections: sections))
+    content: .data(.init(sections: sections)),
+    lastUpdateDate: "27 Apr 2024 14:23:22",
+    isRefreshing: true
   )
-  RequestsListView(
+  return RequestsListView(
     store: .preview(
       state: state,
       reducer: {

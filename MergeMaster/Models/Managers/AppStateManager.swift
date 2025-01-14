@@ -44,11 +44,11 @@ final class AppStateManager {
     requestsRepository.lastDataPublisher
     // disable cache
       .dropFirst()
-      .filter { [filtersRepository] in $0.filters == filtersRepository.savedFilters }
+      .filter { [filtersRepository] in $0.data.filters == filtersRepository.savedFilters }
       .scan((data: MergeRequestsFetchingData?.none, previous: MergeRequestsFetchingData?.none)) { (pair, data) in
         var pair = pair
         pair.previous = pair.data
-        pair.data = data
+        pair.data = data.data
         return pair
       }
       .compactMap { pair -> (data: IRequestsRepository.Requests, previous: IRequestsRepository.Requests)? in
@@ -69,9 +69,9 @@ final class AppStateManager {
 
   private func setupNumberOfRequestsBinding() {
     requestsRepository.lastDataPublisher
-      .filter { [filtersRepository] in $0.filters == filtersRepository.savedFilters }
+      .filter { [filtersRepository] in $0.data.filters == filtersRepository.savedFilters }
       .map { data in
-        data.response.reduce(0) { (sum, projectRequests) in
+        data.data.response.reduce(0) { (sum, projectRequests) in
           sum + projectRequests.value.count
         }
       }

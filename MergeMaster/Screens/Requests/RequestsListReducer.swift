@@ -96,19 +96,19 @@ struct RequestsListReducer {
   // MARK: - Actions
 
   private func handleLoadResult(
-    _ result: Result<[RequestsInfo], Error>, state: inout State
+    _ result: Result<TimeBasedData<[RequestsInfo]>, Error>, state: inout State
   ) -> Effect<Action> {
     state.isLoading = false
     switch result {
     case .success(let requests):
-      state.sections = requests.map { info in
+      state.sections = requests.data.map { info in
         Section(
           project: info.project,
           requests: info.requests
         )
       }
+      state.lastUpdateDate = requests.time
     case .failure(let failure):
-      state.sections = []
       state.error = failure
     }
     return .none
@@ -153,12 +153,13 @@ extension RequestsListReducer {
     var error: Error?
     var settingsOpenedForProjectIdx: Int?
     var filterState: ProjectSettingsReducer.State?
+    var lastUpdateDate: Date?
   }
 
   @CasePathable
   enum Action {
     case viewAction(RequestsListView.Action)
-    case didLoad(requests: Result<[RequestsInfo], Error>)
+    case didLoad(requests: Result<TimeBasedData<[RequestsInfo]>, Error>)
     case filter(ProjectSettingsReducer.Action)
     case update
     case startPolling

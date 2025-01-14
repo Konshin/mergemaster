@@ -10,15 +10,16 @@ import Foundation
 import Combine
 
 struct MergeRequestsFetchingData: Codable {
-  var filters: [ProjectId: RequestsFilter]
-  var response: IRequestsRepository.Requests
+  var filters: [ProjectId: RequestsFilter] = [:]
+  var response: IRequestsRepository.Requests = [:]
 }
 
 protocol IRequestsRepository {
   typealias Requests = [ProjectId: [MergeRequest]]
-  var lastData: MergeRequestsFetchingData { get }
-  var lastDataPublisher: AnyPublisher<MergeRequestsFetchingData, Never> { get }
-  func update(projectIds: [ProjectId], filters: [ProjectId: RequestsFilter]) async throws -> Requests
+  typealias RequestsData = TimeBasedData<MergeRequestsFetchingData>
+  var lastData: RequestsData? { get }
+  var lastDataPublisher: AnyPublisher<RequestsData, Never> { get }
+  func update(projectIds: [ProjectId], filters: [ProjectId: RequestsFilter]) async throws -> TimeBasedData<Requests>
   func clean()
 }
 
@@ -30,7 +31,7 @@ final class RequestsRepository: IRequestsRepository {
 
   private let apiClient: ApiClient
   private let storage: ICodableStorage
-  private let lastDataSubject: CurrentValueSubject<MergeRequestsFetchingData, Never>
+  private let lastDataSubject: CurrentValueSubject<RequestsData?, Never>
 
   init(
     apiClient: ApiClient,
@@ -39,25 +40,28 @@ final class RequestsRepository: IRequestsRepository {
     self.apiClient = apiClient
     self.storage = storage
 
-    let storedData = storage.stored(type: MergeRequestsFetchingData.self, key: StorageKeys.requests.rawValue)
-    lastDataSubject = .init(storedData ?? .init(filters: [:], response: [:]))
+    let storedData = storage.stored(type: RequestsData.self, key: StorageKeys.requests.rawValue)
+    lastDataSubject = .init(storedData)
   }
 
   // MARK: - IRequestsRepository
 
-  var lastData: MergeRequestsFetchingData {
+  var lastData: RequestsData? {
     lastDataSubject.value
   }
 
-  var lastDataPublisher: AnyPublisher<MergeRequestsFetchingData, Never> {
-    lastDataSubject.eraseToAnyPublisher()
+  var lastDataPublisher: AnyPublisher<RequestsData, Never> {
+    lastDataSubject
+      .compactMap { $0 }
+      .eraseToAnyPublisher()
   }
 
   @discardableResult
   func update(
     projectIds: [ProjectId],
     filters: [ProjectId: RequestsFilter]
-  ) async throws -> Requests {
+  ) async throws -> TimeBasedData<Requests> {
+    throw NSError(domain: "123", code: 123)
     struct Pair {
       var projectId: ProjectId
       var requests: [MergeRequest]
@@ -78,17 +82,21 @@ final class RequestsRepository: IRequestsRepository {
         partialResult[pair.projectId] = pair.requests
       }
     }
+    let fetchedDate = Date()
     let filteredRequests = filter(requests: requests, filters: filters)
     let data = MergeRequestsFetchingData(
       filters: filters,
       response: filteredRequests
     )
-    self.lastDataSubject.send(data)
-    return filteredRequests
+    let timeBasedData = TimeBasedData(time: fetchedDate, data: data)
+    self.lastDataSubject.send(timeBasedData)
+    let result = TimeBasedData(time: fetchedDate, data: filteredRequests)
+    try? cache(timeBasedData)
+    return result
   }
 
   func clean() {
-    self.lastDataSubject.send(.init(filters: [:], response: [:]))
+    self.lastDataSubject.send(nil)
   }
 
   // MARK: - Private
@@ -165,5 +173,9 @@ final class RequestsRepository: IRequestsRepository {
     case .contains:
       return property.contains(value)
     }
+  }
+
+  private func cache(_ data: RequestsData) throws {
+    try storage.store(data, key: StorageKeys.requests.rawValue)
   }
 }

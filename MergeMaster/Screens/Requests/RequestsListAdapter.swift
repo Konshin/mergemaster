@@ -9,11 +9,24 @@
 import Foundation
 
 struct RequestsListAdapter: ViewAdapter {
+  private let dateTimeFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .short
+    formatter.timeStyle = .short
+    return formatter
+  }()
+  private let timeFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateStyle = .none
+    formatter.timeStyle = .medium
+    return formatter
+  }()
+
   func adapt(state: RequestsListReducer.State) -> RequestsListView.State {
     let content: RequestsListView.Content
     if state.isLoading, state.sections.isEmpty {
       content = .loading
-    } else if let error = state.error {
+    } else if let error = state.error, state.sections.isEmpty {
       content = .error(error.localizedDescription)
     } else {
       content = .data(
@@ -30,7 +43,10 @@ struct RequestsListAdapter: ViewAdapter {
       )
     }
     return RequestsListView.State(
-      content: content
+      content: content,
+      lastUpdateDate: state.lastUpdateDate.map(dateString),
+      
+      isRefreshing: state.isLoading
     )
   }
 
@@ -56,5 +72,13 @@ struct RequestsListAdapter: ViewAdapter {
         }
       }()
     )
+  }
+
+  private func dateString(date: Date) -> String {
+    if Calendar.current.isDateInToday(date) {
+      timeFormatter.string(from: date)
+    } else {
+      dateTimeFormatter.string(from: date)
+    }
   }
 }

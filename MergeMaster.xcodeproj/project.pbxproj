@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B400DC672D36609900AF5EB8 /* TimeBasedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B400DC662D36609600AF5EB8 /* TimeBasedData.swift */; };
 		B4025A262CA4A95200939AB0 /* ProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */; };
 		B4025A282CA534EB00939AB0 /* RequestsListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */; };
 		B4025A2A2CA5357C00939AB0 /* RequestsInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4025A292CA5357C00939AB0 /* RequestsInfo.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B400DC662D36609600AF5EB8 /* TimeBasedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeBasedData.swift; sourceTree = "<group>"; };
 		B4025A252CA4A95200939AB0 /* ProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsRepository.swift; sourceTree = "<group>"; };
 		B4025A272CA534EB00939AB0 /* RequestsListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsListInteractor.swift; sourceTree = "<group>"; };
 		B4025A292CA5357C00939AB0 /* RequestsInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsInfo.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		B40264E22CA5463500939AB0 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B400DC662D36609600AF5EB8 /* TimeBasedData.swift */,
 				B40264E32CA5469600939AB0 /* DataBySource.swift */,
 			);
 			path = Helpers;
@@ -541,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D5C38D5C26443A5B0033A374 /* Approvals.swift in Sources */,
+				B400DC672D36609900AF5EB8 /* TimeBasedData.swift in Sources */,
 				D5DEECCE1E06AEB800802982 /* AppDelegate.swift in Sources */,
 				B4577B622C626BFB001FB4B8 /* Router.swift in Sources */,
 				B4A7A4302C6654E6004BAFFC /* ToolbarView.swift in Sources */,

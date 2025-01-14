@@ -9,7 +9,7 @@
 import Foundation
 
 protocol IRequestsListInteractor {
-  typealias RequestsData = DataBySource<[RequestsInfo]>
+  typealias RequestsData = DataBySource<TimeBasedData<[RequestsInfo]>>
   func requests(allowCache: Bool) -> AsyncThrowingStream<RequestsData, Error>
   func update(filter: RequestsFilter, for projectId: ProjectId)
 }
@@ -36,10 +36,9 @@ extension RequestsListInteractor: IRequestsListInteractor {
     let filters = filtersRepository.savedFilters
     return AsyncThrowingStream(RequestsData.self) { continuation in
       Task {
-        if allowCache, requestsRepository.lastData.filters == filters {
-          let lastRequests = requestsRepository.lastData.response
-          let info = requestsInfo(requests: lastRequests, projects: projects)
-          continuation.yield(.cached(info))
+        if allowCache, let lastData = requestsRepository.lastData, lastData.data.filters == filters {
+          let info = requestsInfo(requests: lastData.data.response, projects: projects)
+          continuation.yield(.cached(TimeBasedData(time: lastData.time, data: info)))
         }
 
         do {
@@ -47,8 +46,14 @@ extension RequestsListInteractor: IRequestsListInteractor {
             projectIds: projects.map { $0.id },
             filters: filters
           )
-          let info = requestsInfo(requests: requests, projects: projects)
-          continuation.yield(.fetched(info))
+          continuation.yield(
+            .fetched(
+              requests
+                .map {
+                  requestsInfo(requests: $0, projects: projects)
+                }
+            )
+          )
           continuation.finish()
         } catch {
           continuation.finish(throwing: error)
