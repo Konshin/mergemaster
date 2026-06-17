@@ -13,3 +13,14 @@ extension Color {
   static let appError = Color("Error")
   static let appSuccess = Color("Success")
 }
+
+extension NSColor {
+  static let secondary: NSColor = NSColor(name: nil) { appearance in
+    switch appearance.bestMatch(from: [.aqua, .darkAqua]) {
+    case .darkAqua:
+      return NSColor.lightGray
+    default:
+      return NSColor.darkGray
+    }
+  }
+}

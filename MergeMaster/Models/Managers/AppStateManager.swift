@@ -8,6 +8,7 @@
 
 import Combine
 import Foundation
+import AppKit
 
 final class AppStateManager {
   private let requestsRepository: IRequestsRepository
@@ -68,16 +69,37 @@ final class AppStateManager {
   }
 
   private func setupNumberOfRequestsBinding() {
+    let colors: [NSColor] = [
+      .controlAccentColor,
+      NSColor(named: "chart_blue") ?? .blue,
+      NSColor(named: "chart_yellow") ?? .yellow,
+      .brown,
+      .cyan
+    ]
+    func color(for index: Int) -> NSColor {
+      let colorIndex = index % colors.count
+      return colors[colorIndex]
+    }
+
     requestsRepository.lastDataPublisher
       .filter { [filtersRepository] in $0.data.filters == filtersRepository.savedFilters }
-      .map { data in
-        data.data.response.reduce(0) { (sum, projectRequests) in
-          sum + projectRequests.value.count
+      .map { [savedProjectsRepository] data -> [MenuItem] in
+        let projects = savedProjectsRepository.savedProjects
+        var colorIndex = 0
+        return projects.compactMap { project in
+          guard let requests = data.data.response[project.id] else { return nil }
+
+          defer { colorIndex += 1 }
+
+          return MenuItem(
+            color: color(for: colorIndex),
+            value: requests.count
+          )
         }
       }
       .receive(on: DispatchQueue.main)
-      .sink { [menuWizard] numberOfRequests in
-        menuWizard.setNumberOfRequests(numberOfRequests)
+      .sink { [menuWizard] menuItems in
+        menuWizard.update(items: menuItems)
       }
       .store(in: &bindings)
   }

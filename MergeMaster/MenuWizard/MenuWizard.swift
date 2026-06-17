@@ -9,9 +9,11 @@
 import Cocoa
 import Foundation
 
+typealias MenuItem = MenuIconView.Item
+
 protocol IMenuWizard {
   var statusItem: NSStatusItem { get }
-  func setNumberOfRequests(_ num: Int)
+  func update(items: [MenuItem])
 }
 
 final class MenuWizard: NSObject {
@@ -44,7 +46,7 @@ final class MenuWizard: NSObject {
       button.menu = self.makeMennu()
     }
 
-    setNumberOfRequests(0)
+    update(items: [])
   }
 
   @objc func clickToItem(button: NSStatusBarButton) {
@@ -80,39 +82,42 @@ final class MenuWizard: NSObject {
 
 extension MenuWizard: IMenuWizard {
   /// Отображает количество реквестов на статус баре
-  func setNumberOfRequests(_ num: Int) {
-    let color = num > 0 ? NSColor.controlAccentColor : NSColor.labelColor
+  func update(items: [MenuItem]) {
+    let total = items.reduce(into: 0, { $0 += $1.value })
+    let color = total > 0 ? NSColor.controlAccentColor : NSColor.secondary
     let title = NSAttributedString(
-      string: "\(num)",
+      string: "\(total)",
       attributes: [
         NSAttributedString.Key.foregroundColor: color,
-        .font: NSFont.systemFont(ofSize: 13, weight: .medium)
+        .font: NSFont.systemFont(ofSize: 14, weight: .medium)
       ]
     )
 
     let button = statusItem.button
     button?.attributedTitle = title
-    button?.image = self.image(color: color)
+    button?.image = self.image(items: items)
   }
 
-  private func image(color: NSColor) -> NSImage? {
-    if let cached = imageCache[color] {
-      return cached
-    } else {
-      guard let image = NSImage(named: "mr_status_icon_16") else { return nil }
-      image.isTemplate = false
-      image.lockFocus()
-
-      color.set()
-
-      let imageRect = NSRect(origin: NSZeroPoint, size: image.size)
-      imageRect.fill(using: .sourceAtop)
-
-      image.unlockFocus()
-      imageCache[color] = image
-
-      return image
-    }
+  private func image(items: [MenuItem]) -> NSImage? {
+    let view = MenuIconView(items: items, rect: NSRect(x: 0, y: 0, width: 20, height: 20))
+    return NSImage(data: view.dataWithPDF(inside: view.bounds))
+//    if let cached = imageCache[color] {
+//      return cached
+//    } else {
+//      guard let image = NSImage(named: "mr_status_icon_16") else { return nil }
+//      image.isTemplate = false
+//      image.lockFocus()
+//
+//      color.set()
+//
+//      let imageRect = NSRect(origin: NSZeroPoint, size: image.size)
+//      imageRect.fill(using: .sourceAtop)
+//
+//      image.unlockFocus()
+//      imageCache[color] = image
+//
+//      return image
+//    }
   }
 }
 

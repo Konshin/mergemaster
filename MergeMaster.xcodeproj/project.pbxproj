@@ -16,6 +16,7 @@
 		B40264E12CA5454700939AB0 /* SavedProjectsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40264E02CA5454700939AB0 /* SavedProjectsRepository.swift */; };
 		B40264E42CA5469600939AB0 /* DataBySource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B40264E32CA5469600939AB0 /* DataBySource.swift */; };
 		B42659012CB55AD000CA834A /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B42659002CB55ACA00CA834A /* Color+Extensions.swift */; };
+		B43363562D37B99E003BA9E9 /* MenuIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43363552D37B99B003BA9E9 /* MenuIconView.swift */; };
 		B43FC9B12C83AC0E00480DDB /* RequestsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B02C83AC0E00480DDB /* RequestsRepository.swift */; };
 		B43FC9B42C83C73F00480DDB /* CodableStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B32C83C73F00480DDB /* CodableStorage.swift */; };
 		B43FC9B62C83C7A500480DDB /* DefaultsStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */; };
@@ -89,6 +90,7 @@
 		B40264E02CA5454700939AB0 /* SavedProjectsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedProjectsRepository.swift; sourceTree = "<group>"; };
 		B40264E32CA5469600939AB0 /* DataBySource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBySource.swift; sourceTree = "<group>"; };
 		B42659002CB55ACA00CA834A /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
+		B43363552D37B99B003BA9E9 /* MenuIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuIconView.swift; sourceTree = "<group>"; };
 		B43FC9B02C83AC0E00480DDB /* RequestsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestsRepository.swift; sourceTree = "<group>"; };
 		B43FC9B32C83C73F00480DDB /* CodableStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableStorage.swift; sourceTree = "<group>"; };
 		B43FC9B52C83C7A500480DDB /* DefaultsStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsStorage.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 		B4A7A4192C64C671004BAFFC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B43363552D37B99B003BA9E9 /* MenuIconView.swift */,
 				B4A7A41A2C64C678004BAFFC /* SkeletonView.swift */,
 				B4A7A42F2C6654E6004BAFFC /* ToolbarView.swift */,
 				B4A7A4312C676FA7004BAFFC /* ErrorView.swift */,
@@ -549,6 +552,7 @@
 				B4577B622C626BFB001FB4B8 /* Router.swift in Sources */,
 				B4A7A4302C6654E6004BAFFC /* ToolbarView.swift in Sources */,
 				B48831622CA92F1E007BB630 /* NotificationContent.swift in Sources */,
+				B43363562D37B99E003BA9E9 /* MenuIconView.swift in Sources */,
 				D596A5881E0731A1004162A0 /* EventMonitor.swift in Sources */,
 				D5DEECF01E06B53400802982 /* AuthorizationController.swift in Sources */,
 				B40264E42CA5469600939AB0 /* DataBySource.swift in Sources */,
@@ -752,7 +756,7 @@
 				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MergeMaster/Info.plist;
@@ -761,7 +765,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.konshin.mergemaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -776,7 +780,7 @@
 				CODE_SIGN_ENTITLEMENTS = MergeMaster/MergeMaster.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DD57QBF5UM;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = MergeMaster/Info.plist;
@@ -785,7 +789,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 11.0;
-				MARKETING_VERSION = 1.4.0;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = net.konshin.mergemaster;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
